@@ -1,0 +1,41 @@
+<h1>Add a restaurant</h1>
+<form method="POST" action="restaurants/create">
+  <h2>Create a restaurant!</h2>
+  <div>
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" />
+  </div>
+  <div>
+    <label for="adress">Adress</label>
+    <input type="text" id="adress" name="adress" />
+  </div>
+  <div>
+    <label for="phone">Phone</label>
+    <input type="text" id="phone" name="phone" />
+  </div>
+  <div>
+    <label for="rating">Price rating</label>
+    <select type="text" id="rating" name="priceRating" >
+            <option value="-1" disabled selected >Choose a rate</option>
+      <option value="1">1</option>     
+       <option value="2">2</option>
+      <option value="3">3</option>
+
+    </select>
+  </div>
+  <div>
+    <label for="color">Food type</label>
+    <select type="text" id="foodtype" name="foodType" required>
+      <option disabled selected>Choose a type</option>
+      <option value="Asian">Asian</option>
+      <option value="African">African</option>
+      <option value="Italian">Ialian</option>
+      <option value="French" >French</option>
+    </select>
+  </div>
+  <div>
+{{#if erroMsg}}
+    <h3>{{erroMsg}}</h3>
+{{/if}}
+  <button>Submit !</button>
+</form>
