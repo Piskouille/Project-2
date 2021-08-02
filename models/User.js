@@ -17,8 +17,6 @@ const userModel = new Schema({
    password: {
        type: String,
        required: true,
-       minlength: 8,
-       maxlength: 255
    },
    isAdmin: Boolean,
    following: {
