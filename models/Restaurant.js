@@ -1,13 +1,13 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const restaurantModel = new Schema({
+const restaurantSchema = new Schema({
    name: {
        type: String,
        required: true,
        maxlength: 255
    },
-   foodType: [{
+   foodTypes: [{
        type: Schema.Types.ObjectId,
        ref: 'foodType'
     }],
@@ -16,17 +16,23 @@ const restaurantModel = new Schema({
        min: 0,
        max: 3
    },
-   adress: {
-       type: String,
-       maxlength: 500
+   address: {
+       number: String,
+       street: String,
+       city: String,
+       zipCode: String,
+       country: String
    },
    phone: {
        type: String,
        maxlength: 20
    },
-   coordinates: String
+   coordinates: {
+       lat: Number,
+       long: Number
+   }
 })
 
-const Restaurant = mongoose.model('restaurant', restaurantModel)
+const Restaurant = mongoose.model('restaurant', restaurantSchema)
 
 module.exports = Restaurant
