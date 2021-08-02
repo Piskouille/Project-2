@@ -1,0 +1,11 @@
+.landing-page{
+    position: relative;
+    margin: 200px auto 0;
+}
+
+.euro{
+    width: 16px;
+    height: 16px;
+    transform: rotate(-45deg);
+    margin-left: 4px;
+}

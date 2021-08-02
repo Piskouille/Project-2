@@ -3,6 +3,8 @@
 
     </aside>
     <section class="restaurants-list">
-        
+        {{#each restaurants}}
+            {{>restaurantCard this}}
+        {{/each}}
     </section>
 </div>

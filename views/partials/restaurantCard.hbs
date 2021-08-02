@@ -1,4 +1,13 @@
 <div class="restaurant-card">
-    <h3>{{restaurant.name}}</h3>
+    <h3>{{this.name}}</h3>
+    <img src="{{this.image}}" alt="{{this.name}}">
+    
+    <div class="foodTypes">
+        {{formatFoodType this.foodTypes}}
+    </div>
+
+    <div class="priceRating">
+        {{this.priceRating}}
+    </div>
 
 </div>

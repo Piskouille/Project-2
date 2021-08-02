@@ -64,3 +64,15 @@ hbs.registerHelper("compare", function(lvalue, rvalue, options) {
     return options.inverse(this);
   }
 });
+
+
+
+
+
+hbs.registerHelper("formatFoodType", stringArray => {
+
+  const x = stringArray.map(string => (string.name.charAt(0).toUpperCase() + string.name.slice(1)).split('_').join(' '))
+
+  return x.slice(0, 4).join(' - ')
+
+})

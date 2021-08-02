@@ -3,7 +3,7 @@ const Restaurant = require("../../models/Restaurant");
 const FoodType = require("../../models/FoodType");
 const upload = require("../../config/cloudinary");
 // render of all the restaurants from the database
-router.get("/restaurants", async (req, res, next) => {
+router.get("/restaurants-manage", async (req, res, next) => {
   try {
     const restaurant = await Restaurant.find();
     res.render("restaurants", { restaurants: restaurant });
@@ -12,15 +12,16 @@ router.get("/restaurants", async (req, res, next) => {
   }
 });
 // the creation of one restaurant
-router.get("/restaurants/create", async (req, res, next) => {
+router.get("/restaurants-create", async (req, res, next) => {
   try {
     res.render("restaurant.create.hbs");
   } catch (error) {
     next(error);
   }
 });
+
 router.post(
-  "/restaurants/create",
+  "/restaurants-create",
   upload.single("image"),
   async (req, res, next) => {
     try {

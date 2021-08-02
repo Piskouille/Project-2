@@ -8,6 +8,7 @@
 #burger-btn{
   width: 33px;
   height : 33px;
+  z-index: 100;
 }
 
 #burger-btn:hover{
@@ -62,17 +63,37 @@
 
 #burger-menu{
   position: absolute;
-
-  width: 100%;
-  height: 100%;
-  background: var(--color-yellow);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--color-light-green);
   transform: translate(100%, 0);
   transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
 }
 
-#burger-wrapper.active #burger-menu
+#burger-menu.active
 {
   transform: translate(0, 0);
+  z-index: -1;
+}
+
+.burger-logo{
+  position: relative;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px;
+}
+
+#logo-dark{
+  max-width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @media screen and (min-width: 768px) { 
