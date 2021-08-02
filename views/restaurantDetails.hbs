@@ -1,0 +1,14 @@
+<div>
+  <h2>{{restaurant.name}}</h2>
+  <div>
+    <img src="{{restaurant.image}}" />
+    {{#each restaurant.address}}
+      <li>{{this}}</li>
+    {{/each}}
+    {{#each restaurant.foodTypes}}
+      <p>{{this}}</p>
+    {{/each}}
+    <p>{{restaurant.rating}}</p>
+    <a></a>
+  </div>
+</div>

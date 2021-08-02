@@ -1,13 +1,17 @@
 <h1>Add a restaurant</h1>
-<form method="POST" action="restaurants/create">
+<form method="POST" action="/restaurants/create" enctype="multipart/form-data">
   <h2>Create a restaurant!</h2>
   <div>
     <label for="name">Name</label>
     <input type="text" id="name" name="name" />
   </div>
   <div>
-    <label for="adress">Adress</label>
-    <input type="text" id="adress" name="adress" />
+    <label for="address">Adress</label>
+    <input type="text" id="adress" name="number" />   
+     <input type="text" id="adress" name="street" />
+    <input type="text" id="adress" name="city" />
+    <input type="text" id="adress" name="zipCode" />
+    <input type="text" id="adress" name="country" />
   </div>
   <div>
     <label for="phone">Phone</label>
@@ -34,6 +38,8 @@
     </select>
   </div>
   <div>
+    <label for="image">Image</label>
+    <input id="image" name="image" type="file" />
 {{#if erroMsg}}
     <h3>{{erroMsg}}</h3>
 {{/if}}
