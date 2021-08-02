@@ -5,7 +5,7 @@ const restaurantSchema = new Schema({
   name: {
     type: String,
     required: true,
-    maxlength: 255,
+    maxlength: 30,
   },
   foodTypes: [
     {
@@ -33,6 +33,10 @@ const restaurantSchema = new Schema({
     long: Number,
   },
   image: String,
+  description:{
+    type: String,
+    maxlength: 500
+  }
 });
 
 const Restaurant = mongoose.model("restaurant", restaurantSchema);
