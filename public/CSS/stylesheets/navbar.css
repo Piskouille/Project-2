@@ -1,7 +1,28 @@
-#user{
-    color:var(--color-light-green);
+.nav{
+    position: fixed;
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px;
 }
 
 svg{
-    stroke-color: red;
+    fill: var(--color-light-green);
+    width: 50px;
+    height: 50px;
+    transition: fill .5s ease;
+}
+
+#user:hover svg{
+    fill: var(--color-yellow);
+}
+
+#logo{
+    max-width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

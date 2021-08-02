@@ -9,7 +9,7 @@
   --color-yellow: #F5B700;
  }
 
-*, *:hover{
+*{
   padding: 0;
   margin: 0;
   list-style-type: none;
