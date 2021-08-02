@@ -1,13 +1,21 @@
 <div class="restaurant-card">
-    <h3>{{this.name}}</h3>
-    <img src="{{this.image}}" alt="{{this.name}}">
-    
-    <div class="foodTypes">
-        {{formatFoodType this.foodTypes}}
+
+    <div class="restaurant-card-img" >
+        <img src="{{this.image}}" alt="{{this.name}}">
     </div>
 
-    <div class="priceRating">
-        {{this.priceRating}}
+    <div class="restaurant-card-banner">
+        <div class="titles">
+            <h3>{{this.name}}</h3>
+            <div class="foodTypes">
+                {{formatFoodType this.foodTypes}}
+            </div>
+        </div>
+        <div class="short-infos">
+            <div class="priceRating">
+                {{this.priceRating}}
+            </div>
+            <span class="see-more"></span>
+        </div>
     </div>
-
 </div>

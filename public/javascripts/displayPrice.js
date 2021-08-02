@@ -9,7 +9,7 @@ const displayPrice = () => {
         const priceImg = document.createElement('img');
         priceImg.src = '/images/euro.svg'
         priceImg.classList.add("euro")
-        if(count <= 0) priceImg.style.opacity = ".2"
+        if(count <= 0) priceImg.style.opacity = ".4"
         
         count--
         price.appendChild(priceImg);

@@ -91,7 +91,7 @@ router.get(
 );
 
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-  res.redirect('/');
+  res.send('<script>window.close()</script>');
 });
 
 router.get('/logout', (req, res) => {

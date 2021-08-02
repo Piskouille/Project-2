@@ -18,8 +18,12 @@ svg{
     transition: fill .5s ease;
 }
 
-#user:hover svg{
+#user:hover svg, #user.active svg{
     fill: var(--color-yellow);
+}
+
+#user.active:hover svg{
+    fill: var(--color-light-green);
 }
 
 #logo{
