@@ -82,40 +82,55 @@ async function yelpAPICall(foodTypes) {
               const newFoodType = await FoodType.create({ name: cat.alias });
               seedFoodTypes.push(newFoodType.id);
             }
-          })
-        );
+        })
 
-        dataSeed.push({
-          name: resRestoData.name,
-          coordinates: {
-            lat: resRestoData.coordinates.latitude,
-            long: resRestoData.coordinates.longitude,
-          },
-          address: {
-            street: [
-              resRestoData.location.adress1,
-              resRestoData.location.adress2,
-              resRestoData.location.adress3,
-            ]
-              .join(" ")
-              .trim(),
-            city: resRestoData.location.city,
-            zipCode: resRestoData.location.zip_code,
-            country: resRestoData.location.country,
-          },
-          phone: resRestoData.display_phone,
-          priceRating: resRestoData.price.length,
-          foodTypes: seedFoodTypes,
-          // image: resRestoData.image_url  - la vache que leurs photos sont moches !!
-          image: randomPict(PICTS),
-        });
-      })
-    );
+        await Promise.all(res.data.businesses.map(async resto => {
+            const resResto = await axios.get('https://api.yelp.com/v3/businesses/' + resto.id, {
+                headers: {
+                    Authorization: `Bearer ${process.env.YELP_API_KEY}` 
+                }
+            
+            });
+            
+            const resRestoData = resResto.data
+            const categories = resRestoData.categories
+            const seedFoodTypes = []
 
-    return dataSeed;
-  } catch (err) {
-    console.log("ERROR with Yelp API", err);
-  }
+            await Promise.all(categories.map(async cat => {
+                if(foodTypes.hasOwnProperty(cat.alias)){
+                    seedFoodTypes.push(foodTypes[cat.alias])
+                }
+                else{
+                    const newFoodType = await FoodType.create({name: cat.alias}) 
+                    seedFoodTypes.push(newFoodType.id)
+                }
+            }))
+           
+            dataSeed.push({
+                name: resRestoData.name,
+                coordinates: {lat: resRestoData.coordinates.latitude, long: resRestoData.coordinates.longitude},
+                address: {
+                    street: [resRestoData.location.address1, resRestoData.location.address2, resRestoData.location.address3 ].join(' ').trim(),
+                    city: resRestoData.location.city,
+                    zipCode: resRestoData.location.zip_code,
+                    country:  resRestoData.location.country,
+                },
+                phone: resRestoData.display_phone,
+                priceRating: resRestoData.price.length,
+                foodTypes: seedFoodTypes,
+               // image: resRestoData.image_url  - la vache que leurs photos sont moches !!
+                image : randomPict(PICTS)
+            })
+        }))
+
+        return dataSeed
+    }
+    catch(err){
+        console.log('ERROR with Yelp API', err)
+    }
+   
+
+
 }
 
 async function seedFunction() {

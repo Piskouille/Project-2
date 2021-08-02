@@ -19,7 +19,6 @@ const restaurantSchema = new Schema({
     max: 3,
   },
   address: {
-    number: String,
     street: String,
     city: String,
     zipCode: String,
