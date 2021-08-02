@@ -10,10 +10,10 @@ console.log('user authenticated: ', req.user, req.isAuthenticated())
   try{
     const restaurants = await Restaurant.find().populate("foodTypes")
     
-    res.render('landing-page', { 
+    res.render('landingPage', { 
       restaurants,
       loggedIn,
-      scripts: ['/bugerMenu.js', '/displayPrice.js', '/googleAuth.js'] });
+      scripts: ['/bugerMenu.js', '/googleAuth.js', '/cards.js'] });
   }
   catch(err){
     console.log('Loading restaurants failed')

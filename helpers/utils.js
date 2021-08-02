@@ -66,9 +66,6 @@ hbs.registerHelper("compare", function(lvalue, rvalue, options) {
 });
 
 
-
-
-
 hbs.registerHelper("formatFoodType", stringArray => {
 
   const x = stringArray.map(string => (string.name.charAt(0).toUpperCase() + string.name.slice(1)).split('_').join(' '))
@@ -76,3 +73,4 @@ hbs.registerHelper("formatFoodType", stringArray => {
   return x.slice(0, 4).join(' - ')
 
 })
+
