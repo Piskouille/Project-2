@@ -1,0 +1,24 @@
+ @import url('./stylesheets/burgerMenu.css');
+ @import url('./stylesheets/logModal.css');
+ @import url('./stylesheets/navbar.css');
+ 
+ :root{
+  --color-light-green: #21C078;
+  --color-dark-green: #131910; 
+  --color-white: #cdcdcd;
+  --color-yellow: #F5B700;
+ }
+
+*{
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  text-decoration: none;
+  box-sizing: border-box;  
+  color: inherit;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--color-dark-green);
+}

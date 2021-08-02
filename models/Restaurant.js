@@ -11,7 +11,7 @@ const restaurantSchema = new Schema({
        type: Schema.Types.ObjectId,
        ref: 'foodType'
     }],
-   rating: {
+   priceRating: {
        type: Number,
        min: 0,
        max: 3
