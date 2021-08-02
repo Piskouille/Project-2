@@ -4,7 +4,19 @@ const mongoose = require("mongoose");
 const FoodType = require('../models/FoodType')
 const Restaurant = require('../models/Restaurant')
 
+const PICTS = [
+    "https://images.pexels.com/photos/1484516/pexels-photo-1484516.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "https://images.pexels.com/photos/4450334/pexels-photo-4450334.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "https://images.pexels.com/photos/2290070/pexels-photo-2290070.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "https://images.pexels.com/photos/5490933/pexels-photo-5490933.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "https://images.pexels.com/photos/5220092/pexels-photo-5220092.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "https://images.pexels.com/photos/4577740/pexels-photo-4577740.jpeg?auto=compress&cs=tinysrgb&h=350"
+]
 
+function randomPict(picts){
+    const rdm = Math.floor(Math.random() * picts.length)
+    return picts[rdm]
+}
 
 async function DBconnect(){
     const foodTypes = {}
@@ -14,6 +26,10 @@ async function DBconnect(){
             useCreateIndex: true,
             useUnifiedTopology: true
           });
+
+          await Restaurant.deleteMany({}, function(err) { 
+            console.log('collection removed') 
+          })
     
         const foodTypesData = await FoodType.find() 
      
@@ -40,10 +56,10 @@ async function yelpAPICall(foodTypes){
             params :{
                 term: "Restaurant",
                 location: "Paris",
-                limit: "9"
+                limit: "5"
             }
         })
-    
+
         await Promise.all(res.data.businesses.map(async resto => {
             const resResto = await axios.get('https://api.yelp.com/v3/businesses/' + resto.id, {
                 headers: {
@@ -77,7 +93,9 @@ async function yelpAPICall(foodTypes){
                 },
                 phone: resRestoData.display_phone,
                 priceRating: resRestoData.price.length,
-                foodTypes: seedFoodTypes
+                foodTypes: seedFoodTypes,
+               // image: resRestoData.image_url  - la vache que leurs photos sont moches !!
+                image : randomPict(PICTS)
             })
         }))
 

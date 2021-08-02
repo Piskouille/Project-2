@@ -64,3 +64,31 @@ hbs.registerHelper("compare", function(lvalue, rvalue, options) {
     return options.inverse(this);
   }
 });
+
+
+hbs.registerHelper("displayPrice", num => {
+  let count = num
+  const priceRating = document.querySelector('.priceRating')
+  
+
+  for(let i = 0; i < 4; i ++){
+    const priceImg = document.createElement('img');
+    priceImg.src = '/images/euro.svg'
+    
+    if(count <= 0) priceImg.style.opacity = ".4"
+    
+    count--
+    priceRating.appendChild(priceImg);
+  }
+  
+  return priceRating 
+}) 
+
+
+hbs.registerHelper("formatFoodType", stringArray => {
+
+  const x = stringArray.map(string => (string.name.charAt(0).toUpperCase() + string.name.slice(1)).split('_').join(' '))
+
+  return x.slice(0, 4).join(' - ')
+
+})

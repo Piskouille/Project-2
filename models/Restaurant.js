@@ -33,7 +33,7 @@ const restaurantSchema = new Schema({
     lat: Number,
     long: Number,
   },
-  image: { type: String },
+  image: String,
 });
 
 const Restaurant = mongoose.model("restaurant", restaurantSchema);
