@@ -4,13 +4,28 @@
   <div class="modal-content">
     <span id="close-modal"></span>
 
-      <form action="#">
-          <input type="text" placeholder="Email">
-          <input type="text" placeholder="Pass">
-          <button>Log in</button>
+      <form action="#" id="form_SignIn" class="formModal">
+          <div>
+            <label for="name">Name: </label>
+            <input type="hidden" name="name" id="name" placeholder="Name: " autocomplete="off">
+          </div>
+          <div>
+            <label for="email">E-mail: </label>
+            <input type="text" placeholder="Email" id="email">
+          </div>
+          <div>
+            <label for="password">Password: </label>
+            <input type="password" placeholder="Password" id="password">
+          </div>
+          <div>
+            <label for="passwordConfirm">Confirm you password: </label>
+            <input type="password" name="passwordConfirm" id="passwordConfirm">
+          </div>
+          <button id="submit">Log in</button>
+          <p><small id="feedback">{{errorMsg}}</small></p>
       </form>
 
-      <p>No account yet ? <a href="#">Sign up</a></p>
+      <p>No account yet ? <a id="linkModal" href="#">Sign up</a></p>
   </div>
 
 </div>
