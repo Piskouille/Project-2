@@ -1,3 +1,14 @@
+ @import url('./stylesheets/burgerMenu.css');
+ @import url('./stylesheets/logModal.css');
+ 
+ 
+ :root{
+  --color-light-green: #21C078;
+  --color-dark-green: #131910; 
+  --color-white: #cdcdcd;
+  --color-yellow: #F5B700;
+ }
+
 *, *:hover{
   padding: 0;
   margin: 0;
