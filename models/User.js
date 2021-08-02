@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const userModel = new Schema({
+const userSchema = new Schema({
    name: {
        type: String,
        unique: true,
@@ -19,12 +19,13 @@ const userModel = new Schema({
        required: true,
    },
    isAdmin: Boolean,
-   following: {
-       type: [Schema.Types.ObjectId],
+   following: [{
+       type: Schema.Types.ObjectId,
        ref: 'user'
-   },
+   }],
+   googleId: String
 })
 
-const User = mongoose.model('user', userModel)
+const User = mongoose.model('user', userSchema)
 
 module.exports = User
