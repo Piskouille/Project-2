@@ -1,0 +1,14 @@
+<div class="nav">
+    <a href="#" id="user">
+        <svg><use xlink:href="/images/user.svg"></use></svg>
+    </a>
+
+    {{#if isAdmin}}
+        <a href="#">Create Restaurant</a>
+        <a href="#">Manage Restaurants</a>
+    {{/if}}
+
+    <img src="/public/images/logo.png" alt="logo">
+
+    {{> burgerMenu}}
+</div>
