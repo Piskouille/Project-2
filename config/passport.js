@@ -26,7 +26,11 @@ module.exports = () => {
           // and there is no error.
           done(null, user);
         } else {
-          user = await User.create({ googleId: profile.id });
+          console.log(profile)
+          const email = profile.emails[0].value
+          const name = profile.displayName
+
+          user = await User.create({ email, name,  googleId: profile.id });
           done(null, user);
         }
       }
