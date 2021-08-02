@@ -1,10 +1,10 @@
-<div class="card-restaurant">
+<div class="restaurant-card">
   <img src="{{this.image}}" /><h2>{{this.name}}</h2>
   {{#each this.address}}
     <h2 id="address">{{this}}</h2>
   {{/each}}
   <p id="phone">{{this.phone}}</p>
-  <p id="phoe">{{this.rating}}</p>
+  <p id="priceRating">{{this.priceRating}}</p>
 
   <a href="/restaurants/{{this._id}}">Details</a><br />
   <a href="/restaurants/{{this._id}}/delete">Delete</a></div>
