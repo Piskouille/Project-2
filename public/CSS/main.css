@@ -1,6 +1,6 @@
  @import url('./stylesheets/burgerMenu.css');
  @import url('./stylesheets/logModal.css');
- 
+ @import url('./stylesheets/navbar.css');
  
  :root{
   --color-light-green: #21C078;
@@ -19,12 +19,6 @@
   -webkit-font-smoothing: antialiased;
 }
 
-
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
+  background-color: var(--color-dark-green);
 }

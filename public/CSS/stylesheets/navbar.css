@@ -1,0 +1,7 @@
+#user{
+    color:var(--color-light-green);
+}
+
+svg{
+    stroke-color: red;
+}
