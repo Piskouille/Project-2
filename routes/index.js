@@ -9,7 +9,7 @@ router.get('/', async function(req, res, next) {
     
     res.render('landing-page', { 
       restaurants,
-      scripts: ['/bugerMenu.js'] });
+      scripts: ['/bugerMenu.js', '/displayPrice.js'] });
   }
   catch(err){
     console.log('Loading restaurants failed')

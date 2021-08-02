@@ -85,8 +85,8 @@ async function yelpAPICall(foodTypes){
             dataSeed.push({
                 name: resRestoData.name,
                 coordinates: {lat: resRestoData.coordinates.latitude, long: resRestoData.coordinates.longitude},
-                adress: {
-                    street: [resRestoData.location.adress1, resRestoData.location.adress2, resRestoData.location.adress3 ].join(' ').trim(),
+                address: {
+                    street: [resRestoData.location.address1, resRestoData.location.address2, resRestoData.location.address3 ].join(' ').trim(),
                     city: resRestoData.location.city,
                     zipCode: resRestoData.location.zip_code,
                     country:  resRestoData.location.country,

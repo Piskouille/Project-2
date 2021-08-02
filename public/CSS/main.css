@@ -23,4 +23,6 @@
 body {
   position: relative;
   background-color: var(--color-dark-green);
+  color: var(--color-white);
+  font-size: 16px;
 }
