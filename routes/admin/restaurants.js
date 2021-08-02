@@ -72,7 +72,7 @@ router.post(
         image: image,
       });
 
-      res.redirect("/restaurants");
+      res.redirect("/restaurants-manage");
     } catch (error) {
       next(error);
     }
@@ -82,7 +82,9 @@ router.post(
 // render of one restaurant with the id from the list
 router.get("/restaurants/:id", async (req, res, next) => {
   try {
-    const restaurant = await Restaurant.findById(req.params.id);
+    const restaurant = await Restaurant.findById(req.params.id).populate(
+      "foodTypes"
+    );
     res.render("restaurantDetails.hbs", { restaurant: restaurant });
   } catch (error) {
     next(error);
