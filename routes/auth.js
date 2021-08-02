@@ -80,7 +80,9 @@ router.post('/signin', async (req, res, next) => {
   }
 });
 
-//     GOOGLE
+//  -----------------------------------------------------
+//  GOOGLE
+//  -----------------------------------------------------
 router.get(
   '/google',
   passport.authenticate('google', {
