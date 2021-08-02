@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-
 const User = require('../models/User');
+// Passport requirements
+const passport = require('passport');
 
 //  -----------------------------------------------------
 //  Routes are prefixed with /auth
@@ -12,23 +13,23 @@ const User = require('../models/User');
 //  SIGN-UP
 //  -----------------------------------------------------
 router.get('/signup', (req, res, next) => {
-  res.render('/signup.hbs');
+  res.render('/signup.hbs', {
+    errorMsg: req.flash('info'),
+  });
 });
 
 router.post('/signup', async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
     if (!name || !email || !password) {
-      res.redirect('/signup', {
-        errorMsg: 'Please fill all inputs.',
-      });
+      req.flash('info', 'Please fill all inputs.');
+      res.redirect('/signup');
       return;
     }
     const emailUsed = await User.findOne({ email });
     if (emailUsed) {
-      res.redirect('/signup', {
-        errorMsg: 'This e-mail adress is already used',
-      });
+      req.flash('info', 'This e-mail adress is already used');
+      res.redirect('/signup');
       return;
     }
     const securePassword = bcrypt.hashSync(password);
@@ -45,23 +46,23 @@ router.post('/signup', async (req, res, next) => {
 //  -----------------------------------------------------
 
 router.get('/signin', (req, res, next) => {
-  res.render('signin');
+  res.render('signin', {
+    errorMsg: req.flash('info'),
+  });
 });
 
 router.post('/signin', async (req, res, next) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
-      res.redirect('/signin', {
-        errorMsg: 'Add a username / password combo',
-      });
+      req.flash('info', 'Add a username, password combo');
+      res.redirect('/signin');
       return;
     }
     const validUser = await User.findOne({ email });
     if (!validUser) {
-      res.redirect('/signin', {
-        errorMsg: 'Wrong credentials',
-      });
+      req.flash('info', 'Wrong credentials');
+      res.redirect('/signin');
       return;
     }
     const validPass = bcrypt.compareSync(password, validUser.password);
@@ -71,13 +72,29 @@ router.post('/signin', async (req, res, next) => {
       };
       res.redirect('/');
     } else {
-      res.redirect('/signin', {
-        errorMsg: 'Wrong credentials',
-      });
+      req.flash('info', 'Wrong credentials');
+      res.redirect('/signin');
     }
   } catch (error) {
     next(error);
   }
+});
+
+//     GOOGLE
+router.get(
+  '/google',
+  passport.authenticate('google', {
+    scope: ['profile', 'email'],
+  })
+);
+
+router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
+  res.redirect('/');
+});
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
 });
 
 module.exports = router;
