@@ -5,18 +5,15 @@ const userSchema = new Schema({
    name: {
        type: String,
        unique: true,
-       required: true,
        maxlength: 255
    },
    email: {
        type: String,
        unique: true,
-       required: true,
        maxlength: 255
    },
    password: {
        type: String,
-       required: true,
    },
    isAdmin: Boolean,
    following: [{
