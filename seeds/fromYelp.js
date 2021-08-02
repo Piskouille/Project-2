@@ -3,7 +3,7 @@ const axios = require('axios')
 const mongoose = require("mongoose");
 const FoodType = require('../models/FoodType')
 const Restaurant = require('../models/Restaurant')
-
+//update
 const PICTS = [
     "https://images.pexels.com/photos/1484516/pexels-photo-1484516.jpeg?auto=compress&cs=tinysrgb&h=350",
     "https://images.pexels.com/photos/4450334/pexels-photo-4450334.jpeg?auto=compress&cs=tinysrgb&h=350",
@@ -118,7 +118,5 @@ async function seedFunction(){
     mongoose.connection.close(console.log('DB disconnected'))
 
 }
-
-
 
 seedFunction()
