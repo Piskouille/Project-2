@@ -1,11 +1,19 @@
 .landing-page{
+    display: flex;
     position: relative;
-    margin: 200px auto 0;
+    margin: 300px auto 0;
 }
 
-.euro{
-    width: 16px;
-    height: 16px;
-    transform: rotate(-45deg);
-    margin-left: 4px;
+#filters{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 300px;
+    width: 20%;
+    height: calc(100vh-300px);
+    background-color: var(--color-yellow);
+}
+
+.restaurant-list{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
 }

@@ -9,6 +9,8 @@ const name = document.getElementById('name');
 const passwordConfirm = document.getElementById('passwordConfirm');
 const feedback = document.getElementById('feedback');
 const form = document.querySelector('.formModal');
+const googleAuth = document.getElementById('googleAuth')
+const slackAuth = document.getElementById('slackAuth')
 
 const BASE_URL = `http://localhost:${process.env.PORT}/`;
 let isModalDisplayed = false;
@@ -34,6 +36,18 @@ modalBtn.addEventListener('click', () => {
   return;
 });
 
+googleAuth.onclick = () => {
+  window.open('/auth/google',
+    '',
+    ' scrollbars=yes,menubar=no,width=500, resizable=yes,toolbar=no,location=no,status=no')
+}
+
+slackAuth.onclick = () => {
+  window.open('/auth/slack',
+    '',
+    ' scrollbars=yes,menubar=no,width=500, resizable=yes,toolbar=no,location=no,status=no')
+}
+
 submitBtn.onclick = async (e) => {
   e.preventDefault();
   const email = document.getElementById('email').value;
@@ -45,7 +59,7 @@ submitBtn.onclick = async (e) => {
     feedback.style.color = 'red';
     return;
   }
-  
+//TODO  
 
   if (form.id === 'form_SignIn') {
     axios.post(BASE_URL + 'auth/signin');

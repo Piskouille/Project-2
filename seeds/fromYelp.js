@@ -3,6 +3,7 @@ const axios = require('axios')
 const mongoose = require("mongoose");
 const FoodType = require('../models/FoodType')
 const Restaurant = require('../models/Restaurant')
+const loremIpsum = require("lorem-ipsum").loremIpsum;
 
 const PICTS = [
     "https://images.pexels.com/photos/1484516/pexels-photo-1484516.jpeg?auto=compress&cs=tinysrgb&h=350",
@@ -27,9 +28,9 @@ async function DBconnect(){
             useUnifiedTopology: true
           });
 
-          await Restaurant.deleteMany({}, function(err) { 
+        await Restaurant.deleteMany({}, function(err) { 
             console.log('collection removed') 
-          })
+        }) 
     
         const foodTypesData = await FoodType.find() 
      
@@ -95,7 +96,11 @@ async function yelpAPICall(foodTypes){
                 priceRating: resRestoData.price.length,
                 foodTypes: seedFoodTypes,
                // image: resRestoData.image_url  - la vache que leurs photos sont moches !!
-                image : randomPict(PICTS)
+                image : randomPict(PICTS),
+                description : loremIpsum({
+                    count: Math.floor(Math.random() * 33) + 15,
+                    units: "words"
+                })
             })
         }))
 

@@ -4,17 +4,11 @@ const burgerMenu = document.getElementById('burger-menu')
 
 let burgerIsActive = false
 
-burgerBtn.addEventListener('click', handleBurgerBtn)
+burgerBtn.addEventListener('click', () => {
+  burgerWrapper.classList.toggle('active')
+  burgerMenu.classList.toggle('active')
+})
 
-function handleBurgerBtn(){
-  burgerIsActive = !burgerIsActive;
-  if(burgerIsActive){
-    burgerMenu.classList.add('active')
-    return burgerWrapper.classList.add('active')
-  }
-    burgerMenu.classList.remove('active')
-    return burgerWrapper.classList.remove('active')
-}
 
 
 
