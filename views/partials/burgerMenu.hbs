@@ -11,5 +11,17 @@
   <div class="burger-logo">
     <img id="logo-dark" src="/images/logo-dark.png" alt="logo">
   </div>
+
+    <divd id="burger-filters">
+        <h3 class="aside-title">Filters</h3>
+        <ul> 
+            <li id='filter-all' class='aside-filter clicked'>All</li>
+            {{#each foodTypes}}
+                <li class='aside-filter'>{{capitalize this.name}}</li>
+            {{/each}}
+        </ul>
+
+        <span class="burger-done">Done</span>
+    </divd>
 </div>
 

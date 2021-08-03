@@ -162,12 +162,15 @@ p {
   animation: flip-vertical-left 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955)
     both;
 }
+
 .front {
   display: none;
 }
+
 .front.active + .back {
   display: none;
 }
+
 .front + .back.active {
   display: block;
   transform: rotateY(180deg);
@@ -186,3 +189,38 @@ p {
     transform: rotateY(0);
   }
 }
+
+
+ /* .front{
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   transform-origin: right;
+   transition: clip-path 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+   clip-path: inset(0 100% 0 0);
+   transition-delay: 0;
+ }
+
+ .front.active{
+  transform-origin: left;
+  clip-path: inset(0 0 0 0);
+  transition-delay: .5s;
+}
+
+.back{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: right;
+  transition: clip-path 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+  clip-path: inset(0 100% 0 0);
+  transition-delay: 0;
+}
+
+.back.active{
+  transform-origin: left;
+ clip-path: inset(0 0 0 0);
+ transition-delay: .5s;
+} */
