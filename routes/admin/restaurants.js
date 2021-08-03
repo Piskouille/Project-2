@@ -14,7 +14,7 @@ router.get("/restaurants-manage", async (req, res, next) => {
 // the creation of one restaurant
 router.get("/restaurants-create", async (req, res, next) => {
   try {
-    res.render("restaurant.create.hbs");
+    res.render("restaurantCreate.hbs");
   } catch (error) {
     next(error);
   }
@@ -27,12 +27,12 @@ router.post(
     try {
       const restaurant = await Restaurant.findOne({ name: req.body.name });
       if (restaurant) {
-        res.render("restaurant.create.hbs", { errorMsg: "Name already taken" });
+        res.render("restaurantCreate.hbs", { errorMsg: "Name already taken" });
         return;
       }
       const Foodtype = await FoodType.findOne({ name: req.body.foodType });
-      if (Foodtype) {
-        res.render("restaurant.create.hbs", {
+      if (Foodtype.name.toLowerCase() === req.body.foodType.toLowerCaser()) {
+        res.render("restaurantCreate.hbs", {
           errorMsg: "FoodType already exist in the database",
         });
         return;
