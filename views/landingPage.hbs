@@ -1,7 +1,13 @@
 {{> logModal}}
 <div class="landing-page">
     <aside id="filters">
-
+        <h3 class="aside-title">Filters</h3>
+        <ul> 
+            <li id='filter-all' class='aside-filter clicked'>All</li>
+            {{#each foodTypes}}
+                <li class='aside-filter'>{{capitalize this.name}}</li>
+            {{/each}}
+        </ul>
     </aside>
     <section class="restaurant-list">
         {{#each restaurants}}
