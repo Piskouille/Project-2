@@ -8,14 +8,13 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const hbs = require('hbs');
-const keys = require('./config/keys');
 const flash = require('connect-flash');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const passport = require('passport');
 //const cookieSession = require("cookie-session");
 const app = express();
-
+const User = require('./models/User')
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -55,22 +54,24 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const adminRouter = require('./routes/admin/restaurants');
 
-// Cookie setup for passport
-// -------------------------------------------
-// app.use(
-//   cookieSession({
-//     // milliseconds of a day
-//     maxAge: 24 * 60 * 60 * 1000,
-//     keys: [keys.session.cookieKey],
-//   })
-// );
-// -------------------------------------------
+app.use(async (req, res, next) => {
+  if (req.session.currentUser) {
+    const user = await User.findById(req.session.currentUser._id);
+    res.locals.currentUser = user;
+    res.locals.isLoggedIn = true;
+    next();
+  } else {
+    res.locals.currenUser = undefined;
+    res.locals.isLoggedIn = false;
+    next();
+  }
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth/', require('./routes/auth'));
 app.use('/admin', require('./routes/admin/restaurants'));
-app.use('/auth/ajax', require('./routes/ajax/ajaxAuth'))
+app.use('/auth/ajax', require('./routes/ajax/ajaxAuth'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
