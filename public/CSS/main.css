@@ -26,4 +26,5 @@ body {
   background-color: var(--color-dark-green);
   color: var(--color-white);
   font-size: 16px;
+  scroll-behavior: smooth;
 }
