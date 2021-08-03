@@ -1,0 +1,29 @@
+.form-admin-user{
+    position: relative;
+    top: 300px;
+}
+.form-admin-restaurant{
+    position: relative;
+    top: 300px;
+    display: flex;
+    box-sizing: border-box;
+    padding: 20px;
+    width: 320px;
+}
+.input,
+select {
+    border: 0;
+    box-sizing: border-box;
+    background-color: gray;
+    font-size: 18px;
+    outline: 0;
+    padding: 4px 20px 0;
+    width: 100%;
+  }
+  .container{
+    display: flex;
+    justify-content: center;
+  }
+  .alert{
+      color: red;
+  }

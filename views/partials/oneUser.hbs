@@ -1,13 +1,24 @@
-<div class="user-card">
-
-<form method="POST" action="/admin/users/{{this.id}}" >
- <h2>{{this.name}}</h2>
-  <div> 
-        <label for="name">Admin</label>
-    <input type="checkbox"{{#if this.isAdmin}} checked {{/if}} name="{{this.role}}"/>
-    </div>
-       <label for="name">User</label>
-    <input type="checkbox" name="{{this.role}}"/>
-    <button>Submit !</button>
-   
-    </form>
+<form method="POST" action="/admin/users/{{this.id}}">
+  <h2>{{this.name}}</h2>
+  <div>
+    <label for="user">User</label>
+    <input
+      id="user"
+      type="radio"
+      {{isSelected this.role "USER" "checked"}}
+      value="USER"
+      name="role"
+    />
+  </div>
+  <div>
+    <label for="admin">Admin</label>
+    <input
+      id="admin"
+      type="radio"
+      {{isSelected this.role "ADMIN" "checked"}}
+      value="ADMIN"
+      name="role"
+    />
+  </div>
+  <button>Submit !</button>
+</form>
