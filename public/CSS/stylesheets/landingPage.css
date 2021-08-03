@@ -2,7 +2,7 @@
     display: flex;
     position: relative;
     margin: 250px auto 0 auto;
-
+    z-index: 0;
 }
 
 .restaurant-list{
@@ -12,8 +12,6 @@
     justify-content: flex-start;
     align-items: flex-start;
     position: relative;
-    z-index: -1;
-
 }
 
 /* FILTERS */
@@ -28,6 +26,11 @@
     background-color: var(--color-yellow);
     color: var(--color-dark-green);
     user-select: none;
+}
+
+.aside-title{
+    font-family: 'satoshi', serif;
+    font-size: 25px;
 }
 
 .aside-filter{

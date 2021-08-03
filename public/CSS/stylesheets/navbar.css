@@ -11,8 +11,7 @@
 
 #user{
     margin-left: 50px;
-    isolation: isolate;
-    z-index: 300;
+    z-index: -1;
 }
 
 svg{
@@ -42,7 +41,6 @@ svg{
     max-width: 300px;
     left: 50%;
     transform: translate(-50%);
-    z-index: -100;
 }
 
 @media (min-width: 1995px) { 

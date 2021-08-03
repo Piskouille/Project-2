@@ -37,7 +37,10 @@
     height: 20%;
     padding: 15px;
     background: linear-gradient(180deg, rgba(19,25,16,0.6) 41%, rgba(19,25,16,1) 100%);
-    z-index: 500;
+}
+
+.titles h3{
+    font-family: 'satoshi', serif;
 }
 
 .short-infos{
@@ -106,9 +109,9 @@
     bottom: 0;
     left: 0;
     transform: translateY(100%);
-    z-index: 1;
     transition: all .5s cubic-bezier(0.77,0.2,0.05,1.0);
     clip-path: inset(0 0 100% 0);
+    z-index: 1;
 }
 
 .details.active{

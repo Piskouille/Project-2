@@ -4,12 +4,22 @@
  @import url('./stylesheets/landingPage.css');
  @import url('stylesheets/cards.css');
  
- :root{
+ @font-face {
+   font-family: 'zodiak';
+   src: url('/fonts/zodiak-regalar.woff2');
+ }
+
+ @font-face {
+  font-family: 'satoshi';
+  src: url('/fonts/satoshi-medium.woff2');
+}
+
+:root{
   --color-light-green: #21C078;
   --color-dark-green: #131910; 
   --color-white: #cdcdcd;
   --color-yellow: #F5B700;
- }
+}
 
 *{
   padding: 0;
@@ -19,6 +29,7 @@
   box-sizing: border-box;  
   -webkit-font-smoothing: antialiased;
   color: inherit;
+  font-family: inherit;
 }
 
 body {
@@ -27,4 +38,5 @@ body {
   color: var(--color-white);
   font-size: 16px;
   scroll-behavior: smooth;
+  font-family: 'zodiak', serif;
 }
