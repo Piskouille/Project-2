@@ -42,7 +42,7 @@
 }
 
 /* The Close Button */
-#close-modal {
+#close-modal-si, #close-modal-su {
   position: relative;
   color: var(--color-light-green);
   float: right;

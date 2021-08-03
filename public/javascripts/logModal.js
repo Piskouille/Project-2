@@ -1,5 +1,6 @@
 const modalBtn = document.getElementById('user');
-const closeModalBtn = document.getElementById('close-modal');
+const closeModalBtnSi = document.getElementById('close-modal-si');
+const closeModalBtnSu = document.getElementById('close-modal-su');
 const modal = document.getElementById('logModal');
 const submitBtn = document.getElementById('submit');
 const nameInput = document.getElementById('name');
@@ -36,7 +37,12 @@ modalBtn.onclick = () => {
     modal.style.display = 'none';
   }
 };
-closeModalBtn.onclick = () => {
+
+closeModalBtnSi.onclick = () => {
+  modal.style.display = 'none';
+  modal.classList.toggle('modalActive');
+};
+closeModalBtnSu.onclick = () => {
   modal.style.display = 'none';
   modal.classList.toggle('modalActive');
 };
