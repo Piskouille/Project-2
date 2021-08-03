@@ -13,7 +13,7 @@ console.log('user authenticated: ', req.user, req.isAuthenticated())
     res.render('landingPage', { 
       restaurants,
       loggedIn,
-      scripts: ['/bugerMenu.js', '/googleAuth.js', '/cards.js'] });
+      scripts: ['/bugerMenu.js', '/logModal.js', '/cards.js'] });
   }
   catch(err){
     console.log('Loading restaurants failed')

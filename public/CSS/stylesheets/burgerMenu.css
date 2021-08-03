@@ -1,67 +1,63 @@
-#burger-wrapper{
+#burger-wrapper {
   position: relative;
 
   -webkit-user-select: none;
   user-select: none;
 }
 
-#burger-btn{
+#burger-btn {
   width: 33px;
-  height : 33px;
+  height: 33px;
   z-index: 100;
 }
 
-#burger-btn:hover{
+#burger-btn:hover {
   cursor: pointer;
 }
 
-#burger-btn span{
+#burger-btn span {
   display: block;
   background-color: var(--color-light-green);
-  border-radius: 3px; 
+  border-radius: 3px;
   width: 100%;
   height: 4px;
   margin-bottom: 5px;
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
-    background 0.5s ease,
-    opacity 0.55s ease;
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+    background 0.5s ease, opacity 0.55s ease;
 }
 
-#burger-wrapper.active #burger-btn:hover span{
+#burger-wrapper.active #burger-btn:hover span {
   background-color: var(--color-dark-green);
 }
 
-#burger-btn:hover span{
+#burger-btn:hover span {
   background-color: var(--color-yellow);
 }
 
-#burger-btn span:first-child{
+#burger-btn span:first-child {
   transform-origin: 0% 0%;
 }
 
-#burger-btn span:nth-child(3){
+#burger-btn span:nth-child(3) {
   transform-origin: 0% 100%;
 }
 
-#burger-wrapper.active span:first-child
-{
+#burger-wrapper.active span:first-child {
   transform: rotate(45deg) translate(-2px, -3px);
   background: var(--color-yellow);
 }
 
-#burger-wrapper.active span:nth-child(2)
-{
+#burger-wrapper.active span:nth-child(2) {
   opacity: 0;
   transform: rotate(0deg) scale(0.2, 0.2);
 }
 
-#burger-wrapper.active span:nth-child(3)
-{
+#burger-wrapper.active span:nth-child(3) {
   transform: rotate(-45deg) translate(0px, 1px);
   background: var(--color-yellow);
 }
 
-#burger-menu{
+#burger-menu {
   position: absolute;
   top: 0;
   left: 0;
@@ -69,16 +65,15 @@
   height: 100vh;
   background-color: var(--color-light-green);
   transform: translate(100%, 0);
-  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+  transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
 }
 
-#burger-menu.active
-{
+#burger-menu.active {
   transform: translate(0, 0);
   z-index: -1;
 }
 
-.burger-logo{
+.burger-logo {
   position: relative;
   width: 100%;
   height: 200px;
@@ -88,7 +83,7 @@
   padding: 50px;
 }
 
-#logo-dark{
+#logo-dark {
   max-width: 300px;
   position: absolute;
   top: 50%;
@@ -96,9 +91,8 @@
   transform: translate(-50%, -50%);
 }
 
-@media screen and (min-width: 768px) { 
-  #burger-wrapper{
+@media screen and (min-width: 768px) {
+  #burger-wrapper {
     display: none;
- }
-  
+  }
 }
