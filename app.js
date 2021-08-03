@@ -73,6 +73,9 @@ app.use("/users/", usersRouter);
 app.use("/auth/", authRouter);
 app.use("/admin/", adminRestaurantsRouter);
 app.use("/admin/", adminUsersRouter);
+app.use("/auth/", require("./routes/auth"));
+app.use("/admin", require("./routes/admin/restaurants"));
+app.use("/auth/ajax", require("./routes/ajax/ajaxAuth"));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

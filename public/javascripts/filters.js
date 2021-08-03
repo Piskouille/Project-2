@@ -33,8 +33,9 @@ filters.forEach(filter => {
             }
         })
 
-        if(activeFilters.length === 0){
-            all.classList.remove('clicked')
+        if(activeFilters.length === 0 || filter.id === 'filter-all'){
+            filters.forEach(f => f.classList.remove('clicked'))
+            all.classList.add('clicked')
             cards.forEach(card => {
                 card.style.display = 'block'
             })
