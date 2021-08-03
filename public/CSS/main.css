@@ -17,8 +17,8 @@
   list-style-type: none;
   text-decoration: none;
   box-sizing: border-box;  
-  color: white;
   -webkit-font-smoothing: antialiased;
+  color: inherit;
 }
 
 body {

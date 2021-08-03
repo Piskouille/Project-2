@@ -15,7 +15,7 @@ router.get("/restaurants-manage", checkRole('ADMIN'), async (req, res, next) => 
 // the creation of one restaurant
 router.get("/restaurants-create", checkRole('ADMIN'), async (req, res, next) => {
   try {
-    res.render("restaurant.create.hbs");
+    res.render("restaurantCreate.hbs");
   } catch (error) {
     next(error);
   }
