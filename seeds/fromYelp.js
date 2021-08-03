@@ -28,9 +28,9 @@ async function DBconnect(){
             useUnifiedTopology: true
           });
 
-          await Restaurant.deleteMany({}, function(err) { 
+        await Restaurant.deleteMany({}, function(err) { 
             console.log('collection removed') 
-          })
+        }) 
     
         const foodTypesData = await FoodType.find() 
      
