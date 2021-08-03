@@ -80,9 +80,9 @@ router.get(
 );
 
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-  //res.send('<script>window.close()</script>');
-  req.flash('info', 'Log in succesfull')
-  res.redirect('/')
+  res.send('<script>window.close()</script>');
+  // req.flash('info', 'Log in succesfull')
+  // res.redirect('/')
 });
 
 //  -----------------------------------------------------
@@ -92,9 +92,9 @@ router.get('/slack', passport.authenticate('slack', {
   scope: ['profile', 'email']
 }))
 router.get('/slack/redirect', passport.authenticate('slack'), (req, res) => {
-  //res.send('<script>window.close()</script>')
-  req.flash('info', 'Log in succesfull')
-  res.redirect('/')
+  res.send('<script>window.close()</script>')
+  // req.flash('info', 'Log in succesfull')
+  // res.redirect('/')
 })
 
 //  -----------------------------------------------------

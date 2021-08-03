@@ -74,3 +74,11 @@ hbs.registerHelper("formatFoodType", stringArray => {
 
 })
 
+
+
+hbs.registerHelper("capitalize", string => {
+
+  return (string.charAt(0).toUpperCase() + string.slice(1)).split('_').join(' ')
+
+})
+
