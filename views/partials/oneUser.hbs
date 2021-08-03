@@ -1,0 +1,13 @@
+<div class="user-card">
+
+<form method="POST" action="/admin/users/{{this.id}}" >
+ <h2>{{this.name}}</h2>
+  <div> 
+        <label for="name">Admin</label>
+    <input type="checkbox"{{#if this.isAdmin}} checked {{/if}} name="{{this.role}}"/>
+    </div>
+       <label for="name">User</label>
+    <input type="checkbox" name="{{this.role}}"/>
+    <button>Submit !</button>
+   
+    </form>
