@@ -10,7 +10,7 @@ const passport = require('passport');
 //  -----------------------------------------------------
 
 //  -----------------------------------------------------
-//  SIGN-UP
+//  CLASSIC SIGN-UP
 //  -----------------------------------------------------
 router.get('/signup', (req, res, next) => {
   res.render('/signup.hbs', {
@@ -42,7 +42,7 @@ router.post('/signup', async (req, res, next) => {
 });
 
 //  -----------------------------------------------------
-//  SIGN-IN
+//  PASSPORT SIGN-IN
 //  -----------------------------------------------------
 
 router.get('/signin', (req, res, next) => {
@@ -51,37 +51,26 @@ router.get('/signin', (req, res, next) => {
   });
 });
 
-router.post('/signin', async (req, res, next) => {
-  try {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      req.flash('info', 'Add a username, password combo');
-      res.redirect('/signin');
-      return;
-    }
-    const validUser = await User.findOne({ email });
-    if (!validUser) {
+router.post('/signin', (req, res, next) => {
+  passport.authenticate('local', {failureFlash: true}, (err, theUser, failDetails) => {
+    if (err) return next(err)
+    if (!theUser) {
       req.flash('info', 'Wrong credentials');
       res.redirect('/signin');
       return;
     }
-    const validPass = bcrypt.compareSync(password, validUser.password);
-    if (validPass) {
-      req.session.currentUser = {
-        _id: validUser._id,
-      };
-      res.redirect('/');
-    } else {
-      req.flash('info', 'Wrong credentials');
-      res.redirect('/signin');
-    }
-  } catch (error) {
-    next(error);
-  }
+    // ----------------------------------------
+    // User is saved in req.user ↓↓↓
+    req.login(theUser, error => {
+      if (error) return next(error)
+      
+      res.redirect('/')
+    })
+  })(req, res, next)
 });
 
 //  -----------------------------------------------------
-//  GOOGLE
+//  GOOGLE PASSPORT
 //  -----------------------------------------------------
 router.get(
   '/google',
@@ -91,9 +80,26 @@ router.get(
 );
 
 router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
-  res.send('<script>window.close()</script>');
+  //res.send('<script>window.close()</script>');
+  req.flash('info', 'Log in succesfull')
+  res.redirect('/')
 });
 
+//  -----------------------------------------------------
+//  SLACK PASSPORT
+//  -----------------------------------------------------
+router.get('/slack', passport.authenticate('slack', {
+  scope: ['profile', 'email']
+}))
+router.get('/slack/redirect', passport.authenticate('slack'), (req, res) => {
+  //res.send('<script>window.close()</script>')
+  req.flash('info', 'Log in succesfull')
+  res.redirect('/')
+})
+
+//  -----------------------------------------------------
+//  LOGOUT
+//  -----------------------------------------------------
 router.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
