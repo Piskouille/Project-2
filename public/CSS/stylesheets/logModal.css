@@ -51,10 +51,6 @@
   cursor: pointer;
 }
 
-#close-modal:hover {
-  background-color: var(--color-yellow);
-}
-
 .close::before,
 .close::after {
   content: '';
@@ -71,6 +67,9 @@
   transform: rotate(-45deg);
 }
 
+.close:hover::after, .close:hover::before {
+  background-color: var(--color-yellow);
+}
 
 .formModal label,
 p {

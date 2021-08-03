@@ -54,7 +54,7 @@ submitBtn.onclick = async (e) => {
     feedback.innerHTML = success.data;
     return;
   } else {
-    
+
   }
 
   
@@ -141,17 +141,29 @@ function confirmPass() {
 }
 
 googleAuth.onclick = () => {
-  window.open(
+  const win = window.open(
     '/auth/google',
     '',
     ' scrollbars=yes,menubar=no,width=500, resizable=yes,toolbar=no,location=no,status=no'
   );
+  let intervalId = setInterval(() => {
+    if (win.closed) {
+      clearInterval(intervalId)
+      window.location.reload()
+    }
+  }, 500)
 };
 
 slackAuth.onclick = () => {
-  window.open(
+  const win = window.open(
     '/auth/slack',
     '',
     ' scrollbars=yes,menubar=no,width=500, resizable=yes,toolbar=no,location=no,status=no'
   );
+  let intervalId = setInterval(() => {
+    if (win.closed) {
+      clearInterval(intervalId)
+      window.location.reload()
+    }
+  }, 500)
 };
