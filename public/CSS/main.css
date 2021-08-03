@@ -2,6 +2,7 @@
  @import url('./stylesheets/logModal.css');
  @import url('./stylesheets/navbar.css');
  @import url('./stylesheets/landingPage.css');
+ @import url('stylesheets/cards.css');
  
  :root{
   --color-light-green: #21C078;
