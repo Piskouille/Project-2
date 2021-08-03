@@ -2,28 +2,36 @@ const router = require("express").Router();
 const Restaurant = require("../../models/Restaurant");
 const FoodType = require("../../models/FoodType");
 const upload = require("../../config/cloudinary");
-const checkRole = require('../../middlewares/checkRoles')
+const checkRole = require("../../middlewares/checkRoles");
 // render of all the restaurants from the database
-router.get("/restaurants-manage", checkRole('ADMIN'), async (req, res, next) => {
-  try {
-    const restaurant = await Restaurant.find();
-    res.render("restaurants", { restaurants: restaurant });
-  } catch (error) {
-    next(error);
+router.get(
+  "/restaurants-manage",
+  checkRole("ADMIN"),
+  async (req, res, next) => {
+    try {
+      const restaurant = await Restaurant.find();
+      res.render("restaurants", { restaurants: restaurant });
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 // the creation of one restaurant
-router.get("/restaurants-create", checkRole('ADMIN'), async (req, res, next) => {
-  try {
-    res.render("restaurantCreate.hbs");
-  } catch (error) {
-    next(error);
+router.get(
+  "/restaurants-create",
+  checkRole("ADMIN"),
+  async (req, res, next) => {
+    try {
+      res.render("restaurantCreate.hbs");
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 router.post(
   "/restaurants-create",
-  checkRole('ADMIN'),
+  checkRole("ADMIN"),
   upload.single("image"),
   async (req, res, next) => {
     try {
@@ -49,6 +57,7 @@ router.post(
         phone,
         rating,
         foodType,
+        description,
       } = req.body;
 
       if (req.file) {
@@ -72,6 +81,7 @@ router.post(
         },
         phone: phone,
         image: image,
+        description: description,
       });
 
       res.redirect("/restaurants-manage");
@@ -82,7 +92,7 @@ router.post(
 );
 
 // render of one restaurant with the id from the list
-router.get("/restaurants/:id", checkRole('ADMIN'), async (req, res, next) => {
+router.get("/restaurants/:id", checkRole("ADMIN"), async (req, res, next) => {
   try {
     const restaurant = await Restaurant.findById(req.params.id).populate(
       "foodTypes"
@@ -94,13 +104,17 @@ router.get("/restaurants/:id", checkRole('ADMIN'), async (req, res, next) => {
 });
 
 // delete one restaurant
-router.get("/restaurants/:id/delete", checkRole('ADMIN'), async (req, res, next) => {
-  try {
-    await Restaurant.findByIdAndDelete(req.params.id);
-    res.redirect("/restaurants");
-  } catch (error) {
-    next(error);
+router.get(
+  "/restaurants/:id/delete",
+  checkRole("ADMIN"),
+  async (req, res, next) => {
+    try {
+      await Restaurant.findByIdAndDelete(req.params.id);
+      res.redirect("/restaurants");
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 module.exports = router;
