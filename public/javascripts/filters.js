@@ -64,10 +64,3 @@ filters.forEach(filter => {
         }
     })
 })
-
-cards.forEach(card => {
-    card.querySelector('.see-more').addEventListener('click', () => {
-        cards.forEach(c => c.style.zIndex = '0')
-        card.style.zIndex = '100'
-    })
-})

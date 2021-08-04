@@ -9,11 +9,15 @@
 .restaurant-list{
     display: grid;
     width: 100%;
-
+    column-gap: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
     grid-template-columns: repeat(auto-fit,minmax(400px, 1fr));
     justify-content: flex-start;
     align-items: flex-start;
     position: relative;
+    background-color: var(--color-dark-green);
+    z-index: 10;
 }
 
 /* FILTERS */
@@ -33,7 +37,7 @@
 .aside-title{
     font-family: 'satoshi', serif;
     font-size: 25px;
-    margin: 150px 0 15px 50px;
+    margin: 150px 0 32px 50px;
 }
 
 .aside-filter{
@@ -41,7 +45,7 @@
     width: max-content;
     position: relative;
     transition: opacity .35s ease-in-out;
-    margin: 15px 0 15px 50px;
+    margin: 16px 0 16px 50px;
 }
 
 .aside-filter:hover{
@@ -91,6 +95,7 @@
     .restaurant-list{
         grid-template-columns: 1fr;
         width: max-content;
+        z-index: 0;
     }
 
     .landing-page{
