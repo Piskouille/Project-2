@@ -17,21 +17,21 @@
     </div>
     <div class="favorites">
       <h3 class="favorites-title">My favorites:</h3>
-      <ul>
-      {{#each favorites}}
-        <li><a href="/restaurants/{{this._id}}">{{this.restaurant.name}}</a></li>
-      {{/each}}
+      <ul id="favorites-list">
+      
+        {{!-- <li><a href="/restaurants/{{this._id}}">{{this.restaurant.name}}</a></li> --}}
+      
       </ul>
     </div>
 
     <div class="following">
       <h3 class="following-title">Following:</h3>
-      <ul>
-        {{#each following}}
+      <ul id="following-list">
+        
 
-          <li><a href="/user/{{this._id}}">{{this.name}}</a></li>
+          {{!-- <li><a href="/user/{{this._id}}">{{this.name}}</a></li> --}}
 
-        {{/each}}
+      
       </ul>
     </div>
 

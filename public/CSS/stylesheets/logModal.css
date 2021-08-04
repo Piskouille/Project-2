@@ -135,6 +135,10 @@
   flex-direction: column;
   align-items: center;
 }
+#feedback {
+  font-weight: bold;
+}
+
 #signUpLink,
 #signInLink {
   cursor: pointer;

@@ -34,6 +34,7 @@ submitBtn.onclick = async (e) => {
     { withCredentials: true }
   );
   feedback.innerHTML = success.data;
+  feedback.style.color = '#21C078'
   const timeOutId = setTimeout(() => {
     window.location.reload();
     clearTimeout(timeOutId);
@@ -64,6 +65,7 @@ submitSignUp.onclick = async (e) => {
   );
   feedback.textContent = backResponse.data;
   if (feedback.textContent === 'Succesfully Registered') {
+    feedback.style.color = '#21C078'
     const timeoutId = setTimeout(() => {
       document.getElementById('signInLink').click();
       clearTimeout(timeoutId);
