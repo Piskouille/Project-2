@@ -80,7 +80,7 @@ hbs.registerHelper("capitalize", (string) => {
     .split("_")
     .join(" ");
 });
-
+// helper for display the price rating on the forms
 hbs.registerHelper("isSelected", (lvalue, rvalue, attribute, options) => {
   const isArray = Array.isArray(lvalue);
   if (isArray) {

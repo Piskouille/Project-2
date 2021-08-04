@@ -52,10 +52,10 @@ app.use(passport.session());
 
 //Routes
 const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
 const authRouter = require("./routes/auth");
 const adminRestaurantsRouter = require("./routes/admin/restaurants");
 const adminUsersRouter = require("./routes/admin/setUsers");
+const adminIndexRouter = require("./routes/admin/indexAdmin");
 
 // Cookie setup for passport
 // -------------------------------------------
@@ -69,12 +69,13 @@ const adminUsersRouter = require("./routes/admin/setUsers");
 // -------------------------------------------
 
 app.use("/", indexRouter);
-app.use("/users/", usersRouter);
-app.use("/auth/", authRouter);
+// ----------------ADMIN------------------------
+app.use("/admin/", adminIndexRouter);
 app.use("/admin/", adminRestaurantsRouter);
 app.use("/admin/", adminUsersRouter);
+// ------------------AUTH-----------------------
+app.use("/auth/", authRouter);
 app.use("/auth/", require("./routes/auth"));
-app.use("/admin", require("./routes/admin/restaurants"));
 app.use("/auth/ajax", require("./routes/ajax/ajaxAuth"));
 
 // catch 404 and forward to error handler

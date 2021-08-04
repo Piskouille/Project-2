@@ -27,21 +27,22 @@ router.post(
   upload.single("image"),
   async (req, res, next) => {
     try {
+      //check if the name of the restaurant was already in the database
       const restaurant = await Restaurant.findOne({ name: req.body.name });
       if (restaurant) {
         res.render("restaurantCreate", { errorMsg: "Name already taken" });
         return;
       }
+      // check if the food type was already in database otherwise we add the new one
       const oldFoodtype = await FoodType.findOne({
         name: req.body.newfoodType.toLowerCase(),
       });
 
-      if (Foodtype) {
-        req.body.newfoodType = oldFoodtype
-        // res.render("restaurantCreate", { errorMsg: "Food Type exist already" });
+      if (oldFoodtype) {
+        res.render("restaurantCreate", { errorMsg: "Food Type exist already" });
         return;
-      }      
-     
+      }
+      // destructuring the req.body to create foodtype cos of the dependance with the model restaurant
       const {
         number,
         street,
@@ -53,7 +54,7 @@ router.post(
         rating,
         foodType,
         description,
-        image
+        image,
       } = req.body;
 
       const food = await FoodType.create({ name: foodType });
@@ -74,7 +75,7 @@ router.post(
       });
       await FoodType.create({ name: req.body.foodType });
       await Restaurant.create(req.body);
-      res.redirect("restaurants-manage");
+      res.redirect("/admin/restaurants-manage");
     } catch (error) {
       next(error);
     }
@@ -124,19 +125,22 @@ router.post(
         foodType,
         description,
       } = req.body;
-      req.body.image = req.file.path;
-      const Foodtype = await FoodType.findOne({
-        name: req.body.foodType.toLowerCase(),
+      if (req.file) {
+        req.body.image = req.file.path;
+      }
+
+      const oldFoodtype = await FoodType.findOne({
+        name: req.body.newfoodType.toLowerCase(),
       });
 
-      const food = await FoodType.create({ name: foodType });
-      if (Foodtype) {
-        req.body.foodType = await FoodType.findByIdAndUpdate(
-          req.params.id,
-          { name: foodType },
-          { new: true }
-        );
+      if (oldFoodtype) {
+        res.redirect("/admin/restaurants-manage", {
+          errorMsg: "Food Type exist already",
+        });
+        return;
       }
+      const food = await FoodType.create({ name: foodType });
+
       await Restaurant.findByIdAndUpdate(
         req.params.id,
         {
@@ -156,7 +160,7 @@ router.post(
         },
         { new: true }
       );
-      res.redirect("admin/restaurants-manage");
+      res.redirect("/admin/restaurants-manage");
     } catch (error) {
       next(error);
     }

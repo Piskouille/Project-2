@@ -1,4 +1,4 @@
-{{> logModal}}
+{{>logModal}}
 
 <div class="landing-page">
     <aside id="filters">
@@ -12,9 +12,6 @@
         <img id="logo-small" src="/images/logo-small.png" alt="small-logo">
     </aside>
     <section class="restaurant-list">
-                <a href="admin/restaurants-create">Create Restaurant</a>
-        <a href="admin/restaurants-manage">Manage Restaurants</a>
-        <a href="admin/users-manage">Manage users</a>
         {{#each restaurants}}
             {{>restaurantCard this}}
         {{/each}}
