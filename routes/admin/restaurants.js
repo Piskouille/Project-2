@@ -4,7 +4,7 @@ const FoodType = require("../../models/FoodType");
 const upload = require("../../config/cloudinary");
 const checkRole = require('../../middlewares/checkRoles')
 // render of all the restaurants from the database
-router.get("/restaurants-manage", async (req, res, next) => {
+router.get("/restaurants-manage", checkRole('ADMIN'), async (req, res, next) => {
   try {
     const restaurant = await Restaurant.find();
     res.render("restaurants", { restaurants: restaurant });
@@ -13,7 +13,7 @@ router.get("/restaurants-manage", async (req, res, next) => {
   }
 });
 // the creation of one restaurant
-router.get("/restaurants-create", async (req, res, next) => {
+router.get("/restaurants-create", checkRole('ADMIN'), async (req, res, next) => {
   try {
     res.render("restaurantCreate.hbs");
   } catch (error) {

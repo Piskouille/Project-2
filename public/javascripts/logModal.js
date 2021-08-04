@@ -3,7 +3,7 @@ const closeModalBtnSi = document.getElementById('close-modal-si');
 const closeModalBtnSu = document.getElementById('close-modal-su');
 const modal = document.getElementById('logModal');
 const submitBtn = document.getElementById('submit');
-const submitSignUp = document.getElementById('submitSignUp')
+const submitSignUp = document.getElementById('submitSignUp');
 const nameInput = document.getElementById('name');
 const passwordConfirm = document.getElementById('passwordConfirm');
 const password = document.getElementById('password');
@@ -13,13 +13,12 @@ const slackAuth = document.getElementById('slackAuth');
 const registered = document.getElementById('registered');
 const signUpLink = document.getElementById('signUpLink');
 const signInLink = document.getElementById('signInLink');
-const passwordSignUp = document.getElementById('passwordSignUp')
+const passwordSignUp = document.getElementById('passwordSignUp');
 
 // const BASE_URL = `http://localhost:${process.env.PORT}/`;
 
 confirmPass();
 strongPass();
-
 
 submitBtn.onclick = async (e) => {
   e.preventDefault();
@@ -36,29 +35,40 @@ submitBtn.onclick = async (e) => {
   );
   feedback.innerHTML = success.data;
   const timeOutId = setTimeout(() => {
-    clearTimeout(timeOutId)
-  }, 1000)
+    window.location.reload();
+    clearTimeout(timeOutId);
+  }, 1000);
   return;
 };
 
 submitSignUp.onclick = async (e) => {
+  e.preventDefault();
   const name = document.getElementById('nameSignUp').value;
   const email = document.getElementById('emailSignUp').value;
   const pass = document.getElementById('passwordSignUp').value;
   const feedback = document.querySelector('.modal-content.active #feedback');
   if (pass !== passwordConfirm.value) {
-    feedback.textContent = 'Passwords do not match'
+    feedback.textContent = 'Passwords do not match';
     return;
   }
-  const backResponse = await axios.post('http://localhost:5000/auth/ajax/signup', 
-  {
-    name,
-    email,
-    password: pass
-  }, {
-    withCredentials: true
-  })
+  const backResponse = await axios.post(
+    'http://localhost:5000/auth/ajax/signup',
+    {
+      name,
+      email,
+      password: pass,
+    },
+    {
+      withCredentials: true,
+    }
+  );
   feedback.textContent = backResponse.data;
+  if (feedback.textContent === 'Succesfully Registered') {
+    const timeoutId = setTimeout(() => {
+      document.getElementById('signInLink').click();
+      clearTimeout(timeoutId);
+    }, 1000);
+  }
   return;
 };
 
@@ -66,24 +76,23 @@ submitSignUp.onclick = async (e) => {
 // Quick User experience for password strength
 // ---------------------------------------------------------
 function strongPass() {
-  const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+  const regex =
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
   passwordSignUp.onkeyup = () => {
-    const feedback = document.querySelector(
-      '.modal-content.active #feedback'
-    );
+    const feedback = document.querySelector('.modal-content.active #feedback');
     const passed = regex.test(passwordSignUp.value);
     console.log(passwordSignUp.value);
-    console.log(passed)
+    console.log(passed);
     if (!passed) {
-      passwordSignUp.style.boxShadow = 'inset 0px 0px 0px 3px red'
+      passwordSignUp.style.boxShadow = 'inset 0px 0px 0px 3px red';
       feedback.textContent =
         'Your password must contain atleast 8 characters, one number and a punctuation.';
       feedback.style.color = 'red';
       submitBtn.disabled = true;
     } else {
-      passwordSignUp.style.boxShadow = 'inset 0px 0px 0px 3px #21C078'
+      passwordSignUp.style.boxShadow = 'inset 0px 0px 0px 3px #21C078';
       feedback.textContent = 'You password is safe!';
-      feedback.style.color = '#21C078'
+      feedback.style.color = '#21C078';
       submitBtn.disabled = false;
     }
   };
@@ -94,16 +103,14 @@ function strongPass() {
 // ---------------------------------------------------------
 function confirmPass() {
   passwordConfirm.onkeyup = () => {
-    const feedback = document.querySelector(
-      '.modal-content.active #feedback'
-    );
+    const feedback = document.querySelector('.modal-content.active #feedback');
     if (passwordConfirm.value !== passwordSignUp.value) {
-      passwordConfirm.style.boxShadow = 'inset 0px 0px 0px 3px red'
+      passwordConfirm.style.boxShadow = 'inset 0px 0px 0px 3px red';
       feedback.textContent = 'Passwords are not matching.';
       feedback.style.color = 'red';
       submitBtn.disabled = true;
     } else {
-      passwordConfirm.style.boxShadow = 'inset 0px 0px 0px 3px #21C078'
+      passwordConfirm.style.boxShadow = 'inset 0px 0px 0px 3px #21C078';
       feedback.textContent = 'Passwords are matching!';
       feedback.style.color = '#21C078';
       submitBtn.disabled = false;
@@ -122,8 +129,8 @@ googleAuth.onclick = () => {
   );
   let intervalId = setInterval(() => {
     if (win.closed) {
-      clearInterval(intervalId);
       window.location.reload();
+      clearInterval(intervalId);
     }
   }, 500);
 };
@@ -136,8 +143,8 @@ slackAuth.onclick = () => {
   );
   let intervalId = setInterval(() => {
     if (win.closed) {
-      clearInterval(intervalId);
       window.location.reload();
+      clearInterval(intervalId);
     }
   }, 500);
 };

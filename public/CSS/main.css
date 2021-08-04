@@ -3,6 +3,7 @@
  @import url('./stylesheets/navbar.css');
  @import url('./stylesheets/landingPage.css');
  @import url('stylesheets/cards.css');
+ @import url('./stylesheets/userModal.css');
  
  @font-face {
    font-family: 'zodiak';
