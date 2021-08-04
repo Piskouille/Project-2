@@ -31,14 +31,15 @@
 .aside-title{
     font-family: 'satoshi', serif;
     font-size: 25px;
+    margin: 150px 0 15px 50px;
 }
 
 .aside-filter{
     display: block;
     width: max-content;
     position: relative;
-    transition: opacity .6s ease-in-out;
-    margin: 15px;
+    transition: opacity .35s ease-in-out;
+    margin: 15px 0 15px 50px;
 }
 
 .aside-filter:hover{
@@ -88,8 +89,6 @@
     .restaurant-list{
         grid-template-columns: 1fr;
         width: max-content;
-        justify-content: center;
-        align-items: center;
     }
 
     .landing-page{
@@ -104,21 +103,22 @@
 @media (min-width: 768px) and (max-width: 1040px) { 
     .restaurant-list{
         grid-template-columns: 1fr;
-        justify-content: center;
-        align-items: center;
         width: fit-content;
     }
     
     .landing-page{
         justify-content: center;
-   
     }
 }
 
 @media (min-width: 1040px) and (max-width: 1266px) { 
     .restaurant-list{
         grid-template-columns: 1fr 1fr;
-        margin-left: auto;
+        width: fit-content;
+    }
+
+    .landing-page{
+        justify-content: center;
     }
 }
 

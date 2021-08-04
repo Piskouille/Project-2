@@ -1,6 +1,6 @@
 const filters = document.querySelectorAll('.aside-filter')
 const cards = document.querySelectorAll('.restaurant-card')
-const all = document.getElementById('filter-all')
+const filterAll = document.getElementById('filter-all')
 
 filters.forEach(filter => {
     filter.addEventListener('mouseenter', () => {
@@ -9,7 +9,6 @@ filters.forEach(filter => {
             setTimeout(() => filter.classList.remove('in-transition'), 350)
         }
         filter.classList.add('active')
-
     })
     filter.addEventListener('mouseleave', () => {
         if(!filter.classList.contains('clicked')){
@@ -18,13 +17,12 @@ filters.forEach(filter => {
         } 
         filter.classList.remove('active')
     })
-
     
     filter.addEventListener('click', () => {
         filter.classList.remove('in-transition')
         filter.classList.remove('active')
         filter.classList.toggle('clicked')
-
+       
         let activeFilters = []
 
         filters.forEach(fil => {
@@ -32,23 +30,26 @@ filters.forEach(filter => {
                 activeFilters.push(fil.innerText)
             }
         })
-
+        
         if(activeFilters.length === 0 || filter.id === 'filter-all'){
+            console.log('filterAll')
             filters.forEach(f => f.classList.remove('clicked'))
-            all.classList.add('clicked')
+            filterAll.classList.add('clicked')
+            console.log(filterAll)
             cards.forEach(card => {
                 card.style.display = 'block'
             })
         }
         else{
-            all.classList.remove('clicked')
+            filterAll.classList.remove('clicked')
+  
             cards.forEach(card => {
                 const foodTypes = card.querySelector('.foodTypes').innerText.split(' - ')
                 let hasToBeDisplayed = false
                 foodTypes.forEach(ft => {
-                    if(activeFilters.includes(ft)) hasToBeDisplayed = true
+                    if(activeFilters.includes(ft.trim())) hasToBeDisplayed = true
                 })
-                
+    
                 if(hasToBeDisplayed){
                     card.style.display = 'block'
                 }         
@@ -57,5 +58,6 @@ filters.forEach(filter => {
                 }
             })
         }
+      console.log(filterAll)  
     })
 })

@@ -26,7 +26,7 @@ console.log('user authenticated without passport: ', req.session.currentUser)
       restaurants,
       foodTypes,
       loggedIn,
-      scripts: ['bugerMenu.js', 'logModal.js', 'cards.js', 'filters.js'] });
+      scripts: ['bugerMenu.js', 'logModal.js', 'cards.js', 'filters.js', 'intersectionObserver.js'] });
   }
   catch(err){
     console.log('Loading restaurants failed')
