@@ -82,3 +82,15 @@ hbs.registerHelper("capitalize", string => {
 
 })
 
+hbs.registerHelper("isIncluded", (id, arrayIds, options) => {
+
+  const stringifiedId = id.toString();
+  const stringifiedArr = arrayIds.map((id) => id.toString());
+
+  if (stringifiedArr.includes(stringifiedId)) {
+    return options.fn(this);
+  } else {
+    return options.inverse(this);
+  }
+
+})
