@@ -87,7 +87,7 @@
 .see-more{
     display: inline-block;
     position: absolute;
-    top: 5px;
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
     width: 20px;
@@ -135,15 +135,12 @@
 
 .details-perso{
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
+    margin-right: 34px;
 }
 
 .favorite, .personal-notes{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    height: 100%;
+    margin-left: 24px;
 }
 
 .favorite:hover, .personal-notes:hover{

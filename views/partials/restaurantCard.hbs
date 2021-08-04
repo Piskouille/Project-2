@@ -26,12 +26,12 @@
             {{this.description}}
         </p>
 
-        <div class="details-perso">
-            <span class="fa fa-edit fa-heart favorite {{#if isFavorite}} isFavorite {{/if}}">
+        <div class="details-perso" data-card-id="{{this._id}}">
+            <span class="fa fa-edit fa-heart fa-lg favorite {{#if isFavorite}} isFavorite {{/if}}">
 
             </span>
             {{!-- {{#if isFavorite}}  --}}
-                <span class="fas fa-edit fa-file-alt personal-notes"></span><i class=""></i>
+                <span class="fas fa-edit fa-file-alt fa-lg personal-notes"></span><i class=""></i>
             {{!-- {{/if}} --}}
             </div>
         </div>

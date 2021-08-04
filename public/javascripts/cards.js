@@ -53,3 +53,12 @@ des.forEach(d =>
 
 //PERSONAL DETAILS
 const favorites = document.querySelectorAll('.favorite')
+
+favorites.forEach(fav => { 
+  fav.addEventListener('click', () => {
+
+    fav.classList.toggle('isFavorite')
+
+
+  })
+})

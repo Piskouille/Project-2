@@ -3,7 +3,7 @@
     justify-content: center;
     position: relative;
     margin: 250px auto 0 auto;
-    max-width:  1455px;
+    max-width:  1555px;
 }
 
 .restaurant-list{
@@ -94,7 +94,7 @@
 @media (max-width: 768px) { 
     .restaurant-list{
         grid-template-columns: 1fr;
-        width: max-content;
+        width: fit-content;
         z-index: 0;
     }
 
@@ -109,8 +109,8 @@
 
 @media (min-width: 768px) and (max-width: 1040px) { 
     .restaurant-list{
-        grid-template-columns: 1fr;
         width: fit-content;
+        grid-template-columns: 1fr;
     }
     
     .landing-page{
@@ -120,12 +120,11 @@
 
 @media (min-width: 1040px) and (max-width: 1455px) { 
     .restaurant-list{
-        grid-template-columns: 1fr 1fr;
         width: fit-content;
+        grid-template-columns: 1fr 1fr;
     }
 
     .landing-page{
         justify-content: center;
     }
 }
-
