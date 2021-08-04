@@ -25,20 +25,21 @@ const displayPrice = () => {
 const cards = document.querySelectorAll('.restaurant-card')
 
 cards.forEach(card => {
+    const banner = card.querySelector('.restaurant-card-banner')
     const seeMore = card.querySelector('.see-more')
-    const details = card.querySelector('.details')
 
-    seeMore.addEventListener('click', () => {
+    card.addEventListener('click', () => {
 
         cards.forEach(c => {
             if(c !== card){
                 c.querySelector('.see-more').classList.remove('active')
-                c.querySelector('.details').classList.remove('active')
+                c.querySelector('.restaurant-card-banner').classList.remove('active')
             } 
         })
 
+        banner.style.height = `${Math.round(card.getBoundingClientRect().height)}px`
         seeMore.classList.toggle('active')
-        details.classList.toggle('active')
+        banner.classList.toggle('active')
     })
 })
 
@@ -50,5 +51,5 @@ des.forEach(d =>
     d.innerHTML = d.innerText.charAt(0).toUpperCase() + d.innerText.slice(1) + '.'
 )
 
-
-
+//PERSONAL DETAILS
+const favorites = document.querySelectorAll('.favorite')

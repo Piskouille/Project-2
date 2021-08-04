@@ -5,23 +5,37 @@
     </div>
 
     <div class="restaurant-card-banner">
-        <div class="titles">
-            <h3>{{this.name}}</h3>
-            <div class="foodTypes">
-                {{formatFoodType this.foodTypes}}
+        <div class="banner-header">
+            <div class="titles">
+                <h3>{{this.name}}</h3>
+                <div class="foodTypes">
+                    {{formatFoodType this.foodTypes}}
+                </div>
             </div>
-        </div>
-        <div class="short-infos">
-            <div class="priceRating">
-                {{this.priceRating}}
+            <div class="short-infos">
+                <div class="priceRating">
+                    {{this.priceRating}}
+                </div>
             </div>
             <span class="see-more"></span>
         </div>
-    </div>
 
-    <div class="details">
-        <p class="restaurant-card-description">
+
+        <div class="details">
+            <p class="restaurant-card-description">
             {{this.description}}
         </p>
+
+        <div class="details-perso">
+            <span class="fa fa-edit fa-heart favorite {{#if isFavorite}} isFavorite {{/if}}">
+
+            </span>
+            {{!-- {{#if isFavorite}}  --}}
+                <span class="fas fa-edit fa-file-alt personal-notes"></span><i class=""></i>
+            {{!-- {{/if}} --}}
+            </div>
+        </div>
     </div>
+
+   
 </div>
