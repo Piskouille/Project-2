@@ -157,17 +157,24 @@ signUpLink.onclick = () => {
   document.querySelector('.back').classList.toggle('active');
 };
 
+
 signInLink.onclick = () => {
   document.querySelector('.back').classList.toggle('active');
   document.querySelector('.front').classList.toggle('active');
 };
 
+// ---------------------------------------------------------
+// Show up modal
+// ---------------------------------------------------------
 modalBtn.onclick = () => {
   if (modal.style.display === 'none' || !modal.style.display) {
     modal.style.display = 'block';
     modal.classList.toggle('modalActive');
+    document.querySelector('nav').style.zIndex = 900
   } else {
     modal.style.display = 'none';
+    document.querySelector('nav').style.zIndex = 0
+
   }
 };
 
@@ -177,8 +184,10 @@ modalBtn.onclick = () => {
 closeModalBtnSi.onclick = () => {
   modal.style.display = 'none';
   modal.classList.toggle('modalActive');
+  document.querySelector('nav').style.zIndex = 0
 };
 closeModalBtnSu.onclick = () => {
   modal.style.display = 'none';
   modal.classList.toggle('modalActive');
+  document.querySelector('nav').style.zIndex = 0
 };

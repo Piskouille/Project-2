@@ -1,15 +1,22 @@
 #logModal {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
   display: none;
-  position: fixed;
-  z-index: 110;
-  top: 50%;
-  left: 50%;
   width: 100vw;
   height: 100vh;
   animation: fade-in 600ms;
   backdrop-filter: 0;
   transition: backdrop-filter ease 300ms;
-  transform: translate(-50%, -50%);
+}
+
+#logModal > .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
 }
 
 .modalActive {
@@ -20,11 +27,11 @@
 /* Modal Content */
 .modal-content {
   background-color: var(--color-dark-green);
-  margin: 150px auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
   max-width: 400px;
   border-radius: 3px;
+  
 }
 
 /* The Close Button */
