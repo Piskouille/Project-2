@@ -5,28 +5,14 @@
     <span id='close-modal-si'><span class="close"></span></span>
 
     <form action='#' id='formSignIn' class='formModal'>
-      {{!-- <div>
-        <label for='name'>Name:</label>
-        <input
-          type='text'
-          name='name'
-          id='name'
-          placeholder='Name'
-          autocomplete='off'
-        />
-      </div> --}}
       <div>
         <label for='email'>E-mail:</label>
-        <input type='text' placeholder='Email' id='email' />
+        <input type='text' placeholder='Email' id='email' value="johndoe@email.com"/>
       </div>
       <div>
         <label for='password'>Password:</label>
-        <input type='password' placeholder='Password' id='password' />
+        <input type='password' placeholder='Password' id='password' value="12az@34AZ"/>
       </div>
-      {{!-- <div>
-        <label for='passwordConfirm'>Confirmation:</label>
-        <input type='password' name='passwordConfirm' id='passwordConfirm' placeholder="Confirm your password" />
-      </div> --}}
       <button id='submit'>Log in</button>
       <p><small id='feedback'>{{errorMsg}}</small></p>
       <p id='registered'>No account yet ?
@@ -64,19 +50,20 @@
           id='nameSignUp'
           placeholder='Name'
           autocomplete='off'
+          value='John Doe'
         />
       </div>
       <div>
         <label for='email'>E-mail:</label>
-        <input type='text' placeholder='Email' id='emailSignUp' />
+        <input type='text' placeholder='Email' id='emailSignUp' value="johndoe@email.com"/>
       </div>
       <div>
         <label for='password'>Password:</label>
-        <input type='password' placeholder='Password' id='passwordSignUp' />
+        <input type='password' placeholder='Password' id='passwordSignUp' value="12az@34AZ"/>
       </div>
       <div>
         <label for='passwordConfirm'>Confirmation:</label>
-        <input type='password' name='passwordConfirm' id='passwordConfirm' placeholder="Confirm your password" />
+        <input type='password' name='passwordConfirm' id='passwordConfirm' placeholder="Confirm your password" value="12az@34AZ"/>
       </div>
       <button id='submitSignUp'>Sign up</button>
       <p><small id='feedback'>{{errorMsg}}</small></p>
