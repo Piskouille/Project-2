@@ -23,19 +23,24 @@
 
         <div class="details">
             <p class="restaurant-card-description">
-            {{this.description}}
-        </p>
+                {{this.description}}
+             </p>
 
         <div class="details-perso" data-card-id="{{this._id}}">
-            <span class="fa fa-edit fa-heart fa-lg favorite {{#if isFavorite}} isFavorite {{/if}}">
-
+            <span class="favorite {{#isIncluded this._id @root.favorites}} isFavorite {{/isIncluded}}" >
+                <i class="fas fa-heart fa-lg"></i>
             </span>
-            {{!-- {{#if isFavorite}}  --}}
-                <span class="fas fa-edit fa-file-alt fa-lg personal-notes"></span><i class=""></i>
-            {{!-- {{/if}} --}}
-            </div>
+  
+            <span class="notes {{#isIncluded this._id @root.favorites}} isFavorite {{/isIncluded}}"> 
+                <i class="fas fa-edit fa-file-alt fa-lg"></i>
+            </span>
         </div>
     </div>
+
+    <div class="personal-notes">
+
+    </div>
+</div>
 
    
 </div>

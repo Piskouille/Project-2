@@ -1,13 +1,29 @@
 const express = require("express");
 const router = express.Router();
+const isAuthenticated = require('../../middlewares/isAuthenticated')
 const Favorite = require('../../models/Favorite')
 
-router.get('favorite/:id', async (req, res, next) => {
-    console.log(req.params)
+router.post('/favorite/:cardId', isAuthenticated, async (req, res, next) => {
     try{
-        const id = req.params.id
-        const data = await Sneaker.find({id_tags: id})
+        const cardId = req.params.cardId
+        const userId = (req.user || req.session.currentUser) 
 
+        const data = await Favorite.create({user: userId, restaurant: cardId})
+        res.status(200).json(data)
+      
+    }
+    catch(err){
+        console.log('AJAX err', err)
+        next(err)
+    }
+})
+
+router.get('/favorite/:cardId', isAuthenticated, async (req, res, next) => {
+    try{
+        const cardId = req.params.cardId
+        const userId = (req.user || req.session.currentUser) 
+
+        const data = await Favorite.deleteOne({user: userId, restaurant: cardId})
         res.status(200).json(data)
     }
     catch(err){
@@ -16,18 +32,6 @@ router.get('favorite/:id', async (req, res, next) => {
     }
 })
 
-router.post('/nofilter', async (req, res, next) => {
-
-    try{
-        const data = await Sneaker.find()
-
-        res.status(200).json(data)
-    }
-    catch(err){
-        console.log('AJAX err', err)
-        next(err)
-    }
-})
 
 
 module.exports = router

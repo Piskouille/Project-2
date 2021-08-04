@@ -5,6 +5,8 @@
     opacity: 0;
     transform: translateY(-10px);
     animation: popin .6s ease forwards;
+    overflow: hidden;
+    border-radius: 3px;
 }
 
 .restaurant-card.active{
@@ -139,11 +141,11 @@
     margin-right: 34px;
 }
 
-.favorite, .personal-notes{
+.favorite, .notes{
     margin-left: 24px;
 }
 
-.favorite:hover, .personal-notes:hover{
+.favorite:hover, .notes:hover{
     cursor: pointer;
 }
 
@@ -151,10 +153,24 @@
     transition: color .35s ease;
 }
 
-.personal-notes{
+.notes{
+    display: none;
     color: var(--color-yellow);
 }
 
+.notes.isFavorite{
+    display: block;
+}
+
+
 .favorite.isFavorite{
     color: var(--color-red);
+}
+
+.personal-notes{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: linear-gradient(180deg, rgba(245,183,0,1) 100%, rgba(245,183,0,.6) 41%);
+    transition: all .5s cubic-bezier(0.77,0.2,0.05,1.0);
 }

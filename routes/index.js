@@ -1,8 +1,8 @@
-var express = require('express');
+const express = require('express');
+const router = express.Router();
+const Restaurant = require('../models/Restaurant');
 const FoodType = require('../models/FoodType');
-var router = express.Router();
-const Restaurant = require('../models/Restaurant')
-
+const Favorite = require('../models/Favorite')
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
@@ -22,9 +22,12 @@ console.log('user authenticated without passport: ', req.session.currentUser)
   try{
     const restaurants = await Restaurant.find().populate("foodTypes")
     const foodTypes = await FoodType.find()
-    
+    const favoritesData = await Favorite.find({user})
+    const favorites = favoritesData.map(fav => fav.restaurant)
+  
     res.render('landingPage', { 
       restaurants,
+      favorites,
       foodTypes,
       loggedIn,
       user,
