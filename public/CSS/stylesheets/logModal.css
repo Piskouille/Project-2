@@ -7,32 +7,16 @@
   width: 100vw;
   height: 100vh;
   animation: fade-in 600ms;
-  backdrop-filter: blur(2px) brightness(70%);
+  backdrop-filter: 0;
   transition: backdrop-filter ease 300ms;
   transform: translate(-50%, -50%);
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 .modalActive {
-  animation: fade-out 600ms;
+  backdrop-filter: blur(2px) brightness(70%);
+  transition: backdrop-filter ease 300ms;
 }
 
-@keyframes fade-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
 /* Modal Content */
 .modal-content {
   background-color: var(--color-dark-green);
@@ -40,6 +24,7 @@
   padding: 20px;
   border: 1px solid #888;
   max-width: 400px;
+  border-radius: 3px;
 }
 
 /* The Close Button */
@@ -79,7 +64,7 @@
 
 .formModal input {
   color: black;
-  border-radius: 1em;
+  border-radius: 4px;
   height: 2.2em;
   border: 1px solid black;
   padding-left: 2em;

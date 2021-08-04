@@ -3,16 +3,37 @@
     <img id='logo-dark' src='/images/logo-dark.png' alt='logo' />
   </div>
   <div id='content-user'>
-    <h3 class='welcome'>Welcome {{user.name}}!</h3>
-    <ul>
-      <li><a href='/user/{{user._id}}'>Profile</a></li>
-      <li><a href='/auth/logout'>Logout</a></li>
-      {{#if isAdmin}}
-        <li><a href='/admin/restaurants-create'>Create a Restaurant</a></li>
-        <li><a href='/admin/restaurants-manage'>Manage Restaurants</a></li>
-        <li><a href='/admin/'>Manage Users</a></li>
-      {{/if}}
+    <div class='userNav'>
+      <h3 class='welcome'>Welcome {{user.name}}!</h3>
+      <ul>
+        <li><a href='/user/{{user._id}}'>Profile</a></li>
+        <li><a href='/auth/logout'>Logout</a></li>
+        {{#if isAdmin}}
+          <li><a href='/admin/restaurants-create'>Create a Restaurant</a></li>
+          <li><a href='/admin/restaurants-manage'>Manage Restaurants</a></li>
+          <li><a href='/admin/'>Manage Users</a></li>
+        {{/if}}
+      </ul>
+    </div>
+    <div class="favorites">
+      <h3 class="favorites-title">My favorites:</h3>
+      <ul>
+      {{#each favorites}}
+        <li><a href="/restaurants/{{this._id}}">{{this.restaurant.name}}</a></li>
+      {{/each}}
+      </ul>
+    </div>
 
-    </ul>
+    <div class="following">
+      <h3 class="following-title">Following:</h3>
+      <ul>
+        {{#each following}}
+
+          <li><a href="/user/{{this._id}}">{{this.name}}</a></li>
+
+        {{/each}}
+      </ul>
+    </div>
+
   </div>
 </div>

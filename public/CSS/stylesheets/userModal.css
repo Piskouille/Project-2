@@ -51,20 +51,41 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
-#content-user .welcome {
-    color: white;
+#content-user h3 {
+  color: white;
   margin: 1em;
   font-size: 1.5em;
+  font-family: satoshi;
 }
 
 #content-user li {
-    margin: .4em 0 .3em 3em;
-    color: white;
-    transition: color 300ms ease;
-    font-size: 1.1em;
+  margin: 0.4em 0 0.3em 3em;
+  color: var(--color-dark-green);
+  transition: color 300ms ease;
+  font-size: 1.1em;
+  font-weight: 600;
+  box-sizing: content-box;
+  
 }
 
 #content-user li:hover {
-    color: var(--color-yellow);
-    transition: color 300ms ease;
+  color: var(--color-yellow);
+  transition: color 300ms ease;
+}
+
+#content-user {
+  position: relative;
+  display: flex;
+  height: calc(100vh - 180px);
+}
+
+.favorites {
+  position: absolute;
+  bottom: 45vh;
+  left: 30vw;
+}
+.following {
+  position: absolute;
+  bottom: 45vh;
+  left: 60vw;
 }
