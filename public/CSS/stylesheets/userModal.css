@@ -7,13 +7,13 @@
   background-color: var(--color-light-green);
   transform: translate(-200vw, 0);
   transition: transform 0.5s ease-out;
-  /* z-index: 2; */
+  z-index: 2;
 }
 
 #user.active svg {
   display: block;
   fill: var(--color-yellow);
-  z-index: 5;
+  z-index: 25;
 }
 
 #user-menu.active + #user.active svg {
@@ -31,7 +31,7 @@
 
 #user-menu.active {
   transform: translate(0, 0);
-  z-index: 2;
+  z-index: 25;
 }
 
 .user-logo {
