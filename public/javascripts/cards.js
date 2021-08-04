@@ -26,20 +26,49 @@ const cards = document.querySelectorAll(".restaurant-card");
 cards.forEach((card) => {
   const banner = card.querySelector(".restaurant-card-banner");
   const seeMore = card.querySelector(".see-more");
+  const perso = card.closest('.restaurant-card').querySelector('.personal-notes')
+  const persoBtn = card.closest('.restaurant-card').querySelector('.notes')
+
 
   card.addEventListener("click", () => {
+
     cards.forEach((c) => {
       if (c !== card) {
-        c.querySelector(".see-more").classList.remove("active");
-        c.querySelector(".restaurant-card-banner").classList.remove("active");
+        const persoC = c.closest('.restaurant-card').querySelector('.personal-notes')
+        const persoBtnC = c.closest('.restaurant-card').querySelector('.notes')
+        
+        if(persoC.classList.contains('clicked')){
+          persoC.classList.remove('clicked')
+          persoBtnC.classList.toggle('dark-green')
+          setTimeout(() => {
+            c.querySelector(".see-more").classList.remove("active");
+            c.querySelector(".restaurant-card-banner").classList.remove("active");
+          }, 500)
+    
+        }else{
+          c.querySelector(".see-more").classList.remove("active");
+          c.querySelector(".restaurant-card-banner").classList.remove("active");
+        }
       }
     });
 
     banner.style.height = `${Math.round(
       card.getBoundingClientRect().height
     )}px`;
-    seeMore.classList.toggle("active");
-    banner.classList.toggle("active");
+
+    if(perso.classList.contains('clicked')){
+      perso.classList.remove('clicked')
+      persoBtn.classList.toggle('dark-green')
+      setTimeout(() => {
+        seeMore.classList.toggle("active");
+        banner.classList.toggle("active");
+      }, 500)
+
+    }else{
+      seeMore.classList.toggle("active");
+      banner.classList.toggle("active");
+    }
+
   });
 });
 
@@ -102,8 +131,8 @@ notes.forEach(n => {
   n.addEventListener('click', (e) => {
     e.stopPropagation()
 
-    n.closest('.personal-notes').classList.toggle('clicked')
-    
+    n.closest('.restaurant-card').querySelector('.personal-notes').classList.toggle('clicked')
+    n.closest('.restaurant-card').querySelector('.notes').classList.toggle('dark-green')
   })
 })
 
