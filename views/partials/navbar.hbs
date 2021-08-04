@@ -4,7 +4,7 @@
     {{else}}
         {{> logModal}}
     {{/if}}
-    <span id="user" {{#if loggedIn}} class="active" {{/if}}>
+    <span id="user" {{#if loggedIn}} class="active" data-id="{{user._id}}" {{/if}}>
 
         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
         width="45.532px" height="45.532px" viewBox="0 0 45.532 45.532" style="enable-background:new 0 0 45.532 45.532;"
