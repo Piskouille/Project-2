@@ -4,6 +4,7 @@
  @import url('./stylesheets/landingPage.css');
  @import url('stylesheets/cards.css');
  @import url('./stylesheets/userModal.css');
+ @import url('./stylesheets/createRestaurant.css');
  
  @font-face {
    font-family: 'zodiak';

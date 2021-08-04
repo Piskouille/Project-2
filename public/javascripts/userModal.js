@@ -1,25 +1,16 @@
 const modalBtn = document.getElementById('user');
 const userMenu = document.getElementById('user-menu')
 const prefix = 'http://localhost:5000'
+const followList = document.getElementById('following-list')
+const favoritesList = document.getElementById('favorites-list')
+const mainList = document.getElementById('main-list')
 
 modalBtn.addEventListener('click', () => {
-  userMenu.classList.toggle('active')
-  const nav = document.querySelector('.nav')
-  if (userMenu.classList.contains('active')) {
-    fetchInfos()
-    nav.style.zIndex = 20
-  } else {
-    const timeoutId = setTimeout(() => {
-      nav.style.zIndex = 1
-      clearTimeout(timeoutId)
-    }, 300)
-    
-  }
+  openCloseMenu()
 })
 
 async function fetchInfos() {
-  const followList = document.getElementById('following-list')
-  const favoritesList = document.getElementById('favorites-list')
+  
   followList.innerHTML = ''
   favoritesList.innerHTML = ''
   const id = modalBtn.getAttribute('data-id')
@@ -36,7 +27,7 @@ async function fetchInfos() {
     followList.append(li)
   }
   let li = document.createElement('li')
-  li.innerHTML = '<li><a href="#">More...</a></li>'
+  li.innerHTML = '<a href="#">More...</a>'
   followList.append(li)
 
   length = favorites.length > 5 ? 5 : favorites.length
@@ -47,6 +38,31 @@ async function fetchInfos() {
     favoritesList.append(li)
   }
   li = document.createElement('li')
-  li.innerHTML = '<li><a href="#">More...</a></li>'
+  li.innerHTML = '<a href="#">More...</a>'
   favoritesList.append(li)
+  attachListeners()
+}
+
+function attachListeners() {
+  document.querySelectorAll('#main-list a, #favorites-list a, #following-list a').forEach(a => {
+    a.onclick = () => {
+      openCloseMenu()
+    }
+  })
+}
+
+
+
+function openCloseMenu() {
+  userMenu.classList.toggle('active')
+  const nav = document.querySelector('.nav')
+  if (userMenu.classList.contains('active')) {
+    fetchInfos()
+    nav.style.zIndex = 20
+  } else {
+    const timeoutId = setTimeout(() => {
+      nav.style.zIndex = 1
+      clearTimeout(timeoutId)
+    }, 300)
+  }
 }

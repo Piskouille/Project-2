@@ -5,7 +5,8 @@
   <div id='content-user'>
     <div class='userNav'>
       <h3 class='welcome'>Welcome {{user.name}}!</h3>
-      <ul>
+      <ul id="main-list">
+        <li><a href="/">Main page</a></li>
         <li><a href='/user/{{user._id}}'>Profile</a></li>
         <li><a href='/auth/logout'>Logout</a></li>
         {{#if isAdmin}}
@@ -19,18 +20,12 @@
       <h3 class="favorites-title">My favorites:</h3>
       <ul id="favorites-list">
       
-        {{!-- <li><a href="/restaurants/{{this._id}}">{{this.restaurant.name}}</a></li> --}}
-      
       </ul>
     </div>
 
     <div class="following">
       <h3 class="following-title">Following:</h3>
       <ul id="following-list">
-        
-
-          {{!-- <li><a href="/user/{{this._id}}">{{this.name}}</a></li> --}}
-
       
       </ul>
     </div>
