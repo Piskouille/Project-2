@@ -1,13 +1,15 @@
 .landing-page{
     display: flex;
+    justify-content: center;
     position: relative;
     margin: 250px auto 0 auto;
-    z-index: 0;
+    max-width:  1455px;
 }
 
 .restaurant-list{
     display: grid;
     width: 100%;
+
     grid-template-columns: repeat(auto-fit,minmax(400px, 1fr));
     justify-content: flex-start;
     align-items: flex-start;
@@ -15,7 +17,7 @@
 }
 
 /* FILTERS */
-#filters{
+#mainFilters{
     position: -webkit-sticky;
     position: sticky;
     top: 0;
@@ -95,7 +97,7 @@
         justify-content: center;
     }
     
-    #filters{
+    #mainFilters{
         display: none;
     }
 }
@@ -111,7 +113,7 @@
     }
 }
 
-@media (min-width: 1040px) and (max-width: 1266px) { 
+@media (min-width: 1040px) and (max-width: 1455px) { 
     .restaurant-list{
         grid-template-columns: 1fr 1fr;
         width: fit-content;

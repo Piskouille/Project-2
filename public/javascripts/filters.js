@@ -1,6 +1,7 @@
 const filters = document.querySelectorAll('.aside-filter')
 const cards = document.querySelectorAll('.restaurant-card')
-const filterAll = document.getElementById('filter-all')
+const filterAll = document.querySelector('#mainFilters #filter-all')
+const filterAllBurger = document.querySelector('#burgerFilters #filter-all')
 
 filters.forEach(filter => {
     filter.addEventListener('mouseenter', () => {
@@ -32,16 +33,19 @@ filters.forEach(filter => {
         })
         
         if(activeFilters.length === 0 || filter.id === 'filter-all'){
-            console.log('filterAll')
+
             filters.forEach(f => f.classList.remove('clicked'))
+
             filterAll.classList.add('clicked')
-            console.log(filterAll)
+            filterAllBurger.classList.add('clicked')
+
             cards.forEach(card => {
                 card.style.display = 'block'
             })
         }
         else{
             filterAll.classList.remove('clicked')
+            filterAllBurger.classList.remove('clicked')
   
             cards.forEach(card => {
                 const foodTypes = card.querySelector('.foodTypes').innerText.split(' - ')
@@ -58,6 +62,12 @@ filters.forEach(filter => {
                 }
             })
         }
-      console.log(filterAll)  
+    })
+})
+
+cards.forEach(card => {
+    card.querySelector('.see-more').addEventListener('click', () => {
+        cards.forEach(c => c.style.zIndex = '0')
+        card.style.zIndex = '100'
     })
 })

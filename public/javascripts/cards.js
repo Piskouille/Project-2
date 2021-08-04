@@ -50,5 +50,5 @@ des.forEach(d =>
     d.innerHTML = d.innerText.charAt(0).toUpperCase() + d.innerText.slice(1) + '.'
 )
 
-
-
+//PERSONAL DETAILS
+const favorites = document.querySelectorAll('.favorite')

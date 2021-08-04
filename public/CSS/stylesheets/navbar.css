@@ -7,11 +7,13 @@
     align-items: center;
     justify-content: space-between;
     z-index: 1;
+    max-width:  1455px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 #user{
     margin-left: 150px;
-    z-index: -1;
 }
 
 svg{
@@ -61,15 +63,5 @@ svg{
         margin-left: 50px;
     }
 }
-
-@media (min-width: 1995px) { 
-    .nav{
-        width: 1995px;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-}
-
-
 
 

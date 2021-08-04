@@ -23,5 +23,14 @@
         <p class="restaurant-card-description">
             {{this.description}}
         </p>
+
+        <div class="details-perso">
+            <span class="fa fa-edit fa-heart favorite {{#if isFavorite}} isFavorite {{/if}}">
+
+            </span>
+            {{#if isFavorite}} 
+                <span class="fas fa-edit fa-file-alt personal-notes"></span><i class=""></i>
+            {{/if}}
+        </div>
     </div>
 </div>

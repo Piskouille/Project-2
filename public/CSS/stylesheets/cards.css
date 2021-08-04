@@ -7,6 +7,10 @@
     animation: popin .6s ease forwards;
 }
 
+.restaurant-card.active{
+    z-index: 10;
+}
+
 @keyframes popin {
     0%{
         opacity: 0;
@@ -51,6 +55,7 @@
     height: 20%;
     padding: 15px;
     background: linear-gradient(180deg, rgba(19,25,16,0.6) 41%, rgba(19,25,16,1) 100%);
+    z-index: 1;
 }
 
 .titles h3{
@@ -67,9 +72,10 @@
 
 .see-more{
     display: inline-block;
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 20px;
+    height: 20px;
     position: relative;
+    padding: 10px;
 }
 
 .see-more:hover{
@@ -82,22 +88,21 @@
 
 .see-more::before, .see-more::after{
     content: '';
-    top: .5rem;
     position: absolute;
-    width: .75rem;
-    height: .1rem;
+    width: 10px;
+    height: 2px;
     background-color: var(--color-white);
     display: inline-block;
     transition: all .35s ease;
 }
 
 .see-more::before{
-    left: 0;
+    left: 2px;
     transform: rotate(45deg);
 }
 
 .see-more::after{
-    right: 0;
+    right: 2px;
     transform: rotate(-45deg);
 }
 
@@ -123,9 +128,11 @@
     bottom: 0;
     left: 0;
     transform: translateY(100%);
-    transition: all .5s cubic-bezier(0.77,0.2,0.05,1.0);
+    transition: clip-path .5s cubic-bezier(0.77,0.2,0.05,1.0);
     clip-path: inset(0 0 100% 0);
     z-index: 1;
+    display: flex;
+    flex-direction: row;
 }
 
 .details.active{
@@ -135,4 +142,33 @@
 .restaurant-card-description{
     padding: 30px 120px 30px 30px;
     line-height: 1.5;
+}
+
+.details-perso{
+    display: flex;
+    flex-direction: column;
+}
+
+.favorite, .personal-notes{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    height: 100%;
+}
+
+.favorite:hover, .personal-notes:hover{
+    cursor: pointer;
+}
+
+.isFavorite{
+    transition: color .35s ease;
+}
+
+.personal-notes{
+    color: var(--color-yellow);
+}
+
+.favorite.isFavorite{
+    color: var(--color-red);
 }
