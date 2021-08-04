@@ -52,21 +52,25 @@ router.get('/signin', (req, res, next) => {
 });
 
 router.post('/signin', (req, res, next) => {
-  passport.authenticate('local', {failureFlash: true}, (err, theUser, failDetails) => {
-    if (err) return next(err)
-    if (!theUser) {
-      req.flash('info', 'Wrong credentials');
-      res.redirect('/signin');
-      return;
+  passport.authenticate(
+    'local',
+    { failureFlash: true },
+    (err, theUser, failDetails) => {
+      if (err) return next(err);
+      if (!theUser) {
+        req.flash('info', 'Wrong credentials');
+        res.redirect('/signin');
+        return;
+      }
+      // ----------------------------------------
+      // User is saved in req.user ↓↓↓
+      req.login(theUser, (error) => {
+        if (error) return next(error);
+
+        res.redirect('/');
+      });
     }
-    // ----------------------------------------
-    // User is saved in req.user ↓↓↓
-    req.login(theUser, error => {
-      if (error) return next(error)
-      
-      res.redirect('/')
-    })
-  })(req, res, next)
+  )(req, res, next);
 });
 
 //  -----------------------------------------------------
@@ -88,20 +92,30 @@ router.get('/google/redirect', passport.authenticate('google'), (req, res) => {
 //  -----------------------------------------------------
 //  SLACK PASSPORT
 //  -----------------------------------------------------
-router.get('/slack', passport.authenticate('slack', {
-  scope: ['profile', 'email']
-}))
+router.get(
+  '/slack',
+  passport.authenticate('slack', {
+    scope: ['profile', 'email'],
+  })
+);
 router.get('/slack/redirect', passport.authenticate('slack'), (req, res) => {
-  res.send('<script>window.close()</script>')
+  res.send('<script>window.close()</script>');
   // req.flash('info', 'Log in succesfull')
   // res.redirect('/')
-})
+});
 
 //  -----------------------------------------------------
 //  LOGOUT
 //  -----------------------------------------------------
-router.get('/logout', (req, res) => {
+router.get('/logout', (req, res, next) => {
   req.logout();
+  req.session.destroy((error) => {
+    if (error) {
+      next(error);
+    } else {
+      res.redirect('/');
+    }
+  });
   res.redirect('/');
 });
 

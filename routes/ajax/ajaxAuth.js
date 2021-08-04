@@ -20,9 +20,7 @@ router.post('/signin', async (req, res, next) => {
       res.send('Wrong credentials');
       return;
     } else {
-      req.session.currentUser = {
-        _id: validUser._id,
-      };
+      req.session.currentUser = validUser
       res.send('Succesfully Logged!');
     }
   } catch (error) {

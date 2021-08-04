@@ -1,5 +1,5 @@
 function isAuthenticated(req, res, next) {
-    if (req.isAuthenticated()) {
+    if (req.isAuthenticated() || req.session.currentUser) {
       return next();
     } else {
       req.flash('info', 'You need to login / register')
