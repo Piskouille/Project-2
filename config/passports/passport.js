@@ -28,8 +28,7 @@ module.exports = () => {
           if (!user || !bcrypt.compareSync(password, user.password)) {
             return done(null, false, {message: 'Wrong credentials'})
           }
-          done(null, user)
-
+          return done(null, user)
         } catch(error) {
           done(error)
         }

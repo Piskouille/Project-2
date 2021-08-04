@@ -3,149 +3,117 @@ const closeModalBtnSi = document.getElementById('close-modal-si');
 const closeModalBtnSu = document.getElementById('close-modal-su');
 const modal = document.getElementById('logModal');
 const submitBtn = document.getElementById('submit');
+const submitSignUp = document.getElementById('submitSignUp')
 const nameInput = document.getElementById('name');
 const passwordConfirm = document.getElementById('passwordConfirm');
 const password = document.getElementById('password');
-const feedback = document.getElementById('feedback');
 const form = document.querySelector('.formModal');
 const googleAuth = document.getElementById('googleAuth');
 const slackAuth = document.getElementById('slackAuth');
 const registered = document.getElementById('registered');
 const signUpLink = document.getElementById('signUpLink');
 const signInLink = document.getElementById('signInLink');
+const passwordSignUp = document.getElementById('passwordSignUp')
 
 // const BASE_URL = `http://localhost:${process.env.PORT}/`;
 
 confirmPass();
 strongPass();
 
-signUpLink.onclick = () => {
-  document.querySelector('.front').classList.toggle('active')
-  document.querySelector('.back').classList.toggle('active')
-}
-
-signInLink.onclick = () => {
-  document.querySelector('.back').classList.toggle('active')
-  document.querySelector('.front').classList.toggle('active')
-}
-
-modalBtn.onclick = () => {
-  if (modal.style.display === 'none' || !modal.style.display) {
-    modal.style.display = 'block';
-    modal.classList.toggle('modalActive');
-  } else {
-    modal.style.display = 'none';
-  }
-};
-
-closeModalBtnSi.onclick = () => {
-  modal.style.display = 'none';
-  modal.classList.toggle('modalActive');
-};
-closeModalBtnSu.onclick = () => {
-  modal.style.display = 'none';
-  modal.classList.toggle('modalActive');
-};
 
 submitBtn.onclick = async (e) => {
   e.preventDefault();
-
-  if (form.id === 'formSignIn') {
-    const email = document.getElementById('email').value;
-    const pass = password.value;
-    const success = await axios.post('http://localhost:5000/auth/ajax/signin', {
+  const feedback = document.querySelector('.modal-content.active #feedback');
+  const email = document.getElementById('email').value;
+  const pass = password.value;
+  const success = await axios.post(
+    'http://localhost:5000/auth/ajax/signin',
+    {
       email,
       password: pass,
-    });
-    feedback.innerHTML = success.data;
-    return;
-  } else {
-
-  }
-
-  
-  //TODO
+    },
+    { withCredentials: true }
+  );
+  feedback.innerHTML = success.data;
+  const timeOutId = setTimeout(() => {
+    clearTimeout(timeOutId)
+  }, 1000)
+  return;
 };
 
-// signUpLink.onclick = () => {
-//   const modal = document.getElementById('')
-//   modalContent.classList.toggle('back')
-//   modalContent.classList.toggle('front')
+submitSignUp.onclick = async (e) => {
+  const name = document.getElementById('nameSignUp').value;
+  const email = document.getElementById('emailSignUp').value;
+  const pass = document.getElementById('passwordSignUp').value;
+  const feedback = document.querySelector('.modal-content.active #feedback');
+  if (pass !== passwordConfirm.value) {
+    feedback.textContent = 'Passwords do not match'
+    return;
+  }
+  const backResponse = await axios.post('http://localhost:5000/auth/ajax/signup', 
+  {
+    name,
+    email,
+    password: pass
+  }, {
+    withCredentials: true
+  })
+  feedback.textContent = backResponse.data;
+  return;
+};
 
-// }
-
-// linkModal.onclick = () => {
-//   form.id = form.id === 'formSignIn' ? 'formSignUp' : 'formSignIn';
-//   displayForm();
-// };
-
-// function displayForm() {
-//   if (form.id === 'formSignIn') {
-//     signInForm();
-//   } else {
-//     signUpForm();
-//   }
-// }
-
-// function signInForm() {
-//   form.classList.toggle('transition');
-//   setTimeout(() => {
-//     nameInput.previousElementSibling.style.display = 'none';
-//     nameInput.style.display = 'none';
-//     passwordConfirm.previousElementSibling.style.display = 'none';
-//     passwordConfirm.style.display = 'none';
-//     submitBtn.textContent = 'Log in';
-//     linkModal.textContent = 'Sign up';
-//     registered.textContent = 'No account yet? ';
-//   }, 1000);
-//   form.classList.toggle('transition');
-// }
-
-// function signUpForm() {
-//   form.classList.toggle('transition');
-//   setTimeout(() => {
-//     nameInput.previousElementSibling.style.display = 'inline';
-//     nameInput.style.display = 'inline';
-//     passwordConfirm.previousElementSibling.style.display = 'inline';
-//     passwordConfirm.style.display = 'inline';
-//     submitBtn.textContent = 'Sign up';
-//     linkModal.textContent = 'Sign in';
-//     registered.textContent = 'Already registered?  ';
-//   }, 1000);
-//   form.classList.toggle('transition');
-// }
-
+// ---------------------------------------------------------
+// Quick User experience for password strength
+// ---------------------------------------------------------
 function strongPass() {
-  const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-  password.onkeyup = () => {
-    const passed = regex.test(password.value);
-    console.log(password.value);
+  const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+  passwordSignUp.onkeyup = () => {
+    const feedback = document.querySelector(
+      '.modal-content.active #feedback'
+    );
+    const passed = regex.test(passwordSignUp.value);
+    console.log(passwordSignUp.value);
+    console.log(passed)
     if (!passed) {
+      passwordSignUp.style.boxShadow = 'inset 0px 0px 0px 3px red'
       feedback.textContent =
-        'Your password must contain atleast 8 characters, one uppercase letter, one lowercase and one number.';
+        'Your password must contain atleast 8 characters, one number and a punctuation.';
       feedback.style.color = 'red';
       submitBtn.disabled = true;
     } else {
-      feedback.textContent = '';
+      passwordSignUp.style.boxShadow = 'inset 0px 0px 0px 3px #21C078'
+      feedback.textContent = 'You password is safe!';
+      feedback.style.color = '#21C078'
       submitBtn.disabled = false;
     }
   };
 }
 
+// ---------------------------------------------------------
+// Quick User experience for password confirmation
+// ---------------------------------------------------------
 function confirmPass() {
   passwordConfirm.onkeyup = () => {
-    if (passwordConfirm.value !== password.value) {
+    const feedback = document.querySelector(
+      '.modal-content.active #feedback'
+    );
+    if (passwordConfirm.value !== passwordSignUp.value) {
+      passwordConfirm.style.boxShadow = 'inset 0px 0px 0px 3px red'
       feedback.textContent = 'Passwords are not matching.';
       feedback.style.color = 'red';
       submitBtn.disabled = true;
     } else {
-      feedback.textContent = 'Passwords are matching.';
+      passwordConfirm.style.boxShadow = 'inset 0px 0px 0px 3px #21C078'
+      feedback.textContent = 'Passwords are matching!';
       feedback.style.color = '#21C078';
       submitBtn.disabled = false;
     }
   };
 }
 
+// ---------------------------------------------------------
+// Popup autoclosing and refreshing our mainpage on close
+// ---------------------------------------------------------
 googleAuth.onclick = () => {
   const win = window.open(
     '/auth/google',
@@ -154,10 +122,10 @@ googleAuth.onclick = () => {
   );
   let intervalId = setInterval(() => {
     if (win.closed) {
-      clearInterval(intervalId)
-      window.location.reload()
+      clearInterval(intervalId);
+      window.location.reload();
     }
-  }, 500)
+  }, 500);
 };
 
 slackAuth.onclick = () => {
@@ -168,8 +136,42 @@ slackAuth.onclick = () => {
   );
   let intervalId = setInterval(() => {
     if (win.closed) {
-      clearInterval(intervalId)
-      window.location.reload()
+      clearInterval(intervalId);
+      window.location.reload();
     }
-  }, 500)
+  }, 500);
+};
+
+// ---------------------------------------------------------
+// Animation switch
+// ---------------------------------------------------------
+signUpLink.onclick = () => {
+  document.querySelector('.front').classList.toggle('active');
+  document.querySelector('.back').classList.toggle('active');
+};
+
+signInLink.onclick = () => {
+  document.querySelector('.back').classList.toggle('active');
+  document.querySelector('.front').classList.toggle('active');
+};
+
+modalBtn.onclick = () => {
+  if (modal.style.display === 'none' || !modal.style.display) {
+    modal.style.display = 'block';
+    modal.classList.toggle('modalActive');
+  } else {
+    modal.style.display = 'none';
+  }
+};
+
+// ---------------------------------------------------------
+// Close modal on the signup/signin faces
+// ---------------------------------------------------------
+closeModalBtnSi.onclick = () => {
+  modal.style.display = 'none';
+  modal.classList.toggle('modalActive');
+};
+closeModalBtnSu.onclick = () => {
+  modal.style.display = 'none';
+  modal.classList.toggle('modalActive');
 };
