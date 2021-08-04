@@ -10,7 +10,7 @@
 }
 
 #user{
-    margin-left: 50px;
+    margin-left: 150px;
     z-index: -1;
 }
 
@@ -36,11 +36,30 @@ svg{
     fill: var(--color-light-green);
 }
 
+
+#user.active.dark-green svg{
+    fill: var(--color-dark-green);
+}
+
+#user.active.dark-green:hover svg{
+    fill: var(--color-light-green);
+}
+
+#user.active.light-green:hover svg{
+    fill: var(--color-dark-green);
+}
+
 #logo{
     position: absolute;
     max-width: 300px;
     left: 50%;
     transform: translate(-50%);
+}
+
+@media (max-width: 768px) {  
+    #user{
+        margin-left: 50px;
+    }
 }
 
 @media (min-width: 1995px) { 
@@ -50,3 +69,7 @@ svg{
         transform: translateX(-50%);
     }
 }
+
+
+
+

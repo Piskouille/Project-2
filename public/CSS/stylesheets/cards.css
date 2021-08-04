@@ -1,7 +1,21 @@
 .restaurant-card{
     position: relative;
     width: 100%;
-    max-width: 600px;
+    max-width: 525px;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: popin .6s ease forwards;
+}
+
+@keyframes popin {
+    0%{
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }
 
 .euro{

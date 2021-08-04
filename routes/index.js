@@ -16,7 +16,7 @@ console.log('user authenticated: ', req.user, req.isAuthenticated())
       restaurants,
       foodTypes,
       loggedIn,
-      scripts: ['bugerMenu.js', 'logModal.js', 'cards.js', 'filters.js'] });
+      scripts: ['bugerMenu.js', 'logModal.js', 'cards.js', 'filters.js', 'intersectionObserver.js'] });
   }
   catch(err){
     console.log('Loading restaurants failed')

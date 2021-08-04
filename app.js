@@ -28,11 +28,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(flash());
 hbs.registerPartials(__dirname + '/views/partials');
 
-// Init passports config
-require('./config/passports/passport')();
-require('./config/passports/passportGoogle')();
-require('./config/passports/passportSlack')();
-
 // Session setup
 // -------------------------------------------
 app.use(
@@ -46,6 +41,11 @@ app.use(
     }),
   })
 );
+
+// Init passports config
+require('./config/passports/passport')();
+require('./config/passports/passportGoogle')();
+require('./config/passports/passportSlack')();
 
 app.use(passport.initialize());
 app.use(passport.session());
