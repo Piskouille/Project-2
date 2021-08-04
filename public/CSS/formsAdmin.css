@@ -1,11 +1,12 @@
-.form-admin-user{
+.form-admin-user,
+.admin-page,
+.restaurants-list{
     position: relative;
     top: 300px;
 }
 .form-admin-restaurant{
     position: relative;
     top: 300px;
-    display: flex;
     box-sizing: border-box;
     padding: 20px;
     width: 320px;
@@ -26,4 +27,8 @@ select {
   }
   .alert{
       color: red;
+  }
+
+  img{
+      transform: scale(0.5);
   }

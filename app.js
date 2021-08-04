@@ -2,33 +2,19 @@ require("dotenv").config();
 require("./config/mongodb"); // database initial setup
 require("./helpers/utils"); // utils for hbs templates
 // require("./bin/seed");
-<<<<<<< HEAD
 const createError = require("http-errors");
 const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const hbs = require("hbs");
-const keys = require("./config/keys");
 const flash = require("connect-flash");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const passport = require("passport");
-=======
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const logger = require('morgan');
-const hbs = require('hbs');
-const flash = require('connect-flash');
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
-const passport = require('passport');
->>>>>>> a0e4fa26f9446115f4ae1586b1a902b25ee530a4
 //const cookieSession = require("cookie-session");
 const app = express();
-const User = require('./models/User')
+const User = require("./models/User");
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
@@ -41,14 +27,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(flash());
 hbs.registerPartials(__dirname + "/views/partials");
 
-<<<<<<< HEAD
-// Init passports config
-require("./config/passports/passport")();
-require("./config/passports/passportGoogle")();
-require("./config/passports/passportSlack")();
-
-=======
->>>>>>> a0e4fa26f9446115f4ae1586b1a902b25ee530a4
 // Session setup
 // -------------------------------------------
 app.use(
@@ -64,9 +42,9 @@ app.use(
 );
 
 // Init passports config
-require('./config/passports/passport')();
-require('./config/passports/passportGoogle')();
-require('./config/passports/passportSlack')();
+require("./config/passports/passport")();
+require("./config/passports/passportGoogle")();
+require("./config/passports/passportSlack")();
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -91,7 +69,6 @@ app.use(async (req, res, next) => {
   }
 });
 
-<<<<<<< HEAD
 app.use("/", indexRouter);
 // ----------------ADMIN------------------------
 app.use("/admin/", adminIndexRouter);
@@ -101,13 +78,6 @@ app.use("/admin/", adminUsersRouter);
 app.use("/auth/", authRouter);
 app.use("/auth/", require("./routes/auth"));
 app.use("/auth/ajax", require("./routes/ajax/ajaxAuth"));
-=======
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/auth/', require('./routes/auth'));
-app.use('/admin', require('./routes/admin/restaurants'));
-app.use('/auth/ajax', require('./routes/ajax/ajaxAuth'));
->>>>>>> a0e4fa26f9446115f4ae1586b1a902b25ee530a4
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

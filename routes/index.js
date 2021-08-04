@@ -4,51 +4,41 @@ var router = express.Router();
 const Restaurant = require("../models/Restaurant");
 
 /* GET home page. */
-<<<<<<< HEAD
 router.get("/", async function (req, res, next) {
-  const loggedIn = req.isAuthenticated();
+  let loggedIn = false;
+  if (req.isAuthenticated()) {
+    loggedIn = true;
+  } else {
+    if (req.session.currentUser) {
+      loggedIn = true;
+    }
+  }
+
   // isAuthenticated est Bool
-  console.log("user authenticated: ", req.user, req.isAuthenticated());
+  console.log(
+    "user authenticated w/ passport: ",
+    req.user,
+    req.isAuthenticated()
+  );
+  console.log("user authenticated without passport: ", req.session.currentUser);
   try {
     const restaurants = await Restaurant.find().populate("foodTypes");
     const foodTypes = await FoodType.find();
 
     res.render("landingPage", {
-      restaurants,
-      foodTypes,
-      loggedIn,
-      scripts: ["bugerMenu.js", "logModal.js", "cards.js", "filters.js"],
+      restaurants: restaurants,
+      foodTypes: foodTypes,
+      loggedIn: loggedIn,
+      scripts: [
+        "bugerMenu.js",
+        "logModal.js",
+        "cards.js",
+        "filters.js",
+        "intersectionObserver.js",
+      ],
     });
   } catch (err) {
     console.log("Loading restaurants failed");
-=======
-router.get('/', async function(req, res, next) {
-
-let loggedIn = false
-if (req.isAuthenticated()) {
-  loggedIn = true
-} else {
-  if (req.session.currentUser) {
-    loggedIn = true
-  }
-}
-
-// isAuthenticated est Bool
-console.log('user authenticated w/ passport: ', req.user, req.isAuthenticated())
-console.log('user authenticated without passport: ', req.session.currentUser)
-  try{
-    const restaurants = await Restaurant.find().populate("foodTypes")
-    const foodTypes = await FoodType.find()
-    
-    res.render('landingPage', { 
-      restaurants,
-      foodTypes,
-      loggedIn,
-      scripts: ['bugerMenu.js', 'logModal.js', 'cards.js', 'filters.js', 'intersectionObserver.js'] });
-  }
-  catch(err){
-    console.log('Loading restaurants failed')
->>>>>>> a0e4fa26f9446115f4ae1586b1a902b25ee530a4
   }
 });
 
