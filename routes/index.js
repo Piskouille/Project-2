@@ -5,9 +5,19 @@ const Restaurant = require('../models/Restaurant')
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
-const loggedIn = req.isAuthenticated()
+
+let loggedIn = false
+if (req.isAuthenticated()) {
+  loggedIn = true
+} else {
+  if (req.session.currentUser) {
+    loggedIn = true
+  }
+}
+
 // isAuthenticated est Bool
-console.log('user authenticated: ', req.user, req.isAuthenticated())
+console.log('user authenticated w/ passport: ', req.user, req.isAuthenticated())
+console.log('user authenticated without passport: ', req.session.currentUser)
   try{
     const restaurants = await Restaurant.find().populate("foodTypes")
     const foodTypes = await FoodType.find()
