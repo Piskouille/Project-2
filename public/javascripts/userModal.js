@@ -34,7 +34,7 @@ async function fetchInfos() {
   }
 
   length = favorites.length > 5 ? 5 : favorites.length
-  list = document.getElementById('favortites-list')
+  list = document.getElementById('favorites-list')
   for (let i = 0; i < length; i++) {
     const li = document.createElement('li')
     li.setAttribute('data-id', favorites[i]._id)
