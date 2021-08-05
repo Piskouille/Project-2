@@ -1,0 +1,22 @@
+`
+<div class="restaurant-card">
+  <div class="content">
+    <div class="image">
+      <img src="${r.image}" alt="${r.name}" />
+    </div>
+    <div class="general-infos">
+      <h4>${r.name}</h4>
+      <div class="foodTypes">${foodTypesString}</div>
+      <div class="short-infos">
+        <div class="priceRating">${r.priceRating}</div>
+      </div>
+    </div>
+    <p class="description">${r.description}</p>
+    <div class="details-perso" data-card-id="${r._id}">
+      <span class="favorite">
+        <i class="fas fa-edit fa-file-alt fa-lg"></i>
+      </span>
+    </div>
+  </div>
+</div>
+`
