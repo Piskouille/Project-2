@@ -36,3 +36,12 @@
     display: block;
     clip-path: inset(0);
 }
+
+
+#info-box{
+    position: absolute;
+    z-index: 800;
+    left: 0;
+    top: 0;
+}
+
