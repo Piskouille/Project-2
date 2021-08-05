@@ -4,7 +4,7 @@ function isAuthenticated(req, res, next) {
     } else {
       req.flash('info', 'You need to login / register')
      // res.redirect('/');
-     res.send('<script>document.getElementById("signInLink").click()</script>')
+     res.send('Not Connected')
     }
   }
   
