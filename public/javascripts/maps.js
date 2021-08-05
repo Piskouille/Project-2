@@ -32,8 +32,8 @@ mapsBtn.addEventListener('click', async () => {
 
 })
 
-
 function startMap(locations) {
+    console.log(locations)
     const iciCestParis = {
         lat: 48.856614,
         lng: 2.3522219
@@ -89,7 +89,7 @@ function displayInfoBox(restaurant){
     //const favorites = await axios.get('/favorites/${restaurant._id}')
 
     infoBox.style.top = `${mouseY - landingPage.getBoundingClientRect().top - 125}px`
-    infoBox.style.left = `${mouseX - landingPage.getBoundingClientRect().top + 125}px`
+    infoBox.style.left = `${mouseX + 10}px`
 
     infoBox.innerHTML = `
     <div class="restaurant-card">
