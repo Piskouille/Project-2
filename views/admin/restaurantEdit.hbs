@@ -60,11 +60,11 @@
       <input id="newFoodtype" type="text" class="input" name="newfoodType" />
       <label for="foodType">Food type</label>
 
-      <select multiple id="foodType" name="foodType">
+      <select multiple id="foodType" name="foodTypes">
         {{#each foodTypes}}
          <option
             class="input"
-            value="{{this.name}}"
+            value="{{this._id}}"
           {{isAdded  ../restaurant.foodTypes this._id "selected" }} >
             {{this.name}}
           </option>
