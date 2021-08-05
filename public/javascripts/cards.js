@@ -94,7 +94,7 @@ favorites.forEach((fav) => {
     if(!fav.classList.contains("isFavorite")){
       try{
         const isAuth = await favPost(cardId)
-  
+        console.log(isAuth)
         if(isAuth){
           fav.classList.toggle("isFavorite");
           fav.nextElementSibling.classList.toggle("isFavorite")
