@@ -5,7 +5,9 @@
     {{#each restaurant.address}}
       <li>{{this}}</li>
     {{/each}}
-      <p>{{restaurant.foodTypes}}</p>
+    {{#each restaurant.foodTypes}}
+      <p>{{this.name}}</p>
+    {{/each}}
     <p>{{restaurant.priceRating}}</p>
     <a></a>
   </div>

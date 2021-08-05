@@ -33,10 +33,10 @@ const restaurantSchema = new Schema({
     long: Number,
   },
   image: String,
-  description:{
+  description: {
     type: String,
-    maxlength: 500
-  }
+    maxlength: 500,
+  },
 });
 
 const Restaurant = mongoose.model("restaurant", restaurantSchema);
