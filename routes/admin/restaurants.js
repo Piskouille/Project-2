@@ -6,7 +6,7 @@ const checkRole = require("../../middlewares/checkRoles");
 // render of all the restaurants from the database
 router.get(
   "/restaurants-manage",
-
+  checkRole("ADMIN"),
   async (req, res, next) => {
     let loggedIn = false;
     if (req.isAuthenticated() || req.session.currentUser) {

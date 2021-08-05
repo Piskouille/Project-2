@@ -85,14 +85,15 @@
 
 #favorites {
   overflow-y: scroll;
+
 }
 
 #favorites > .restaurant-card {
   position: relative;
   display: flex;
   margin-bottom: 1.5em;
-  height: 300px;
-  width: 525px;
+  height: 150px;
+  background-color: var(--color-dark-green);
 }
 
 
