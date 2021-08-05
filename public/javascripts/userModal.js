@@ -1,69 +1,136 @@
 const modalBtn = document.getElementById('user');
-const userMenu = document.getElementById('user-menu')
-const prefix = 'http://localhost:5000'
-const followList = document.getElementById('following-list')
-const favoritesList = document.getElementById('favorites-list')
-const mainList = document.getElementById('main-list')
+const userMenu = document.getElementById('user-menu');
+const prefix = 'http://localhost:5000';
+const followList = document.getElementById('following-list');
+const favoritesList = document.getElementById('favorites');
+const mainList = document.getElementById('main-list');
 
 modalBtn.addEventListener('click', () => {
-  openCloseMenu()
-})
+  openCloseMenu();
+});
 
 async function fetchInfos() {
-  
-  followList.innerHTML = ''
-  favoritesList.innerHTML = ''
-  const id = modalBtn.getAttribute('data-id')
-  const {data} = await axios.get(prefix + '/users/' + id)
+  followList.innerHTML = '';
+  const id = modalBtn.getAttribute('data-id');
+  const { data } = await axios.get(prefix + '/users/' + id);
 
-  const favorites = data.favorites
-  const following = data.user.following
+  const favorites = data.favorites;
+  const following = data.user.following;
+  console.log(favorites);
+  favorites.forEach((favorite) => {
+    let foodTypesString = '';
+    const r = favorite.restaurant;
+    r.foodTypes.forEach((type, i, arr) => {
+      foodTypesString += type.name.charAt(0).toUpperCase() + type.name.slice(1);
+      if (i !== arr.length - 1) {
+        foodTypesString += ' - ';
+      }
+    });
 
-  let length = following.length > 5 ? 5 : following.length
+    favoritesList.innerHTML += `<div class="restaurant-card" style="background:url(${r.image})">
+
+        
+   
+    <div class='content'>
+            <div class="general-infos">
+              <div class="titles">
+                  <h4>${r.name}</h4>
+                  <div class="foodTypes">
+                      ${foodTypesString}
+                  </div>
+              </div>
+              <div class="short-infos">
+                  <div class="priceRating">
+                      ${r.priceRating}
+                  </div>
+              </div>
+            </div>
+
+
+          <div class="details">
+              <p>
+                  ${r.description}
+              </p>
+
+          <div class="details-perso" data-card-id="${r._id}">
+              <span class="favorite" >
+                  <i class="fas fa-heart fa-lg"></i>
+              </span>
+    
+              <span class="notes"> 
+                  <i class="fas fa-edit fa-file-alt fa-lg"></i>
+              </span>
+          </div>
+      </div>
+
+      <div class="personal-notes">
+          <textarea 
+              class="notes-input" 
+              name="notes" 
+              maxlength="350" >
+          </textarea>
+      </div>
+    </div>
+</div>
+
+</div>
+</div>`;
+
+  });
+  displayPrice();
+  let length = following.length > 5 ? 5 : following.length;
   for (let i = 0; i < length; i++) {
-    const li = document.createElement('li')
-    li.setAttribute('data-id', following[i]._id)
-    li.textContent = following[i].name
-    followList.append(li)
+    const li = document.createElement('li');
+    li.setAttribute('data-id', following[i]._id);
+    li.textContent = following[i].name;
+    followList.append(li);
   }
-  let li = document.createElement('li')
-  li.innerHTML = '<a href="#">More...</a>'
-  followList.append(li)
+  let li = document.createElement('li');
+  li.innerHTML = '<a href="#">More...</a>';
+  followList.append(li);
 
-  length = favorites.length > 5 ? 5 : favorites.length
-  
-  for (let i = 0; i < length; i++) {
-    const li = document.createElement('li')
-    li.setAttribute('data-id', favorites[i]._id)
-    li.textContent = favorites[i].restaurant.name
-    favoritesList.append(li)
-  }
-  li = document.createElement('li')
-  li.innerHTML = '<a href="#">More...</a>'
-  favoritesList.append(li)
-  attachListeners()
+  attachListeners();
 }
 
 function attachListeners() {
-  document.querySelectorAll('#main-list a, #favorites-list a, #following-list a').forEach(a => {
-    a.onclick = () => {
-      openCloseMenu()
-    }
-  })
+  document
+    .querySelectorAll('#main-list a, #favorites-list a, #following-list a')
+    .forEach((a) => {
+      a.onclick = () => {
+        openCloseMenu();
+      };
+    });
 }
-
-
 
 function openCloseMenu() {
-  userMenu.classList.toggle('active')
-  const nav = document.querySelector('.nav')
+  userMenu.classList.toggle('active');
+  const nav = document.querySelector('.nav');
   if (userMenu.classList.contains('active')) {
-    fetchInfos()
-    nav.style.zIndex = 20
+    fetchInfos();
+    nav.style.zIndex = 20;
   } else {
     const timeoutId = setTimeout(() => {
-      nav.style.zIndex = 1
-      clearTimeout(timeoutId)
-    }, 300)
+      nav.style.zIndex = 1;
+      clearTimeout(timeoutId);
+    }, 300);
   }
 }
+
+const displayPrice = () => {
+  const priceRating = document.querySelectorAll('#favorites .priceRating');
+
+  priceRating.forEach((price) => {
+    let count = +price.innerText;
+    price.innerHTML = '';
+
+    for (let i = 0; i < 4; i++) {
+      const priceImg = document.createElement('img');
+      priceImg.src = '/images/euro.svg';
+      priceImg.classList.add('euro');
+      if (count <= 0) priceImg.style.opacity = '.4';
+
+      count--;
+      price.appendChild(priceImg);
+    }
+  });
+};

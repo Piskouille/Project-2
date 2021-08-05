@@ -58,6 +58,8 @@
   font-family: satoshi;
 }
 
+
+
 #content-user li {
   margin: 0.4em 0 0.3em 3em;
   color: var(--color-dark-green);
@@ -76,16 +78,44 @@
 #content-user {
   position: relative;
   display: flex;
+  justify-content: space-between;
   height: calc(100vh - 180px);
 }
 
-.favorites {
-  position: absolute;
-  bottom: 45vh;
-  left: 30vw;
+
+#favorites {
+  overflow-y: scroll;
 }
-.following {
-  position: absolute;
-  bottom: 45vh;
-  left: 60vw;
+
+#favorites > .restaurant-card {
+  display: flex;
+  background-color: var(--color-dark-green);
+  margin-bottom: 1.5em;
+  padding: .5em;
+  background-position: cover;
+  background-repeat: no-repeat;
+  filter: brightness(70%);
+  height: 300px;
+
+}
+
+
+#favorites .content {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  margin-left: .5em;
+}
+#favorites .content * {
+  color: white;
+  z-index: 2;
+}
+#favorites .content .general-infos {
+  display: flex;
+  flex-direction: column;
+  font-family: satoshi;
+  white-space: nowrap;
+} 
+#favorites .general-infos .short-infos {
+  align-items: flex-start;
 }

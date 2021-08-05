@@ -9,7 +9,16 @@ const isAuth = require('../../middlewares/isAuthenticated');
 router.get('/:id', isAuth, async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id).populate('following').exec();
-    const favorites = await Favorite.find({user: req.params.id}).populate('restaurant').exec()
+    const favorites = await Favorite.find({user: req.params.id}).populate(
+      {
+        path: 'restaurant',
+        model: 'restaurant',
+        populate: {
+            path: 'foodTypes',
+            model: 'foodType'           
+        }
+    }).exec()
+    console.log(favorites)
     res.status(200).json({user, favorites})
   } catch (error) {
     console.log(error);
