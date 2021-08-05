@@ -11,6 +11,7 @@ modalBtn.addEventListener('click', () => {
 
 async function fetchInfos() {
   followList.innerHTML = '';
+  favoritesList.innerHTML = '';
   const id = modalBtn.getAttribute('data-id');
   const { data } = await axios.get(prefix + '/users/' + id);
 
