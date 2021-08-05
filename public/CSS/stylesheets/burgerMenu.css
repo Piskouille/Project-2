@@ -87,11 +87,12 @@
 }
 
 #logo-dark {
-  max-width: 300px;
+  width: 250px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  padding-top: 70px;
 }
 
 /* FILTERS */ 

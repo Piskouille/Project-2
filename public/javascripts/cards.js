@@ -147,14 +147,13 @@ notes.forEach(n => {
         console.log(notesInput.value)
         return notePost(noteId, notesInput.value)
       }
-      
 
       notesInput.focus()
       const noteData = await noteGet(noteId)
-      return notesInput.value = noteData.data[0].content
+      return noteData.data.length !== 0 ? notesInput.value = noteData.data[0].content : null
     }
     catch(err){
-      console.log('ERR with note AJAX')
+      console.log('ERR with note AJAX', err)
     }
   })
 })

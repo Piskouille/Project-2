@@ -1,0 +1,38 @@
+
+#maps-btn{
+    display:inline-block;
+    position: absolute;
+    top: -64px;
+    right: 32px;
+    color: var(--color-yellow);
+}
+
+#maps-btn:hover{
+    cursor: pointer;
+    color: var(--color-light-green);
+}
+
+#maps-btn.active{
+    color: var(--color-light-green);
+}
+
+#maps-btn.active:hover{
+    color: var(--color-yellow);
+}
+
+#maps{
+    position: absolute;
+    top: 0;
+    left: 4px;
+    z-index: 300;
+    width: calc(100% - 8px);
+    height: calc(100vh - 250px);
+    clip-path: inset(0 0 100% 100%);
+    transition: clip-path 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+
+}
+
+#maps.active{
+    display: block;
+    clip-path: inset(0);
+}

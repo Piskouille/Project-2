@@ -11,6 +11,7 @@
     max-width: 1555px;
     left: 50%;
     transform: translateX(-50%);
+    padding-top: 70px;
 }
 
 #user{
@@ -54,7 +55,7 @@ svg{
 
 #logo{
     position: absolute;
-    max-width: 300px;
+    max-width: 250px;
     left: 50%;
     transform: translate(-50%);
 }
@@ -64,5 +65,4 @@ svg{
         margin-left: 50px;
     }
 }
-
 
