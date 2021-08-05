@@ -61,7 +61,9 @@ router.post(
   async (req, res, next) => {
     try {
       //check if the name of the restaurant was already in the database
+      
       const restaurant = await Restaurant.findOne({ name: req.body.name });
+      
       if (restaurant) {
         req.flash("Name already in database");
         res.redirect("/admin/restaurants-create");

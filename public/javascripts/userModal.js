@@ -17,7 +17,6 @@ async function fetchInfos() {
 
   const favorites = data.favorites;
   const following = data.user.following;
-  console.log(favorites);
   favorites.forEach((favorite) => {
     let foodTypesString = '';
     const r = favorite.restaurant;
