@@ -1,23 +1,30 @@
-<<<<<<< HEAD
-<div>
-  <img src="{{this.image}}" /><h2>{{this.name}}</h2>
-=======
-<div class='restaurant-card'>
-  <img src='{{this.image}}' /><h2>{{this.name}}</h2>
->>>>>>> be095623ef2d4abe1933ffb1ce39d2f547929abd
-  {{#each this.address}}
-    <h2 id='address'>{{this}}</h2>
-  {{/each}}
-<<<<<<< HEAD
-  <p id="phone">{{this.phone}}</p>
-  <p id="priceRating">{{this.priceRating}}</p>
-  <a href="/admin/restaurants/{{this._id}}/edit">Edit</a><br />
-  <a href="/admin/restaurants/{{this._id}}/delete">Delete</a>
-=======
-  <p id='phone'>{{this.phone}}</p>
-  <p id='priceRating'>{{this.priceRating}}</p>
-
-  <a href='/restaurants/{{this._id}}'>Details</a><br />
-  <a href='/restaurants/{{this._id}}/delete'>Delete</a>
->>>>>>> be095623ef2d4abe1933ffb1ce39d2f547929abd
+<div class="restaurant-card-admin">
+  <img
+    class="restaurant-image-admin"
+    src="{{this.image}}"
+    alt="{{this.name}}"
+  />
+  <h3>{{this.name}}</h3>
+  <div class="restaurant-description-admin">
+    <p>{{this.description}}</p></div>
+  <div class="foodTypes-list">
+    <p>Food type :</p>
+    {{#each this.foodTypes}}
+      <p>{{this.name}}</p>
+    {{/each}}
+  </div>
+  <div>
+    <h4>Price rating: <p>{{this.priceRating}}</p></h4>
+  </div>
+  <div>
+    <a
+      style="color: greenyellow;"
+      href="/admin/restaurants/{{this._id}}/edit"
+    >Edit</a>
+    <br />
+    <a
+      style="color: red;"
+      href="/admin/restaurants/{{this._id}}/delete"
+    >Delete</a>
+  </div>
 </div>

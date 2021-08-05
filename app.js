@@ -49,13 +49,6 @@ require("./config/passports/passportSlack")();
 app.use(passport.initialize());
 app.use(passport.session());
 
-//Routes
-const indexRouter = require("./routes/index");
-const authRouter = require("./routes/auth");
-const adminRestaurantsRouter = require("./routes/admin/restaurants");
-const adminUsersRouter = require("./routes/admin/setUsers");
-const adminIndexRouter = require("./routes/admin/indexAdmin");
-
 app.use(async (req, res, next) => {
   if (req.session.currentUser) {
     const user = await User.findById(req.session.currentUser._id);
@@ -69,25 +62,19 @@ app.use(async (req, res, next) => {
   }
 });
 
-<<<<<<< HEAD
-app.use("/", indexRouter);
+//Routes
+
+app.use("/", require("./routes/index"));
 // ----------------ADMIN------------------------
-app.use("/admin/", adminIndexRouter);
-app.use("/admin/", adminRestaurantsRouter);
-app.use("/admin/", adminUsersRouter);
+app.use("/admin/", require("./routes/admin/restaurants"));
+app.use("/admin/", require("./routes/admin/setUsers"));
 // ------------------AUTH-----------------------
-app.use("/auth/", authRouter);
 app.use("/auth/", require("./routes/auth"));
 app.use("/auth/ajax", require("./routes/ajax/ajaxAuth"));
-=======
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/auth/', require('./routes/auth'));
-app.use('/admin', require('./routes/admin/restaurants'));
-app.use('/users', require('./routes/ajax/userInfos'))
-app.use('/auth/ajax', require('./routes/ajax/ajaxAuth'));
-app.use('/', require('./routes/ajax/persoOnCard'));
->>>>>>> be095623ef2d4abe1933ffb1ce39d2f547929abd
+// app.use("/users", usersRouter);
+app.use("/users", require("./routes/ajax/userInfos"));
+app.use("/auth/ajax", require("./routes/ajax/ajaxAuth"));
+app.use("/", require("./routes/ajax/persoOnCard"));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

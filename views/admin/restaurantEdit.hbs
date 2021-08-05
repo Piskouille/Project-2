@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="/CSS/formsAdmin.css" />
+<div class="container">
+  <div class="form-admin-restaurant">
+    <form
+      method="POST"
+      action="/admin/restaurants/{{restaurant._id}}/edit"
+      enctype="multipart/form-data"
+    >
+      <h2>Create a restaurant!</h2>
+      <label for="name">Name</label>
+      <input
+        type="text"
+        class="input"
+        name="name"
+        value="{{restaurant.name}}"
+      />
+      <label for="street">Street</label>
+      <input
+        type="text"
+        class="input"
+        name="street"
+        value="{{restaurant.address.street}}"
+      />
+      <label for="city">City</label>
+      <input
+        type="text"
+        class="input"
+        name="city"
+        value="{{restaurant.address.city}}"
+      />
+      <label for="zipCode">Zip code</label>
+      <input
+        type="text"
+        class="input"
+        name="zipCode"
+        value="{{restaurant.address.zipCode}}"
+      />
+      <label for="country">Country</label>
+      <input
+        type="text"
+        class="input"
+        name="country"
+        value="{{restaurant.address.country}}"
+      />
+      <label for="phone">Phone</label>
+      <input
+        type="text"
+        class="input"
+        name="phone"
+        value="{{restaurant.phone}}"
+      />
+      <label for="rating">Price rating</label>
+      <select type="text" class="input" name="priceRating">
+        <option value="-1" disabled selected>Choose a rate</option>
+        <option {{isSelected restaurant.priceRating 1}} value="1">1</option>
+        <option {{isSelected restaurant.priceRating 2}} value="2">2</option>
+        <option {{isSelected restaurant.priceRating 3}} value="3">3</option>
+      </select>
+      <label for="newFoodtype">Add new food type</label>
+      <input id="newFoodtype" type="text" class="input" name="newfoodType" />
+      <label for="foodType">Food type</label>
+
+      <select multiple id="foodType" name="foodType">
+        {{#each foodTypes}}
+         <option
+            class="input"
+            value="{{this.name}}"
+          {{isAdded  ../restaurant.foodTypes this._id "selected" }} >
+            {{this.name}}
+          </option>
+        {{/each}}
+      </select>
+      <label for="description">Description</label>
+      <textarea
+        name="description"
+        class="input"
+        value=""
+        size="7"
+      >{{restaurant.description}}</textarea>
+      <label for="image">Image</label>
+      <input class="input" name="image" type="file" />
+      {{#if errorMsg}}
+        <h3>{{errorMsg}}</h3>
+      {{/if}}
+      <button>Submit !</button>
+      <a href="/admin/restaurants-manage">Back admin page</a>
+
+    </form>
+  </div>
+</div>
