@@ -3,7 +3,9 @@ const mapsBtn = document.getElementById('maps-btn')
 const maps = document.getElementById('maps')
 const iconBase =
 "https://developers.google.com/maps/documentation/javascript/examples/full/images/";
+const landingPage = document.querySelector('.landing-page')
 
+//IL FAUDRAIT GERER LE RESIZE
 let mouseX = 0
 let mouseY = 0
 
@@ -86,8 +88,8 @@ const infoBox = document.getElementById('info-box')
 function displayInfoBox(restaurant){
     //const favorites = await axios.get('/favorites/${restaurant._id}')
 
-    infoBox.style.top = `${mouseY - 425}px`
-    infoBox.style.left = `${mouseX}px`
+    infoBox.style.top = `${mouseY - landingPage.getBoundingClientRect().top - 125}px`
+    infoBox.style.left = `${mouseX - landingPage.getBoundingClientRect().top + 125}px`
 
     infoBox.innerHTML = `
     <div class="restaurant-card">
