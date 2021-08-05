@@ -27,7 +27,7 @@
 /* Modal Content */
 .modal-content {
   background-color: var(--color-dark-green);
-  padding: 20px;
+  padding: 40px;
   border: 1px solid #888;
   max-width: 400px;
   border-radius: 3px;
@@ -60,30 +60,25 @@
   transform: rotate(-45deg);
 }
 
-.close:hover::after, .close:hover::before {
+#close-modal-si:hover .close::after, #close-modal-si:hover .close::before {
+  background-color: var(--color-yellow);
+}
+#close-modal-su:hover .close::after, #close-modal-su:hover .close::before {
   background-color: var(--color-yellow);
 }
 
 .formModal label,
 .formModal p {
+  font-family: satoshi;
   color: var(--color-yellow);
 }
 
 .formModal input {
-  color: black;
+  color: var(--color-dark-green);
   border-radius: 4px;
   height: 2.2em;
-  border: 1px solid black;
+  border: 1px solid var(--color-dark-green);
   padding-left: 2em;
-}
-
-.formModal * {
-  opacity: 100%;
-  transition: opacity 200ms;
-}
-.formModal.transition * {
-  opacity: 0%;
-  transition: opacity 200ms;
 }
 
 .formModal {
@@ -94,6 +89,7 @@
 }
 
 .formModal button {
+  font-family: satoshi;
   background-color: var(--color-light-green);
   color: white;
   padding: 0.4em 1.5em;
@@ -135,12 +131,14 @@
   flex-direction: column;
   align-items: center;
 }
+
 #feedback {
-  font-weight: bold;
+  font-size: .8em;
 }
 
 #signUpLink,
 #signInLink {
+  font-family: satoshi;
   cursor: pointer;
   transition: all 300ms ease;
   font-weight: bold;

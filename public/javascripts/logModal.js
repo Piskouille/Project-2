@@ -83,12 +83,9 @@ function strongPass() {
   passwordSignUp.onkeyup = () => {
     const feedback = document.querySelector('.modal-content.active #feedback');
     const passed = regex.test(passwordSignUp.value);
-    console.log(passwordSignUp.value);
-    console.log(passed);
     if (!passed) {
       passwordSignUp.style.boxShadow = 'inset 0px 0px 0px 3px red';
-      feedback.textContent =
-        'Your password must contain atleast 8 characters, one number and a punctuation.';
+      feedback.innerHTML = 'Please provide 8 characters, a number<br>and a punctuation.';
       feedback.style.color = 'red';
       submitBtn.disabled = true;
     } else {
