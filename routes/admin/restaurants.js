@@ -6,11 +6,23 @@ const checkRole = require("../../middlewares/checkRoles");
 // render of all the restaurants from the database
 router.get(
   "/restaurants-manage",
-
+  checkRole("ADMIN"),
   async (req, res, next) => {
+    let loggedIn = false;
+    if (req.isAuthenticated() || req.session.currentUser) {
+      loggedIn = true;
+    }
+    const user = req.isAuthenticated() ? req.user : req.session.currentUser;
+    const isAdmin = user?.role === "ADMIN" ? true : false;
     try {
       const restaurants = await Restaurant.find().populate("foodTypes");
-      res.render("admin/restaurants", { restaurants: restaurants });
+      res.render("admin/restaurants", {
+        restaurants,
+        user,
+        loggedIn,
+        isAdmin,
+        scripts: ["bugerMenu.js", "userModal.js"],
+      });
     } catch (error) {
       next(error);
     }
@@ -21,11 +33,9 @@ router.get(
   "/restaurants-create",
   checkRole("ADMIN"),
   async (req, res, next) => {
-    let modal = "logModal.js";
     let loggedIn = false;
     if (req.isAuthenticated() || req.session.currentUser) {
       loggedIn = true;
-      modal = "userModal.js";
     }
     const user = req.isAuthenticated() ? req.user : req.session.currentUser;
     const isAdmin = user?.role === "ADMIN" ? true : false;
@@ -61,28 +71,25 @@ router.post(
       const oldFoodtype = await FoodType.findOne({
         name: req.body.newfoodType.toLowerCase(),
       });
+      let newFoodType;
+      // check if the input of the form its filled
+      if (req.body.newFoodType && !oldFoodtype) {
+        newFoodType = await FoodType.create({
+          name: req.body.newFoodType,
+        });
+      }
+      req.body.foodType = Array.isArray(req.body.foodType)
+        ? req.body.foodType
+        : [req.body.foodType];
 
-      if (oldFoodtype) {
-        req.flash("Food type already in database");
-        res.redirect("/admin/restaurants-create");
-        return;
+      if (newFoodType) {
+        req.body.foodType.push(newFoodType._id);
       }
 
       if (req.file) {
         req.body.image = req.file.path;
       }
-      if (Array.isArray(req.body.foodTypes)) {
-        req.body.foodTypes = req.body.foodTypes.map(async (element) => {
-          return await FoodType.create({ name: element });
-        });
-      } else {
-        req.body.foodTypes = req.body.foodTypes.map(async (element) => {
-          return await FoodType.findOneAndUpdate(
-            { name: element },
-            { new: true }
-          );
-        });
-      }
+
       // destructuring the req.body to create foodtype cos of the dependance with the model restaurant
       const {
         number,
@@ -99,7 +106,7 @@ router.post(
       } = req.body;
       await Restaurant.create({
         name: name,
-        foodTypes: [foodTypes],
+        foodTypes: foodTypes,
         priceRating: rating,
         address: {
           number: number,
@@ -122,7 +129,7 @@ router.post(
 // render of one restaurant with the id from the list
 router.get(
   "/restaurants/:id/delete",
-
+  checkRole("ADMIN"),
   async (req, res, next) => {
     try {
       await Restaurant.findByIdAndDelete(req.params.id);
@@ -136,14 +143,27 @@ router.get(
 // display the form of the editing restaurant
 router.get(
   "/restaurants/:id/edit",
-
+  checkRole("ADMIN"),
   async (req, res, next) => {
+    let loggedIn = false;
+    if (req.isAuthenticated() || req.session.currentUser) {
+      loggedIn = true;
+    }
+    const user = req.isAuthenticated() ? req.user : req.session.currentUser;
+    const isAdmin = user?.role === "ADMIN" ? true : false;
     try {
       const restaurant = await Restaurant.findById(req.params.id).populate(
         "foodTypes"
       );
       const foodTypes = await FoodType.find();
-      res.render("admin/restaurantEdit", { restaurant, foodTypes });
+      res.render("admin/restaurantEdit", {
+        restaurant,
+        foodTypes,
+        user,
+        loggedIn,
+        isAdmin,
+        scripts: ["bugerMenu.js", "userModal.js"],
+      });
     } catch (error) {
       next(error);
     }
@@ -153,9 +173,35 @@ router.get(
 // get the edited form of the restaurant
 router.post(
   "/restaurants/:id/edit",
+  checkRole("ADMIN"),
   upload.single("image"),
   async (req, res, next) => {
     try {
+      const oldFoodtype = await FoodType.findOne({
+        name: req.body.newfoodType.toLowerCase(),
+      });
+      let newFoodType;
+      if (req.body.newFoodType && !oldFoodtype) {
+        newFoodType = await FoodType.findByIdAndUpdate(
+          {
+            id: req.body.newFoodType,
+          },
+          { new: true }
+        );
+      }
+      req.body.foodTypes = Array.isArray(req.body.foodTypes)
+        ? req.body.foodTypes
+        : [req.body.foodTypes];
+
+      if (newFoodType) {
+        req.body.foodTypes.push(newFoodType._id);
+      }
+
+      req.body.image =
+        req.file === null
+          ? req.file.path
+          : "https://images.pexels.com/photos/4577740/pexels-photo-4577740.jpeg?auto=compress&cs=tinysrgb&h=350";
+
       const {
         number,
         street,
@@ -165,34 +211,15 @@ router.post(
         name,
         phone,
         rating,
-        foodType,
+        foodTypes,
         description,
         image,
       } = req.body;
-      if (req.file) {
-        req.body.image = req.file.path;
-      }
-      const oldFoodtype = await FoodType.findOne({
-        name: req.body.newfoodType.toLowerCase(),
-      });
-
-      if (oldFoodtype) {
-        res.redirect("/admin/restaurants-manage", {
-          errorMsg: "Food Type exist already",
-        });
-        return;
-      }
-      if (Array.isArray(foodType)) {
-        req.body.foodType = foodType.map(async (element) => {
-          return await FoodType.create({ name: element });
-        });
-      }
-
       await Restaurant.findByIdAndUpdate(
         req.params.id,
         {
           name: name,
-          foodTypes: [foodType._id],
+          foodTypes: foodTypes,
           rating: rating,
           address: {
             number: number,

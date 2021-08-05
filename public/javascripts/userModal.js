@@ -11,6 +11,7 @@ modalBtn.addEventListener('click', () => {
 
 async function fetchInfos() {
   followList.innerHTML = '';
+  favoritesList.innerHTML = '';
   const id = modalBtn.getAttribute('data-id');
   const { data } = await axios.get(prefix + '/users/' + id);
 
@@ -27,41 +28,64 @@ async function fetchInfos() {
       }
     });
 
-    favoritesList.innerHTML += `
-    <div class="restaurant-card" >
-      <div class='content'>
-              <div class="general-infos">
-                <div class="titles">
-                    <h4>${r.name}</h4>
-                    <div class="foodTypes">
-                        ${foodTypesString}
-                    </div>
-                </div>
-                <div class="short-infos">
-                    <div class="priceRating">
-                        ${r.priceRating}
-                    </div>
-                </div>
-              </div>
+     favoritesList.innerHTML += `
+     <div class="restaurant-card">
+       <div class="content">
+         <div class="image">
+           <img src="${r.image}" alt="${r.name}" />
+         </div>
+         <div class="general-infos">
+           <h4>${r.name}</h4>
+           <div class="foodTypes">${foodTypesString}</div>
+           <div class="short-infos">
+             <div class="priceRating">${r.priceRating}</div>
+           </div>
+         </div>
+         <p class="description">${r.description}</p>
+         <div class="details-perso" data-card-id="${r._id}">
+           <span class="favorite">
+             <i class="fas fa-edit fa-file-alt fa-lg"></i>
+           </span>
+         </div>
+       </div>
+     </div>
+     `
+     
+    //`
+    // <div class="restaurant-card" >
+    //   <div class='content'>
+    //           <div class="general-infos">
+    //             <div class="titles">
+    //                 <h4>${r.name}</h4>
+    //                 <div class="foodTypes">
+    //                     ${foodTypesString}
+    //                 </div>
+    //             </div>
+    //             <div class="short-infos">
+    //                 <div class="priceRating">
+    //                     ${r.priceRating}
+    //                 </div>
+    //             </div>
+    //           </div>
 
 
       
-              <p class='description'>
-                  ${r.description}
-              </p>
+    //           <p class='description'>
+    //               ${r.description}
+    //           </p>
 
-          <div class="details-perso" data-card-id="${r._id}">
-              <span class="favorite" >
-                  <i class="fas fa-heart fa-lg"></i>
-              </span>
+    //       <div class="details-perso" data-card-id="${r._id}">
+    //           <span class="favorite" >
+    //               <i class="fas fa-heart fa-lg"></i>
+    //           </span>
     
-              <span class="notes"> 
-                  <i class="fas fa-edit fa-file-alt fa-lg"></i>
-              </span>
-          </div>
-      </div>      
-      <div id="background-img" style="background:url(${r.image})"></div>
-    </div>`;
+    //           <span class="notes"> 
+    //               <i class="fas fa-edit fa-file-alt fa-lg"></i>
+    //           </span>
+    //       </div>
+    //   </div>      
+    //   <div id="background-img" style="background:url(${r.image})"></div>
+    // </div>`;
 
   });
   displayPrice();
