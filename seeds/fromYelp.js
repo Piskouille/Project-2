@@ -98,7 +98,7 @@ async function yelpAPICall(foodTypes){
                // image: resRestoData.image_url  - la vache que leurs photos sont moches !!
                 image : randomPict(PICTS),
                 description : loremIpsum({
-                  count: Math.floor(Math.random() * 20) + 15,
+                  count: Math.floor(Math.random() * 10) + 16,
                   units: "words"
               })
             })

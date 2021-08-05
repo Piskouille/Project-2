@@ -44,4 +44,24 @@ body {
   font-size: 16px;
   scroll-behavior: smooth;
   font-family: 'zodiak', serif;
+  min-height: 100vh;
 }
+
+.error-404{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--color-yellow);
+  font-size: 50px;
+}
+
+.error-404 img{
+  max-width: 300px;
+}
+
+

@@ -14,7 +14,6 @@ document.addEventListener('mousemove', e => {
     mouseY = e.clientY
 })
 
-
 mapsBtn.addEventListener('click', async () => {
 
     maps.classList.toggle('active')
@@ -33,11 +32,13 @@ mapsBtn.addEventListener('click', async () => {
 })
 
 function startMap(locations) {
-    console.log(locations)
+    
     const iciCestParis = {
         lat: 48.856614,
         lng: 2.3522219
     };
+
+    
 
     const map = new google.maps.Map(
       maps,
@@ -47,6 +48,37 @@ function startMap(locations) {
         center: iciCestParis
       }
     );
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          const user_location = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+           
+          map.setCenter(user_location);
+     
+          const userLocationMarker = new google.maps.Marker({
+            position: {
+              lat: user_location.lat,
+              lng: user_location.lng
+            },
+            map: map,
+            title: "You are here.",
+            icon:
+            {
+               url: '/images/place.png',
+               scaledSize : new window.google.maps.Size(50, 50),
+               labelOrigin: new google.maps.Point(0, 0)
+           },
+           animation: google.maps.Animation.DROP,
+           optimized: false
+          });
+     
+        }, function () {
+            console.log('Error in the geolocation service.');
+          });
+        }
     
 
     const markers = locations.map(async loc => {
@@ -89,7 +121,7 @@ function displayInfoBox(restaurant){
     //const favorites = await axios.get('/favorites/${restaurant._id}')
 
     infoBox.style.top = `${mouseY - landingPage.getBoundingClientRect().top - 125}px`
-    infoBox.style.left = `${mouseX + 10}px`
+    infoBox.style.left = `${mouseX - landingPage.getBoundingClientRect().left + 15}px`
 
     infoBox.innerHTML = `
     <div class="restaurant-card">
