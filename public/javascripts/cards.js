@@ -36,7 +36,7 @@ cards.forEach((card) => {
       if (c !== card) {
         const persoC = c.closest('.restaurant-card').querySelector('.personal-notes')
         const persoBtnC = c.closest('.restaurant-card').querySelector('.notes')
-        
+
         if(persoC.classList.contains('clicked')){
           persoC.classList.remove('clicked')
           persoBtnC.classList.toggle('dark-green')
@@ -94,7 +94,7 @@ favorites.forEach((fav) => {
     if(!fav.classList.contains("isFavorite")){
       try{
         const isAuth = await favPost(cardId)
-        console.log(isAuth)
+  
         if(isAuth){
           fav.classList.toggle("isFavorite");
           fav.nextElementSibling.classList.toggle("isFavorite")
@@ -128,19 +128,52 @@ const notes = document.querySelectorAll(".notes");
 
 
 notes.forEach(n => {
-  n.addEventListener('click', (e) => {
+  const notesInput = n.closest('.restaurant-card').querySelector('.personal-notes textarea')
+  const persoNotes =  n.closest('.restaurant-card').querySelector('.personal-notes')
+  const notes = n.closest('.restaurant-card').querySelector('.notes')
+  const noteId = n.parentElement.dataset.cardId;
+
+  notesInput.addEventListener('click', e => e.stopPropagation())
+
+  n.addEventListener('click', async (e) => {
     e.stopPropagation()
 
-    n.closest('.restaurant-card').querySelector('.personal-notes').classList.toggle('clicked')
-    n.closest('.restaurant-card').querySelector('.notes').classList.toggle('dark-green')
+    try{
+
+      persoNotes.classList.toggle('clicked')
+      notes.classList.toggle('dark-green')
+
+      if(!persoNotes.classList.contains('clicked')){
+        console.log(notesInput.value)
+        return notePost(noteId, notesInput.value)
+      }
+      
+
+      notesInput.focus()
+      const noteData = await noteGet(noteId)
+      return notesInput.value = noteData.data[0].content
+    }
+    catch(err){
+      console.log('ERR with note AJAX')
+    }
   })
 })
 
+
 function favPost(id){
-  return axios.post(`http://localhost:5000/favorite/${id}`);
+  return axios.post(`/favorite/${id}`);
 }
 
-
 function favGet(id){
-  return axios.get(`http://localhost:5000/favorite/${id}`);
+  return axios.get(`/favorite/${id}`);
+}
+
+function noteGet(id){
+  return axios.get(`/note/${id}`)
+}
+
+function notePost(id, data){
+  return axios.post(`/note/${id}`, { 
+    data: data
+  })
 }

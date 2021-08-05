@@ -35,6 +35,7 @@ router.get(
         foodTypes,
         user,
         loggedIn,
+        isAdmin,
         scripts: ["bugerMenu.js", "userModal.js"],
       });
     } catch (error) {
