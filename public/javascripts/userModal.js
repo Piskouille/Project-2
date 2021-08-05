@@ -27,28 +27,26 @@ async function fetchInfos() {
       }
     });
 
-    favoritesList.innerHTML += `<div class="restaurant-card" style="background:url(${r.image})">
-
-        
-   
-    <div class='content'>
-            <div class="general-infos">
-              <div class="titles">
-                  <h4>${r.name}</h4>
-                  <div class="foodTypes">
-                      ${foodTypesString}
-                  </div>
+    favoritesList.innerHTML += `
+    <div class="restaurant-card" >
+      <div class='content'>
+              <div class="general-infos">
+                <div class="titles">
+                    <h4>${r.name}</h4>
+                    <div class="foodTypes">
+                        ${foodTypesString}
+                    </div>
+                </div>
+                <div class="short-infos">
+                    <div class="priceRating">
+                        ${r.priceRating}
+                    </div>
+                </div>
               </div>
-              <div class="short-infos">
-                  <div class="priceRating">
-                      ${r.priceRating}
-                  </div>
-              </div>
-            </div>
 
 
-          <div class="details">
-              <p>
+      
+              <p class='description'>
                   ${r.description}
               </p>
 
@@ -61,20 +59,9 @@ async function fetchInfos() {
                   <i class="fas fa-edit fa-file-alt fa-lg"></i>
               </span>
           </div>
-      </div>
-
-      <div class="personal-notes">
-          <textarea 
-              class="notes-input" 
-              name="notes" 
-              maxlength="350" >
-          </textarea>
-      </div>
-    </div>
-</div>
-
-</div>
-</div>`;
+      </div>      
+      <div id="background-img" style="background:url(${r.image})"></div>
+    </div>`;
 
   });
   displayPrice();
