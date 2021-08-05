@@ -3,6 +3,17 @@ const mapsBtn = document.getElementById('maps-btn')
 const maps = document.getElementById('maps')
 const iconBase =
 "https://developers.google.com/maps/documentation/javascript/examples/full/images/";
+const landingPage = document.querySelector('.landing-page')
+
+//IL FAUDRAIT GERER LE RESIZE
+let mouseX = 0
+let mouseY = 0
+
+document.addEventListener('mousemove', e => {
+    mouseX = e.clientX
+    mouseY = e.clientY
+})
+
 
 mapsBtn.addEventListener('click', async () => {
 
@@ -21,7 +32,6 @@ mapsBtn.addEventListener('click', async () => {
 
 })
 
-console.log(style)
 
 function startMap(locations) {
     const iciCestParis = {
@@ -58,13 +68,67 @@ function startMap(locations) {
             animation: google.maps.Animation.DROP,
             optimized: false
         });
-
+       
 
         marker.addListener('mouseover', () => {
-            console.log('OVERMARKER')
+            displayInfoBox(loc)
+            //location = restaurant -_____-
+        })
+
+        marker.addListener('mouseout', () => {
+            infoBox.innerHTML = ''
+            //location = restaurant -_____-
         })
 
     });
+}
+
+const infoBox = document.getElementById('info-box')
+
+function displayInfoBox(restaurant){
+    //const favorites = await axios.get('/favorites/${restaurant._id}')
+
+    infoBox.style.top = `${mouseY - landingPage.getBoundingClientRect().top - 125}px`
+    infoBox.style.left = `${mouseX - landingPage.getBoundingClientRect().top + 125}px`
+
+    infoBox.innerHTML = `
+    <div class="restaurant-card">
+
+        <div class="restaurant-card-img" >
+            <img src="${restaurant.image}" alt="${restaurant.name}">
+        </div>
+
+        <div class="restaurant-card-banner">
+            <div class="banner-header">
+                <div class="titles">
+                    <h3>${restaurant.name}</h3>
+                    <div class="foodTypes">
+                    ${
+                        restaurant.foodTypes.map(type =>
+                            (type.name.charAt(0).toUpperCase() + type.name.slice(1))
+                            .split("_")
+                            .join(" ")
+                        )
+                    }
+                    </div>
+                </div>
+                <div class="short-infos">
+                    <div class="priceRating">
+                        ${restaurant.priceRating}
+                    </div>
+                </div>
+                <span class="see-more"></span>
+            </div>
+
+
+            <div class="details">
+                <p class="restaurant-card-description">
+                    ${restaurant.description}
+                </p>
+            </div>
+        </div>
+    </div>`
+
 }
 
 function disableScroll() {
@@ -82,4 +146,8 @@ function enableScroll() {
 
 function getRestaurants(){
     return axios.get('/restaurants')
+}
+
+function getOneRestaurant(id){
+    return axios.get(`/restaurant/:${id}`)
 }

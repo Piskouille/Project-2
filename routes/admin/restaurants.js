@@ -131,9 +131,8 @@ router.post(
 // render of one restaurant with the id from the list
 router.get(
   "/restaurants/:id/delete",
-
+  checkRole("ADMIN"),
   async (req, res, next) => {
-    
     try {
       await Restaurant.findByIdAndDelete(req.params.id);
       req.flash("info", "You deleted this shiitttt !.");
@@ -146,7 +145,7 @@ router.get(
 // display the form of the editing restaurant
 router.get(
   "/restaurants/:id/edit",
-
+  checkRole("ADMIN"),
   async (req, res, next) => {
     let loggedIn = false;
     if (req.isAuthenticated() || req.session.currentUser) {
@@ -160,13 +159,13 @@ router.get(
       );
       const foodTypes = await FoodType.find();
       res.render("admin/restaurantEdit", {
-      restaurant,
-      foodTypes,
-      user,
-      loggedIn,
-      isAdmin,
-      scripts: ["bugerMenu.js", "userModal.js"],
-    });
+        restaurant,
+        foodTypes,
+        user,
+        loggedIn,
+        isAdmin,
+        scripts: ["bugerMenu.js", "userModal.js"],
+      });
     } catch (error) {
       next(error);
     }
@@ -176,6 +175,7 @@ router.get(
 // get the edited form of the restaurant
 router.post(
   "/restaurants/:id/edit",
+  checkRole("ADMIN"),
   upload.single("image"),
   async (req, res, next) => {
     try {
