@@ -33,6 +33,7 @@ router.get(
       res.render('restaurantCreate.hbs', {
         user,
         loggedIn,
+        isAdmin,
         scripts: ['bugerMenu.js', 'userModal.js'],
       });
     } catch (error) {
