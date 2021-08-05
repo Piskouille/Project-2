@@ -32,8 +32,8 @@ mapsBtn.addEventListener('click', async () => {
 
 })
 
-
 function startMap(locations) {
+    console.log(locations)
     const iciCestParis = {
         lat: 48.856614,
         lng: 2.3522219
