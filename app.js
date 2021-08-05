@@ -75,6 +75,7 @@ app.use('/users', require('./routes/ajax/userInfos'))
 app.use('/auth/ajax', require('./routes/ajax/ajaxAuth'));
 app.use('/', require('./routes/ajax/persoOnCard'));
 
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

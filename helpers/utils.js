@@ -92,5 +92,5 @@ hbs.registerHelper("isIncluded", (id, arrayIds, options) => {
   } else {
     return options.inverse(this);
   }
-
+  
 })

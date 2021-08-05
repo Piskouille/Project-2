@@ -28,9 +28,9 @@ async function DBconnect(){
             useUnifiedTopology: true
           });
 
-        await Restaurant.deleteMany({}, function(err) { 
-            console.log('collection removed') 
-        }) 
+        // await Restaurant.deleteMany({}, function(err) { 
+        //     console.log('collection removed') 
+        // }) 
     
         const foodTypesData = await FoodType.find() 
      
@@ -85,7 +85,7 @@ async function yelpAPICall(foodTypes){
            
             dataSeed.push({
                 name: resRestoData.name,
-                coordinates: {lat: resRestoData.coordinates.latitude, long: resRestoData.coordinates.longitude},
+                coordinates: {lat: resRestoData.coordinates.latitude, lng: resRestoData.coordinates.longitude},
                 address: {
                     street: [resRestoData.location.address1, resRestoData.location.address2, resRestoData.location.address3 ].join(' ').trim(),
                     city: resRestoData.location.city,
