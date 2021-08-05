@@ -30,7 +30,7 @@ const restaurantSchema = new Schema({
   },
   coordinates: {
     lat: Number,
-    long: Number,
+    lng: Number,
   },
   image: String,
   description: {

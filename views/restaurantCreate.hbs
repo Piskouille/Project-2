@@ -1,0 +1,48 @@
+<div class="containerCreate">
+
+  <form id="create-restaurant-form" method="POST" action="/admin/restaurants-create" enctype="multipart/form-data">
+    <div>
+      <label for="name">Name: </label>
+      <input type="text" id="name" name="name" autocomplete="off"/>
+    </div>
+    <div>
+      <label for="address">Adress: </label>
+      <input type="adress" class="adress" name="street" id="address" placeholder="Street"/>
+      <input type="adress" class="adress" name="city"  placeholder="City"/>
+      <input type="adress" class="adress" name="zipCode"  placeholder="Zipcode"/>
+      <input type="adress" class="adress" name="country"  placeholder="Country"/>
+    </div>
+    <div>
+      <label for="phone">Phone: </label>
+      <input type="telephone" id="phone" name="phone" />
+    </div>
+    <div>
+      <label for="rating">Price rating: </label>
+      <select type="text" id="rating" name="priceRating" >
+              <option value="-1" disabled selected >Choose a rate</option>
+        <option value="1">1</option>     
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+
+      </select>
+    </div>
+    <div>
+      <label for="foodType">Food type: </label>
+      <select type="text" id="foodtype" name="foodType" required>
+        <option disabled selected>Choose a type</option>
+        <option value="Asian">Asian</option>
+        <option value="African">African</option>
+        <option value="Italian">Italian</option>
+        <option value="French">French</option>
+      </select>
+    </div>
+    <div>
+      <label for="image">Image: </label>
+      <input id="image" name="image" type="file" />
+      {{#if errorMsg}}
+        <h3>{{errorMsg}}</h3>
+      {{/if}}
+    <button id="submit">Submit</button>
+  </form>
+</div>

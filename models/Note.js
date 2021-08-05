@@ -14,11 +14,6 @@ const noteSchema = new Schema({
         type: String,
         maxlength: 1000
     },
-    rating: {
-        type: Number,
-        min: 0,
-        max: 5
-    }
 })
 
 const Note = mongoose.model('note', noteSchema)

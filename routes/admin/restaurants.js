@@ -8,9 +8,21 @@ router.get(
   "/restaurants-manage",
 
   async (req, res, next) => {
+    let loggedIn = false;
+    if (req.isAuthenticated() || req.session.currentUser) {
+      loggedIn = true;
+    }
+    const user = req.isAuthenticated() ? req.user : req.session.currentUser;
+    const isAdmin = user?.role === "ADMIN" ? true : false;
     try {
       const restaurants = await Restaurant.find().populate("foodTypes");
-      res.render("admin/restaurants", { restaurants: restaurants });
+      res.render("admin/restaurants", {
+        restaurants,
+        user,
+        loggedIn,
+        isAdmin,
+        scripts: ["bugerMenu.js", "userModal.js"],
+      });
     } catch (error) {
       next(error);
     }
@@ -21,11 +33,9 @@ router.get(
   "/restaurants-create",
   checkRole("ADMIN"),
   async (req, res, next) => {
-    let modal = "logModal.js";
     let loggedIn = false;
     if (req.isAuthenticated() || req.session.currentUser) {
       loggedIn = true;
-      modal = "userModal.js";
     }
     const user = req.isAuthenticated() ? req.user : req.session.currentUser;
     const isAdmin = user?.role === "ADMIN" ? true : false;
@@ -121,6 +131,7 @@ router.get(
   "/restaurants/:id/delete",
 
   async (req, res, next) => {
+    
     try {
       await Restaurant.findByIdAndDelete(req.params.id);
       req.flash("info", "You deleted this shiitttt !.");
@@ -135,12 +146,25 @@ router.get(
   "/restaurants/:id/edit",
 
   async (req, res, next) => {
+    let loggedIn = false;
+    if (req.isAuthenticated() || req.session.currentUser) {
+      loggedIn = true;
+    }
+    const user = req.isAuthenticated() ? req.user : req.session.currentUser;
+    const isAdmin = user?.role === "ADMIN" ? true : false;
     try {
       const restaurant = await Restaurant.findById(req.params.id).populate(
         "foodTypes"
       );
       const foodTypes = await FoodType.find();
-      res.render("admin/restaurantEdit", { restaurant, foodTypes });
+      res.render("admin/restaurantEdit", {
+      restaurant,
+      foodTypes,
+      user,
+      loggedIn,
+      isAdmin,
+      scripts: ["bugerMenu.js", "userModal.js"],
+    });
     } catch (error) {
       next(error);
     }

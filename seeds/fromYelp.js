@@ -19,52 +19,38 @@ function randomPict(picts) {
   return picts[rdm];
 }
 
-async function DBconnect() {
-  const foodTypes = {};
-  try {
-    await mongoose.connect(process.env.MONGO_URI, {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useUnifiedTopology: true,
-    });
+async function DBconnect(){
+    const foodTypes = {}
+    try{
+        await mongoose.connect(process.env.MONGO_URI, {
+            useNewUrlParser: true,
+            useCreateIndex: true,
+            useUnifiedTopology: true
+          });
 
-    await Restaurant.deleteMany({}, function (err) {
-      console.log("collection removed");
-    });
+        // await Restaurant.deleteMany({}, function(err) { 
+        //     console.log('collection removed') 
+        // }) 
+    
+        const foodTypesData = await FoodType.find() 
+     
+        const foodTypes = {}
+        foodTypesData.forEach(foodtype => {
+            foodTypes[foodtype.name] = foodtype._id
+        })
 
-    const foodTypesData = await FoodType.find();
+        return foodTypes
+    }
+    catch(err){
+        console.log("DB connection error", err)
+    }
+} 
 
-    const foodTypes = {};
-    foodTypesData.forEach((foodtype) => {
-      foodTypes[foodtype.name] = foodtype._id;
-    });
+async function yelpAPICall(foodTypes){
+    const dataSeed = []
 
-    return foodTypes;
-  } catch (err) {
-    console.log("DB connection error", err);
-  }
-}
-
-async function yelpAPICall(foodTypes) {
-  const dataSeed = [];
-
-  try {
-    const res = await axios.get("https://api.yelp.com/v3/businesses/search", {
-      headers: {
-        Authorization: `Bearer ${process.env.YELP_API_KEY}`,
-      },
-      params: {
-        term: "Restaurant",
-        location: "Paris",
-        limit: "5",
-      },
-    });
-
-    await Promise.all(
-      res.data.businesses.map(async (resto) => {
-        const resResto = await axios.get(
-          "https://api.yelp.com/v3/businesses/" + resto.id,
-          {
+    try{
+        const res = await axios.get('https://api.yelp.com/v3/businesses/search', {
             headers: {
               Authorization: `Bearer ${process.env.YELP_API_KEY}`,
             },
@@ -83,44 +69,59 @@ async function yelpAPICall(foodTypes) {
               const newFoodType = await FoodType.create({ name: cat.alias });
               seedFoodTypes.push(newFoodType.id);
             }
-          })
-        );
+        }))
 
-        dataSeed.push({
-          name: resRestoData.name,
-          coordinates: {
-            lat: resRestoData.coordinates.latitude,
-            long: resRestoData.coordinates.longitude,
-          },
-          address: {
-            street: [
-              resRestoData.location.address1,
-              resRestoData.location.address2,
-              resRestoData.location.address3,
-            ]
-              .join(" ")
-              .trim(),
-            city: resRestoData.location.city,
-            zipCode: resRestoData.location.zip_code,
-            country: resRestoData.location.country,
-          },
-          phone: resRestoData.display_phone,
-          priceRating: resRestoData.price.length,
-          foodTypes: seedFoodTypes,
-          // image: resRestoData.image_url  - la vache que leurs photos sont moches !!
-          image: randomPict(PICTS),
-          description: loremIpsum({
-            count: Math.floor(Math.random() * 33) + 15,
-            units: "words",
-          }),
-        });
-      })
-    );
+        await Promise.all(res.data.businesses.map(async resto => {
+            const resResto = await axios.get('https://api.yelp.com/v3/businesses/' + resto.id, {
+                headers: {
+                    Authorization: `Bearer ${process.env.YELP_API_KEY}` 
+                }
+            
+            });
+            
+            const resRestoData = resResto.data
+            const categories = resRestoData.categories
+            const seedFoodTypes = []
 
-    return dataSeed;
-  } catch (err) {
-    console.log("ERROR with Yelp API", err);
-  }
+            await Promise.all(categories.map(async cat => {
+                if(foodTypes.hasOwnProperty(cat.alias)){
+                    seedFoodTypes.push(foodTypes[cat.alias])
+                }
+                else{
+                    const newFoodType = await FoodType.create({name: cat.alias}) 
+                    seedFoodTypes.push(newFoodType.id)
+                }
+            }))
+           
+            dataSeed.push({
+                name: resRestoData.name,
+                coordinates: {lat: resRestoData.coordinates.latitude, lng: resRestoData.coordinates.longitude},
+                address: {
+                    street: [resRestoData.location.address1, resRestoData.location.address2, resRestoData.location.address3 ].join(' ').trim(),
+                    city: resRestoData.location.city,
+                    zipCode: resRestoData.location.zip_code,
+                    country:  resRestoData.location.country,
+                },
+                phone: resRestoData.display_phone,
+                priceRating: resRestoData.price.length,
+                foodTypes: seedFoodTypes,
+               // image: resRestoData.image_url  - la vache que leurs photos sont moches !!
+                image : randomPict(PICTS),
+                description : loremIpsum({
+                    count: Math.floor(Math.random() * 33) + 15,
+                    units: "words"
+                })
+            })
+        }))
+
+        return dataSeed
+    }
+    catch(err){
+        console.log('ERROR with Yelp API', err)
+    }
+   
+
+
 }
 
 async function seedFunction() {
