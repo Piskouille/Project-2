@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="/CSS/formsAdmin.css" />
+<div class="containerCreate">
+  <div class="form-admin-restaurant">
+    <form
+      method="POST"
+      action="/admin/restaurants-create"
+      enctype="multipart/form-data"
+    >
+      <div>
+        <h2>Create a restaurant!</h2>
+        <label for="name">Name</label>
+        <input type="text" class="input" required name="name" />
+        <label for="street">Street</label>
+        <input type="text" class="input" required name="street" />
+        <label for="city">City</label>
+        <input type="text" class="input" required name="city" />
+        <label for="zipCode">Zip code</label>
+        <input type="number" class="input" required name="zipCode" />
+        <label for="country">Country</label>
+        <input type="text" class="input" required name="country" />
+        <label for="phone">Phone</label>
+        <input type="text" class="input" name="phone" />
+        <label for="rating">Price rating</label>
+        <select type="text" class="input" required name="priceRating">
+          <option value="-1" disabled selected>Choose a price rate</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+        <label for="newFoodtype">Add new food type</label>
+        <input id="newFoodtype" type="text" class="input" name="newfoodType" />
+        <label for="foodType">Food type</label>
+
+        <select multiple id="foodTypes" name="foodTypes">
+          {{#each foodTypes}}<option
+              class="input"
+              value="{{this.name}}"
+            >{{this.name}}</option>
+          {{/each}}
+        </select>
+        <label for="description">Description</label>
+        <textarea name="description" class="input"></textarea>
+        <label for="image">Image</label>
+        <input class="input" name="image" required type="file" />
+        <button>Submit !</button>
+      </div>
+      <a href="/admin/restaurants-manage">Back admin page</a>
+    </form>
+
+  </div>
+
+</div>

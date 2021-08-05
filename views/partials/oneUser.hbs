@@ -1,0 +1,26 @@
+<form method="POST" action="/admin/users/{{this.id}}">
+  <h2>Name: {{this.name}}</h2>
+  <h2>Email: {{this.email}}</h2>
+
+  <div>
+    <label for="user">User</label>
+    <input
+      id="user"
+      type="radio"
+      {{isSelected this.role "USER" "checked"}}
+      value="USER"
+      name="role"
+    />
+  </div>
+  <div>
+    <label for="admin">Admin</label>
+    <input
+      id="admin"
+      type="radio"
+      {{isSelected this.role "ADMIN" "checked"}}
+      value="ADMIN"
+      name="role"
+    />
+  </div>
+  <button>Submit !</button>
+</form>

@@ -1,0 +1,37 @@
+.restaurant-card-admin{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-color: red;
+    width: 100%;
+    margin-top: 13em;
+    border: 1px solid white;
+}
+.restaurant-list-admin{
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    font-family: satoshi;
+}
+.restaurant-card-admin::before{
+content: 'List of the restaurants';
+position:absolute;
+top: 165px;
+left: 50%;
+transform: translate(-50%);
+color: var(--color-light-green);
+font-family: satoshi;
+font-size: 3em;
+}
+
+.restaurant-image-admin{
+height: 200px;
+width: 200px;
+margin: 5px;
+    
+}
+.restaurant-description-admin{
+    width: 100%;
+    margin: 5px;
+    }
+    

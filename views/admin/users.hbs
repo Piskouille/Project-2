@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="/CSS/formsAdmin.css">
+
+<div class="container">
+<div class="form-admin-user">
+  <div>
+  <h1>List of the users</h1>
+<ul>
+{{#each users}}
+  <li>{{> oneUser this}}</li>
+  <hr>
+{{/each}}
+</ul></div>
+</div>
+<a href="/admin/users-manage"></a>
+</div>

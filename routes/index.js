@@ -36,6 +36,6 @@ const isAdmin = user?.role === 'ADMIN' ? true : false
   catch(err){
     console.log('Loading restaurants failed')
   }
-})
+});
 
 module.exports = router;
