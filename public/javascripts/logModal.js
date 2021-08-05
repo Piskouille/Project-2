@@ -34,6 +34,7 @@ submitBtn.onclick = async (e) => {
     { withCredentials: true }
   );
   feedback.innerHTML = success.data;
+  feedback.style.color = '#21C078'
   const timeOutId = setTimeout(() => {
     window.location.reload();
     clearTimeout(timeOutId);
@@ -64,6 +65,7 @@ submitSignUp.onclick = async (e) => {
   );
   feedback.textContent = backResponse.data;
   if (feedback.textContent === 'Succesfully Registered') {
+    feedback.style.color = '#21C078'
     const timeoutId = setTimeout(() => {
       document.getElementById('signInLink').click();
       clearTimeout(timeoutId);
@@ -81,12 +83,9 @@ function strongPass() {
   passwordSignUp.onkeyup = () => {
     const feedback = document.querySelector('.modal-content.active #feedback');
     const passed = regex.test(passwordSignUp.value);
-    console.log(passwordSignUp.value);
-    console.log(passed);
     if (!passed) {
       passwordSignUp.style.boxShadow = 'inset 0px 0px 0px 3px red';
-      feedback.textContent =
-        'Your password must contain atleast 8 characters, one number and a punctuation.';
+      feedback.innerHTML = 'Please provide 8 characters, a number<br>and a punctuation.';
       feedback.style.color = 'red';
       submitBtn.disabled = true;
     } else {
@@ -157,17 +156,24 @@ signUpLink.onclick = () => {
   document.querySelector('.back').classList.toggle('active');
 };
 
+
 signInLink.onclick = () => {
   document.querySelector('.back').classList.toggle('active');
   document.querySelector('.front').classList.toggle('active');
 };
 
+// ---------------------------------------------------------
+// Show up modal
+// ---------------------------------------------------------
 modalBtn.onclick = () => {
   if (modal.style.display === 'none' || !modal.style.display) {
     modal.style.display = 'block';
     modal.classList.toggle('modalActive');
+    document.querySelector('nav').style.zIndex = 900
   } else {
     modal.style.display = 'none';
+    document.querySelector('nav').style.zIndex = 0
+
   }
 };
 
@@ -177,8 +183,10 @@ modalBtn.onclick = () => {
 closeModalBtnSi.onclick = () => {
   modal.style.display = 'none';
   modal.classList.toggle('modalActive');
+  document.querySelector('nav').style.zIndex = 0
 };
 closeModalBtnSu.onclick = () => {
   modal.style.display = 'none';
   modal.classList.toggle('modalActive');
+  document.querySelector('nav').style.zIndex = 0
 };

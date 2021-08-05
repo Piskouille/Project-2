@@ -69,6 +69,7 @@ app.use(async (req, res, next) => {
   }
 });
 
+<<<<<<< HEAD
 app.use("/", indexRouter);
 // ----------------ADMIN------------------------
 app.use("/admin/", adminIndexRouter);
@@ -78,6 +79,15 @@ app.use("/admin/", adminUsersRouter);
 app.use("/auth/", authRouter);
 app.use("/auth/", require("./routes/auth"));
 app.use("/auth/ajax", require("./routes/ajax/ajaxAuth"));
+=======
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/auth/', require('./routes/auth'));
+app.use('/admin', require('./routes/admin/restaurants'));
+app.use('/users', require('./routes/ajax/userInfos'))
+app.use('/auth/ajax', require('./routes/ajax/ajaxAuth'));
+app.use('/', require('./routes/ajax/persoOnCard'));
+>>>>>>> be095623ef2d4abe1933ffb1ce39d2f547929abd
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

@@ -1,6 +1,10 @@
 <nav class="nav">
-
-    <span id="user" {{#if loggedIn}} class="active" {{/if}}>
+    {{#if loggedIn}}
+        {{> userModal}}
+    {{else}}
+        {{> logModal}}
+    {{/if}}
+    <span id="user" {{#if loggedIn}} class="active" data-id="{{user._id}}" {{/if}}>
 
         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
         width="45.532px" height="45.532px" viewBox="0 0 45.532 45.532" style="enable-background:new 0 0 45.532 45.532;"
@@ -15,11 +19,6 @@
         </svg>
     </span>
 
-    {{#if isAdmin}}
-        <a href="#">Create Restaurant</a>
-        <a href="#">Manage Restaurants</a>
-        <a href="#">Manage Users</a>
-    {{/if}}
 
    <a href="/"><img  id="logo" src="/images/logo.png" alt="logo"></a> 
 

@@ -3,6 +3,8 @@
  @import url('./stylesheets/navbar.css');
  @import url('./stylesheets/landingPage.css');
  @import url('stylesheets/cards.css');
+ @import url('./stylesheets/userModal.css');
+ @import url('./stylesheets/createRestaurant.css');
  
  @font-face {
    font-family: 'zodiak';
@@ -19,6 +21,7 @@
   --color-dark-green: #131910; 
   --color-white: #cdcdcd;
   --color-yellow: #F5B700;
+  --color-red: #B02E0C;
 }
 
 *{

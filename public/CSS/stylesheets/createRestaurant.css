@@ -1,0 +1,54 @@
+
+
+.containerCreate {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-family: satoshi;
+}
+#create-restaurant-form {
+    margin-top: 13em;
+}
+.containerCreateCreate label {
+    margin-right: 1.5em;
+}
+
+.containerCreate select {
+    height: 2.2em;
+    color: var(--color-dark-green)
+}
+
+.containerCreate div {
+    margin: .4em 0 .4em 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.containerCreate input {
+    height: 2.2em;
+    border-radius: 4px;
+    color: var(--color-dark-green)
+}
+
+#create-restaurant-form #submit {
+    margin-top: 1.5em;
+    padding: .5em 2em;
+    border-radius: 3px;
+    color: var(--color-dark-green);
+    align-self: center;
+    font-family: inherit;
+}
+
+.containerCreate::before {
+    content: 'Add a restaurant';
+    position:absolute;
+    top: 165px;
+    left: 50%;
+    transform: translate(-50%);
+    color: var(--color-light-green);
+    font-family: satoshi;
+    font-size: 3em;
+}

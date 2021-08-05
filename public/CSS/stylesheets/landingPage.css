@@ -1,21 +1,27 @@
 .landing-page{
     display: flex;
+    justify-content: center;
     position: relative;
     margin: 250px auto 0 auto;
-    z-index: 0;
+    max-width:  1555px;
 }
 
 .restaurant-list{
     display: grid;
     width: 100%;
+    column-gap: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
     grid-template-columns: repeat(auto-fit,minmax(400px, 1fr));
     justify-content: flex-start;
     align-items: flex-start;
     position: relative;
+    background-color: var(--color-dark-green);
+    z-index: 10;
 }
 
 /* FILTERS */
-#filters{
+#mainFilters{
     position: -webkit-sticky;
     position: sticky;
     top: 0;
@@ -26,12 +32,13 @@
     background-color: var(--color-yellow);
     color: var(--color-dark-green);
     user-select: none;
+    border-radius: 3px;
 }
 
 .aside-title{
     font-family: 'satoshi', serif;
     font-size: 25px;
-    margin: 150px 0 15px 50px;
+    margin: 150px 0 32px 50px;
 }
 
 .aside-filter{
@@ -39,7 +46,7 @@
     width: max-content;
     position: relative;
     transition: opacity .35s ease-in-out;
-    margin: 15px 0 15px 50px;
+    margin: 16px 0 16px 50px;
 }
 
 .aside-filter:hover{
@@ -80,7 +87,7 @@
 #logo-small{
     max-width: 150px;
     position: absolute;
-    bottom: 70px;
+    bottom: 50px;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -88,22 +95,23 @@
 @media (max-width: 768px) { 
     .restaurant-list{
         grid-template-columns: 1fr;
-        width: max-content;
+        width: fit-content;
+        z-index: 0;
     }
 
     .landing-page{
         justify-content: center;
     }
     
-    #filters{
+    #mainFilters{
         display: none;
     }
 }
 
 @media (min-width: 768px) and (max-width: 1040px) { 
     .restaurant-list{
-        grid-template-columns: 1fr;
         width: fit-content;
+        grid-template-columns: 1fr;
     }
     
     .landing-page{
@@ -111,14 +119,13 @@
     }
 }
 
-@media (min-width: 1040px) and (max-width: 1266px) { 
+@media (min-width: 1040px) and (max-width: 1455px) { 
     .restaurant-list{
-        grid-template-columns: 1fr 1fr;
         width: fit-content;
+        grid-template-columns: 1fr 1fr;
     }
 
     .landing-page{
         justify-content: center;
     }
 }
-

@@ -75,6 +75,7 @@ hbs.registerHelper("formatFoodType", (stringArray) => {
   return x.slice(0, 4).join(" - ");
 });
 
+<<<<<<< HEAD
 hbs.registerHelper("capitalize", (string) => {
   return (string.charAt(0).toUpperCase() + string.slice(1))
     .split("_")
@@ -89,3 +90,17 @@ hbs.registerHelper("isSelected", (lvalue, rvalue, attribute, options) => {
     return lvalue == rvalue ? attribute : "";
   }
 });
+=======
+hbs.registerHelper("isIncluded", (id, arrayIds, options) => {
+
+  const stringifiedId = id.toString();
+  const stringifiedArr = arrayIds.map((id) => id.toString());
+
+  if (stringifiedArr.includes(stringifiedId)) {
+    return options.fn(this);
+  } else {
+    return options.inverse(this);
+  }
+
+})
+>>>>>>> be095623ef2d4abe1933ffb1ce39d2f547929abd

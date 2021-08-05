@@ -1,89 +1,114 @@
 <div id='logModal'>
 
-  <!-- Modal content -->
-  <div class='modal-content front active'>
-    <span id='close-modal-si'><span class="close"></span></span>
+  <div class='container'>
+    <div class='modal-content front active'>
+      <span id='close-modal-si'><span class='close'></span></span>
 
-    <form action='#' id='formSignIn' class='formModal'>
-      <div>
-        <label for='email'>E-mail:</label>
-        <input type='text' placeholder='Email' id='email' value="johndoe@email.com"/>
-      </div>
-      <div>
-        <label for='password'>Password:</label>
-        <input type='password' placeholder='Password' id='password' value="12az@34AZ"/>
-      </div>
-      <button id='submit'>Log in</button>
-      <p><small id='feedback'>{{errorMsg}}</small></p>
-      <p id='registered'>No account yet ?
-        <span id='signUpLink'>Sign up</span></p>
+      <form action='#' id='formSignIn' class='formModal'>
+        <div>
+          <label for='email'>E-mail:</label>
+          <input
+            type='text'
+            placeholder='Email'
+            id='email'
+            value='admin@admin.com'
+          />
+        </div>
+        <div>
+          <label for='password'>Password:</label>
+          <input
+            type='password'
+            placeholder='Password'
+            id='password'
+            value='admin'
+          />
+        </div>
+        <button id='submit'>Log in</button>
+        <div id="feedwrap">
+        <p id='feedback'></p>
+        </div>
+        <p id='registered'>No account yet ?
+          <span id='signUpLink'>Sign up</span></p>
 
-    </form>
+      </form>
 
-    <div class='authContainer'>
-      <img
-        id='googleAuth'
-        src='../../images/btn_google_signin_dark_pressed_web@2x.png'
-        alt='Google passport authentification'
-      />
-      <img
-        id='slackAuth'
-        src='https://platform.slack-edge.com/img/sign_in_with_slack.png'
-        srcset='https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x'
-      />
-    </div>
-  </div>
-
-
-
-
-{{!--  BACKFACE --}}
-  <div class='modal-content back'>
-    <span id='close-modal-su'><span class="close"></span></span>
-
-    <form action='#' id='formSignUp' class='formModal'>
-      <div>
-        <label for='name'>Name:</label>
-        <input
-          type='text'
-          name='name'
-          id='nameSignUp'
-          placeholder='Name'
-          autocomplete='off'
-          value='John Doe'
+      <div class='authContainer'>
+        <img
+          id='googleAuth'
+          src='../../images/btn_google_signin_dark_pressed_web@2x.png'
+          alt='Google passport authentification'
+        />
+        <img
+          id='slackAuth'
+          src='https://platform.slack-edge.com/img/sign_in_with_slack.png'
+          srcset='https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x'
         />
       </div>
-      <div>
-        <label for='email'>E-mail:</label>
-        <input type='text' placeholder='Email' id='emailSignUp' value="johndoe@email.com"/>
-      </div>
-      <div>
-        <label for='password'>Password:</label>
-        <input type='password' placeholder='Password' id='passwordSignUp' value="12az@34AZ"/>
-      </div>
-      <div>
-        <label for='passwordConfirm'>Confirmation:</label>
-        <input type='password' name='passwordConfirm' id='passwordConfirm' placeholder="Confirm your password" value="12az@34AZ"/>
-      </div>
-      <button id='submitSignUp'>Sign up</button>
-      <p><small id='feedback'>{{errorMsg}}</small></p>
-      <p id='registered'>Already have an account ?
-        <span id='signInLink'>Sign in</span></p>
+    </div>
 
-    </form>
+    {{!  BACKFACE }}
+    <div class='modal-content back'>
+      <span id='close-modal-su'><span class='close'></span></span>
 
-    <div class='authContainer'>
-      <img
-        id='googleAuth'
-        src='../../images/btn_google_signin_dark_pressed_web@2x.png'
-        alt='Google passport authentification'
-      />
-      <img
-        id='slackAuth'
-        src='https://platform.slack-edge.com/img/sign_in_with_slack.png'
-        srcset='https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x'
-      />
+      <form action='#' id='formSignUp' class='formModal'>
+        <div>
+          <label for='name'>Name:</label>
+          <input
+            type='text'
+            name='name'
+            id='nameSignUp'
+            placeholder='Name'
+            autocomplete='off'
+            value='John Doe'
+          />
+        </div>
+        <div>
+          <label for='email'>E-mail:</label>
+          <input
+            type='text'
+            placeholder='Email'
+            id='emailSignUp'
+            value='johndoe@email.com'
+          />
+        </div>
+        <div>
+          <label for='password'>Password:</label>
+          <input
+            type='password'
+            placeholder='Password'
+            id='passwordSignUp'
+            value='12az@34AZ'
+          />
+        </div>
+        <div>
+          <label for='passwordConfirm'>Confirmation:</label>
+          <input
+            type='password'
+            name='passwordConfirm'
+            id='passwordConfirm'
+            placeholder='Confirm your password'
+            value='12az@34AZ'
+          />
+        </div>
+        <button id='submitSignUp'>Sign up</button>
+        <p><small id='feedback'>{{errorMsg}}</small></p>
+        <p id='registered'>Already have an account ?
+          <span id='signInLink'>Sign in</span></p>
+
+      </form>
+
+      <div class='authContainer'>
+        <img
+          id='googleAuth'
+          src='../../images/btn_google_signin_dark_pressed_web@2x.png'
+          alt='Google passport authentification'
+        />
+        <img
+          id='slackAuth'
+          src='https://platform.slack-edge.com/img/sign_in_with_slack.png'
+          srcset='https://platform.slack-edge.com/img/sign_in_with_slack.png 1x, https://platform.slack-edge.com/img/sign_in_with_slack@2x.png 2x'
+        />
+      </div>
     </div>
   </div>
-
 </div>
