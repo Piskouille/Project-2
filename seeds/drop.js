@@ -35,9 +35,9 @@ async function DBDrop(){
           })
 
           
-          await User.deleteMany({}, function(err) { 
-            console.log('USER DB DROPED') 
-          })
+          // await User.deleteMany({}, function(err) { 
+          //   console.log('USER DB DROPED') 
+          // })
         
 
           mongoose.connection.close(console.log('DB disconnected'))
