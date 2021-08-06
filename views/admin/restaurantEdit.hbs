@@ -55,9 +55,10 @@
         <option {{isSelected restaurant.priceRating 1}} value="1">1</option>
         <option {{isSelected restaurant.priceRating 2}} value="2">2</option>
         <option {{isSelected restaurant.priceRating 3}} value="3">3</option>
+                <option {{isSelected restaurant.priceRating 4}} value="4">4</option>
       </select>
       <label for="newFoodtype">Add new food type</label>
-      <input id="newFoodtype" type="text" class="input" name="newfoodType" />
+      <input id="newFoodtype" type="text" class="input" name="newFoodType" />
       <label for="foodType">Food type</label>
 
       <select multiple id="foodType" name="foodTypes">
@@ -78,7 +79,7 @@
         size="7"
       >{{restaurant.description}}</textarea>
       <label for="image">Image</label>
-      <input class="input" name="image" type="file" />
+      <input class="input" name="image" type="file" required />
       {{#if errorMsg}}
         <h3>{{errorMsg}}</h3>
       {{/if}}
