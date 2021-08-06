@@ -64,4 +64,8 @@ body {
   max-width: 300px;
 }
 
+.error-404 h1 {
+  font-size: .5em;
+  margin-top: 3em;
+}
 

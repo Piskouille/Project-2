@@ -1,6 +1,6 @@
 const modalBtn = document.getElementById('user');
 const userMenu = document.getElementById('user-menu');
-const prefix = 'http://localhost:5000';
+
 const followList = document.getElementById('following-list');
 const favoritesList = document.getElementById('favorites');
 const mainList = document.getElementById('main-list');
@@ -13,11 +13,11 @@ async function fetchInfos() {
   followList.innerHTML = '';
   favoritesList.innerHTML = '';
   const id = modalBtn.getAttribute('data-id');
-  const { data } = await axios.get(prefix + '/users/' + id);
+  const { data } = await axios.get('/users/' + id);
 
-  const favorites = data.favorites;
+  const fav = data.favorites;
   const following = data.user.following;
-  favorites.forEach((favorite) => {
+  fav.forEach((favorite) => {
     let foodTypesString = '';
     const r = favorite.restaurant;
     r.foodTypes.forEach((type, i, arr) => {
@@ -27,7 +27,7 @@ async function fetchInfos() {
       }
     });
 
-     favoritesList.innerHTML += `
+    favoritesList.innerHTML += `
      <div class="restaurant-card">
        <div class="content">
          <div class="image">
@@ -40,16 +40,21 @@ async function fetchInfos() {
              <div class="priceRating">${r.priceRating}</div>
            </div>
          </div>
-         <p class="description">${r.description}</p>
+         
          <div class="details-perso" data-card-id="${r._id}">
-           <span class="favorite">
-             <i class="fas fa-edit fa-file-alt fa-lg"></i>
+           <span class="favorite isFavorite">
+           <i class="fas fa-heart fa-lg"></i>
+            
            </span>
+           <span class="notes isFavorite"> 
+                <i class="fas fa-edit fa-file-alt fa-lg"></i>
+            </span>
          </div>
        </div>
+       <p class="description">${r.description}</p>
      </div>
-     `
-     
+     `;
+
     //`
     // <div class="restaurant-card" >
     //   <div class='content'>
@@ -67,8 +72,6 @@ async function fetchInfos() {
     //             </div>
     //           </div>
 
-
-      
     //           <p class='description'>
     //               ${r.description}
     //           </p>
@@ -77,15 +80,14 @@ async function fetchInfos() {
     //           <span class="favorite" >
     //               <i class="fas fa-heart fa-lg"></i>
     //           </span>
-    
-    //           <span class="notes"> 
+
+    //           <span class="notes">
     //               <i class="fas fa-edit fa-file-alt fa-lg"></i>
     //           </span>
     //       </div>
-    //   </div>      
+    //   </div>
     //   <div id="background-img" style="background:url(${r.image})"></div>
     // </div>`;
-
   });
   displayPrice();
   let length = following.length > 5 ? 5 : following.length;
@@ -100,6 +102,30 @@ async function fetchInfos() {
   followList.append(li);
 
   attachListeners();
+  const favorites = document.querySelectorAll('#favorites .favorite');
+  favorites.forEach((fav) => {
+    fav.addEventListener('click', async (e) => {
+      e.stopPropagation();
+
+      const cardId = fav.parentElement.dataset.cardId;
+      console.log(cardId)
+
+      if (fav.classList.contains('isFavorite')) {
+        try {
+          const isAuth = await favGet(cardId);
+          console.log(isAuth);
+          if (isAuth) {
+            fav.classList.toggle('isFavorite');
+            fav.nextElementSibling.classList.toggle('isFavorite');
+            fetchInfos();
+            return;
+          }
+        } catch (err) {
+          return console.log('Error on favorite GET route', err);
+        }
+      }
+    });
+  });
 }
 
 function attachListeners() {
@@ -144,3 +170,7 @@ const displayPrice = () => {
     }
   });
 };
+
+function favGet(id){
+  return axios.get(`/favorite/${id}`);
+}
