@@ -183,10 +183,10 @@ modalBtn.onclick = () => {
 closeModalBtnSi.onclick = () => {
   modal.style.display = 'none';
   modal.classList.toggle('modalActive');
-  document.querySelector('nav').style.zIndex = 0
+  document.querySelector('nav').style.zIndex = 1
 };
 closeModalBtnSu.onclick = () => {
   modal.style.display = 'none';
   modal.classList.toggle('modalActive');
-  document.querySelector('nav').style.zIndex = 0
+  document.querySelector('nav').style.zIndex = 1
 };
