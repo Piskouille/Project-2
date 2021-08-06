@@ -57,8 +57,7 @@ async function yelpAPICall(foodTypes){
             params :{
                 term: "Restaurant",
                 location: "Paris",
-                limit: "9"
-            }
+                limit: "6"            }
         })
 
         await Promise.all(res.data.businesses.map(async resto => {
