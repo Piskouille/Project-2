@@ -124,7 +124,7 @@ function displayInfoBox(restaurant){
     infoBox.style.left = `${mouseX - landingPage.getBoundingClientRect().left + 15}px`
 
     infoBox.innerHTML = `
-    <div class="restaurant-card">
+    <div id="map-card" class="restaurant-card">
 
         <div class="restaurant-card-img" >
             <img src="${restaurant.image}" alt="${restaurant.name}">
@@ -160,6 +160,21 @@ function displayInfoBox(restaurant){
             </div>
         </div>
     </div>`
+
+
+    const priceRating = document.querySelector('#map-card .priceRating')
+    let count = +priceRating.innerText;
+    priceRating.innerHTML = "";
+
+    for (let i = 0; i < 4; i++) {
+      const priceImg = document.createElement("img");
+      priceImg.src = "/images/euro.svg";
+      priceImg.classList.add("euro");
+      if (count <= 0) priceImg.style.opacity = ".4";
+
+      count--;
+      priceRating.appendChild(priceImg);
+    }
 
 }
 

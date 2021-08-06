@@ -1,7 +1,20 @@
 
-    
-<section class="restaurant-list-admin">
-{{#each restaurants}}
-{{> oneRestaurant this}}
-{{/each}}
-</section>
+<div class="restaurant-list-admin">
+    <table class="fl-table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Name</th>
+            <th scope="col">Description</th>
+            <th>Food types</th>
+            <th>Price rating</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+         {{#each restaurants}} <tr>
+        {{> oneRestaurant this}}</tr>
+         {{/each}}
+        <tbody>
+    </table>
+</div>
