@@ -61,31 +61,33 @@ router.post(
   async (req, res, next) => {
     try {
       //check if the name of the restaurant was already in the database
-      
+
       const restaurant = await Restaurant.findOne({ name: req.body.name });
-      
+
       if (restaurant) {
         req.flash("Name already in database");
         res.redirect("/admin/restaurants-create");
         return;
       }
       // check if the food type was already in database otherwise we add the new one
-      const oldFoodtype = await FoodType.findOne({
-        name: req.body.newfoodType.toLowerCase(),
+      const oldFoodType = await FoodType.findOne({
+        name: req.body.newFoodType.toLowerCase(),
       });
-      let newFoodType;
+      let newfood = null;
       // check if the input of the form its filled
-      if (req.body.newFoodType && !oldFoodtype) {
-        newFoodType = await FoodType.create({
+
+      if (req.body.newFoodType && !oldFoodType) {
+        console.log(req.body.newFoodType);
+        newfood = await FoodType.create({
           name: req.body.newFoodType,
         });
       }
-      req.body.foodType = Array.isArray(req.body.foodType)
-        ? req.body.foodType
-        : [req.body.foodType];
+      req.body.foodTypes = Array.isArray(req.body.foodTypes)
+        ? req.body.foodTypes
+        : [req.body.foodTypes];
 
-      if (newFoodType) {
-        req.body.foodType.push(newFoodType);
+      if (newfood) {
+        req.body.foodTypes.push(newfood);
       }
 
       if (req.file) {
@@ -179,14 +181,14 @@ router.post(
   upload.single("image"),
   async (req, res, next) => {
     try {
-      const oldFoodtype = await FoodType.findOne({
-        name: req.body.newfoodType.toLowerCase(),
+      const oldFoodType = await FoodType.findOne({
+        name: req.body.newFoodType.toLowerCase(),
       });
-      let newFoodType;
-      if (req.body.newFoodType && !oldFoodtype) {
-        newFoodType = await FoodType.findByIdAndUpdate(
+      let newFood;
+      if (req.body.newFoodType && !oldFoodType) {
+        newFood = await FoodType.findByIdAndUpdate(
           {
-            id: req.body.newFoodType,
+            name: req.body.newFoodType,
           },
           { new: true }
         );
@@ -195,8 +197,8 @@ router.post(
         ? req.body.foodTypes
         : [req.body.foodTypes];
 
-      if (newFoodType) {
-        req.body.foodTypes.push(newFoodType._id);
+      if (newFood) {
+        req.body.foodTypes.push(newFood);
       }
 
       req.body.image =

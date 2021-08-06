@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="/CSS/formsAdmin.css" />
 <div class="containerCreate">
   <div class="form-admin-restaurant">
     <form
@@ -26,11 +25,11 @@
           <option value="1">1</option>
           <option value="2">2</option>
           <option value="3">3</option>
+              <option value="3">4</option>
         </select>
         <label for="newFoodtype">Add new food type</label>
-        <input id="newFoodtype" type="text" class="input" name="newfoodType" />
+        <input id="newFoodtype" type="text" class="input" name="newFoodType" />
         <label for="foodType">Food type</label>
-
         <select multiple id="foodTypes" name="foodTypes">
           {{#each foodTypes}}<option
               class="input"
@@ -41,7 +40,7 @@
         <label for="description">Description</label>
         <textarea name="description" class="input"></textarea>
         <label for="image">Image</label>
-        <input class="input" name="image" required type="file" />
+        <input class="input" name="image" type="file" />
         <button>Submit !</button>
       </div>
       <a href="/admin/restaurants-manage">Back admin page</a>
@@ -49,4 +48,3 @@
 
   </div>
 
-</div>

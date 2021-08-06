@@ -1,4 +1,4 @@
-<div class="restaurant-card-admin">
+{{!-- <div class="restaurant-card-admin">
   <img
     class="restaurant-image-admin"
     src="{{this.image}}"
@@ -8,11 +8,11 @@
   <div class="restaurant-description-admin">
     <p>{{this.description}}</p></div>
   <div class="foodTypes-list">
-    <h4>Food type : </h4>
-    {{#each this.foodTypes}}
-      <p>{{this.name}}</p>
-      ,
-    {{/each}}
+    <h4>Food type </h4>
+    <ol>
+      {{#each this.foodTypes}}
+        <li>{{this.name}}</li>
+      {{/each}}</ol>
   </div>
 
   <div class="priceRating">
@@ -29,4 +29,30 @@
       href="/admin/restaurants/{{this._id}}/delete"
     >Delete</a>
   </div>
-</div>
+</div> --}}
+<td><img
+    class="restaurant-image-admin"
+    src="{{this.image}}"
+    alt="{{this.name}}"
+  />
+</td>
+<td><h3>{{this.name}}</h3></td>
+<td>
+  <div class="restaurant-description-admin"><p
+    >{{this.description}}</p></div></td>
+<td>
+  <ol>
+    {{#each this.foodTypes}}
+      <li>{{this.name}}</li>
+    {{/each}}</ol>
+</td>
+<td>{{this.priceRating}}</td>
+<td>
+  <a
+    style="color: greenyellow;"
+    href="/admin/restaurants/{{this._id}}/edit"
+  >Edit</a>
+  <a
+    style="color: red;"
+    href="/admin/restaurants/{{this._id}}/delete"
+  >Delete</a></td>
