@@ -49,6 +49,7 @@ router.get(
         scripts: ["bugerMenu.js", "userModal.js"],
       });
     } catch (error) {
+  
       next(error);
     }
   }
@@ -71,13 +72,16 @@ router.post(
       }
       // check if the food type was already in database otherwise we add the new one
       const oldFoodtype = await FoodType.findOne({
-        name: req.body.newfoodType.toLowerCase(),
+        name: req.body.newFoodtype.toLowerCase(),
       });
       let newFoodType;
       // check if the input of the form its filled
-      if (req.body.newFoodType && !oldFoodtype) {
+
+      
+      if (req.body.newFoodtype && !oldFoodtype) {
+    
         newFoodType = await FoodType.create({
-          name: req.body.newFoodType,
+          name: req.body.newFoodtype,
         });
       }
       req.body.foodType = Array.isArray(req.body.foodType)
@@ -123,6 +127,7 @@ router.post(
       });
       res.redirect("/admin/restaurants-manage");
     } catch (error) {
+      console.log(error)
       next(error);
     }
   }

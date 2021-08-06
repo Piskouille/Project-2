@@ -180,6 +180,15 @@
     color: var(--color-red);
 }
 
+.itinary{
+    color: var(--color-light-green);
+}
+
+.itinary:hover{
+    cursor: pointer;
+    color: var(--color-yellow);
+}
+
 .personal-notes{
     position: absolute;
     top: 0;
