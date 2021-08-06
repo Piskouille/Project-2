@@ -140,7 +140,7 @@ function displayInfoBox(restaurant){
                             (type.name.charAt(0).toUpperCase() + type.name.slice(1))
                             .split("_")
                             .join(" ")
-                        )
+                        ).join(' - ')
                     }
                     </div>
                 </div>
