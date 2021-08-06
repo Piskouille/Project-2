@@ -85,7 +85,12 @@
 
 #favorites {
   overflow-y: scroll;
+  margin-top: 1.5em;
 
+}
+
+#favorites .restaurant-card:first-child {
+  margin-top: 3em;
 }
 
 #favorites .restaurant-card {
@@ -93,25 +98,41 @@
   flex-direction: row;
   justify-content: space-evenly;
   margin-bottom: 1.5em;
-  height: 150px;
+  height: 250px;
+  width: 400px;
   background-color: var(--color-dark-green);
+  z-index: 10;
+  flex-wrap: nowrap;
+  padding: .5em;
+  border-radius: 4px;
 }
 
-#favorites > .image {
-  width: 300px;
+#favorites img {
+  height: 100px;
+  border-radius: 4px;
 }
 
+#favorites .restaurant-card .description {
+  text-overflow: ellipsis;
+  margin: 1em;
+  color: var(--color-yellow);
+  font-size: .9em;
+}
 
 
 #favorites .content .general-infos {
   display: flex;
   flex-direction: column;
   font-family: satoshi;
-  white-space: nowrap;
 } 
 #favorites .general-infos .short-infos {
   align-items: flex-start;
+  margin-top: -2em;
 }
 #favorites .description {
-  max-width: 400px;
+  max-width: 300px;
+}
+
+#favorites .details-perso {
+  z-index: 25;
 }
