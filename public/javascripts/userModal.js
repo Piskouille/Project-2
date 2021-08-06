@@ -1,6 +1,6 @@
 const modalBtn = document.getElementById('user');
 const userMenu = document.getElementById('user-menu');
-
+const addUser = document.getElementById('searchUser')
 const followList = document.getElementById('following-list');
 const favoritesList = document.getElementById('favorites');
 const mainList = document.getElementById('main-list');
@@ -16,7 +16,7 @@ async function fetchInfos() {
   const { data } = await axios.get('/users/' + id);
 
   const fav = data.favorites;
-  const following = data.user.following;
+  
   fav.forEach((favorite) => {
     let foodTypesString = '';
     const r = favorite.restaurant;
@@ -90,17 +90,8 @@ async function fetchInfos() {
     // </div>`;
   });
   displayPrice();
-  let length = following.length > 5 ? 5 : following.length;
-  for (let i = 0; i < length; i++) {
-    const li = document.createElement('li');
-    li.setAttribute('data-id', following[i]._id);
-    li.textContent = following[i].name;
-    followList.append(li);
-  }
-  let li = document.createElement('li');
-  li.innerHTML = '<a href="#">More...</a>';
-  followList.append(li);
-
+  
+  updateFollow()
   attachListeners();
   const favorites = document.querySelectorAll('#favorites .favorite');
   favorites.forEach((fav) => {
@@ -138,6 +129,24 @@ function attachListeners() {
     });
 }
 
+async function updateFollow () {
+  const userId = modalBtn.getAttribute('data-id');
+  const { data } = await axios.get('/users/' + userId);
+
+  followList.innerHTML = '';
+  const following = data.user.following;
+  let length = following.length > 5 ? 5 : following.length;
+  for (let i = 0; i < length; i++) {
+    const li = document.createElement('li');
+    li.setAttribute('data-id', following[i]._id);
+    li.textContent = following[i].name;
+    followList.append(li);
+  }
+  let li = document.createElement('li');
+  li.innerHTML = '<a href="#">More...</a>';
+  followList.append(li);
+}
+
 function openCloseMenu() {
   userMenu.classList.toggle('active');
   const nav = document.querySelector('.nav');
@@ -173,4 +182,18 @@ const displayPrice = () => {
 
 function favGet(id){
   return axios.get(`/favorite/${id}`);
+}
+
+addUser.onclick = async () => {
+  const email = document.getElementById('addUser').value
+  const searched = await axios.post('/users/email', {email})
+  if (searched.data === 'not found') {
+    document.getElementById('userAddInfos').textContent = 'Sorry, user not found!'
+  } else if (searched.data === 'already added') {
+    document.getElementById('userAddInfos').textContent = `You ${searched.data} this user!`
+  } else {
+    document.getElementById('userAddInfos').textContent = `Successfully added ${searched.data}`
+    updateFollow()
+  }
+  
 }
