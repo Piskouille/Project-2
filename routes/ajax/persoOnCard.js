@@ -82,7 +82,7 @@ router.get('/restaurants', async (req, res, next) => {
 
     try{
         
-        const data = await Restaurant.find()
+        const data = await Restaurant.find().populate('foodTypes').exec()
         res.status(200).json(data)
     }
     catch(err){
@@ -91,5 +91,20 @@ router.get('/restaurants', async (req, res, next) => {
     }
 })
 
+
+router.get('/favorites/:restaurantId', isAuthenticated, async (req, res, next) => {
+
+    try{
+        const restaurantId = req.params.restaurantId
+        const userId = (req.user || req.session.currentUser) 
+        
+        const data = await Favorite.find({user: userId, restaurant: restaurantId})
+        res.status(200).json(data)
+    }
+    catch(err){
+        console.log('AJAX err', err)
+        next(err)
+    }
+})
 
 module.exports = router

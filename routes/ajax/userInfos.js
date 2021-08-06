@@ -18,7 +18,6 @@ router.get('/:id', isAuth, async (req, res, next) => {
             model: 'foodType'           
         }
     }).exec()
-    console.log(favorites)
     res.status(200).json({user, favorites})
   } catch (error) {
     console.log(error);

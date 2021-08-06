@@ -106,3 +106,6 @@ hbs.registerHelper("isAdded", (array, id, attribute) => {
   const objectIds = array.map((element) => element._id.toString());
   return objectIds.includes(id.toString()) ? attribute : " ";
 });
+
+hbs.registerHelper("jsonFormat", obj =>  JSON.stringify(obj));
+

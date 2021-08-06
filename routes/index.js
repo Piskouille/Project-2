@@ -31,7 +31,7 @@ const isAdmin = user?.role === 'ADMIN' ? true : false
       loggedIn,
       user,
       isAdmin,
-      scripts: ['bugerMenu.js', 'maps.js', modal, 'cards.js', 'filters.js', 'intersectionObserver.js'] });
+      scripts: ['bugerMenu.js', modal, 'maps.js', 'cards.js', 'filters.js', 'intersectionObserver.js', 'calculDistance.js'] });
   }
   catch(err){
     console.log('Loading restaurants failed')

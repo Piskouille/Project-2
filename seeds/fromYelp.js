@@ -1,22 +1,22 @@
-require("dotenv/config");
-const axios = require("axios");
+require('dotenv/config')
+const axios = require('axios')
 const mongoose = require("mongoose");
-const FoodType = require("../models/FoodType");
-const Restaurant = require("../models/Restaurant");
+const FoodType = require('../models/FoodType')
+const Restaurant = require('../models/Restaurant')
 const loremIpsum = require("lorem-ipsum").loremIpsum;
 
 const PICTS = [
-  "https://images.pexels.com/photos/1484516/pexels-photo-1484516.jpeg?auto=compress&cs=tinysrgb&h=350",
-  "https://images.pexels.com/photos/4450334/pexels-photo-4450334.jpeg?auto=compress&cs=tinysrgb&h=350",
-  "https://images.pexels.com/photos/2290070/pexels-photo-2290070.jpeg?auto=compress&cs=tinysrgb&h=350",
-  "https://images.pexels.com/photos/5490933/pexels-photo-5490933.jpeg?auto=compress&cs=tinysrgb&h=350",
-  "https://images.pexels.com/photos/5220092/pexels-photo-5220092.jpeg?auto=compress&cs=tinysrgb&h=350",
-  "https://images.pexels.com/photos/4577740/pexels-photo-4577740.jpeg?auto=compress&cs=tinysrgb&h=350",
-];
+    "https://images.pexels.com/photos/1484516/pexels-photo-1484516.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "https://images.pexels.com/photos/4450334/pexels-photo-4450334.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "https://images.pexels.com/photos/2290070/pexels-photo-2290070.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "https://images.pexels.com/photos/5490933/pexels-photo-5490933.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "https://images.pexels.com/photos/5220092/pexels-photo-5220092.jpeg?auto=compress&cs=tinysrgb&h=350",
+    "https://images.pexels.com/photos/4577740/pexels-photo-4577740.jpeg?auto=compress&cs=tinysrgb&h=350"
+]
 
-function randomPict(picts) {
-  const rdm = Math.floor(Math.random() * picts.length);
-  return picts[rdm];
+function randomPict(picts){
+    const rdm = Math.floor(Math.random() * picts.length)
+    return picts[rdm]
 }
 
 async function DBconnect(){
@@ -28,9 +28,9 @@ async function DBconnect(){
             useUnifiedTopology: true
           });
 
-        // await Restaurant.deleteMany({}, function(err) { 
-        //     console.log('collection removed') 
-        // }) 
+          // await Restaurant.deleteMany({}, function(err) { 
+          //   console.log('collection removed') 
+          // })
     
         const foodTypesData = await FoodType.find() 
      
@@ -52,24 +52,14 @@ async function yelpAPICall(foodTypes){
     try{
         const res = await axios.get('https://api.yelp.com/v3/businesses/search', {
             headers: {
-              Authorization: `Bearer ${process.env.YELP_API_KEY}`,
+                Authorization: `Bearer ${process.env.YELP_API_KEY}` 
             },
-          }
-        );
-
-        const resRestoData = resResto.data;
-        const categories = resRestoData.categories;
-        const seedFoodTypes = [];
-
-        await Promise.all(
-          categories.map(async (cat) => {
-            if (foodTypes.hasOwnProperty(cat.alias)) {
-              seedFoodTypes.push(foodTypes[cat.alias]);
-            } else {
-              const newFoodType = await FoodType.create({ name: cat.alias });
-              seedFoodTypes.push(newFoodType.id);
+            params :{
+                term: "Restaurant",
+                location: "Paris",
+                limit: "5"
             }
-        }))
+        })
 
         await Promise.all(res.data.businesses.map(async resto => {
             const resResto = await axios.get('https://api.yelp.com/v3/businesses/' + resto.id, {
@@ -108,9 +98,9 @@ async function yelpAPICall(foodTypes){
                // image: resRestoData.image_url  - la vache que leurs photos sont moches !!
                 image : randomPict(PICTS),
                 description : loremIpsum({
-                    count: Math.floor(Math.random() * 33) + 15,
-                    units: "words"
-                })
+                  count: Math.floor(Math.random() * 10) + 16,
+                  units: "words"
+              })
             })
         }))
 
@@ -124,13 +114,16 @@ async function yelpAPICall(foodTypes){
 
 }
 
-async function seedFunction() {
-  const types = await DBconnect();
-  const dataSeed = await yelpAPICall(types);
+async function seedFunction(){
+    const types = await DBconnect();
+    const dataSeed = await yelpAPICall(types)
 
-  await Restaurant.create(dataSeed);
+    await Restaurant.create(dataSeed)
 
-  mongoose.connection.close(console.log("DB disconnected"));
+    mongoose.connection.close(console.log('DB disconnected'))
+
 }
 
-seedFunction();
+
+
+seedFunction()

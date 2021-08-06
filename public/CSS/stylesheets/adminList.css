@@ -1,6 +1,6 @@
 .restaurant-card-admin{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     border-color: red;
     width: 100%;
@@ -10,7 +10,7 @@
 .restaurant-list-admin{
     width: 100vw;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     font-family: satoshi;
 }
 .restaurant-card-admin::before{

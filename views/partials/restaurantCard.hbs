@@ -26,6 +26,10 @@
                 {{this.description}}
              </p>
 
+        <div class="user-distance">
+            {{jsonFormat this.coordinates}}
+        </div>
+
         <div class="details-perso" data-card-id="{{this._id}}">
             <span class="favorite {{#isIncluded this._id @root.favorites}} isFavorite {{/isIncluded}}" >
                 <i class="fas fa-heart fa-lg"></i>

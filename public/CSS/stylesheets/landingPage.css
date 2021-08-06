@@ -93,6 +93,8 @@
     transform: translateX(-50%);
 }
 
+
+
 @media (max-width: 768px) { 
     .restaurant-list{
         grid-template-columns: 1fr;

@@ -26,7 +26,7 @@ submitBtn.onclick = async (e) => {
   const email = document.getElementById('email').value;
   const pass = password.value;
   const success = await axios.post(
-    'http://localhost:5000/auth/ajax/signin',
+    '/auth/ajax/signin',
     {
       email,
       password: pass,
@@ -53,7 +53,7 @@ submitSignUp.onclick = async (e) => {
     return;
   }
   const backResponse = await axios.post(
-    'http://localhost:5000/auth/ajax/signup',
+    '/auth/ajax/signup',
     {
       name,
       email,

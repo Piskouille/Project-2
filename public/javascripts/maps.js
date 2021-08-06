@@ -3,6 +3,16 @@ const mapsBtn = document.getElementById('maps-btn')
 const maps = document.getElementById('maps')
 const iconBase =
 "https://developers.google.com/maps/documentation/javascript/examples/full/images/";
+const landingPage = document.querySelector('.landing-page')
+
+//IL FAUDRAIT GERER LE RESIZE
+let mouseX = 0
+let mouseY = 0
+
+document.addEventListener('mousemove', e => {
+    mouseX = e.clientX
+    mouseY = e.clientY
+})
 
 mapsBtn.addEventListener('click', async () => {
 
@@ -21,13 +31,14 @@ mapsBtn.addEventListener('click', async () => {
 
 })
 
-console.log(style)
-
 function startMap(locations) {
+    
     const iciCestParis = {
         lat: 48.856614,
         lng: 2.3522219
     };
+
+    
 
     const map = new google.maps.Map(
       maps,
@@ -37,6 +48,37 @@ function startMap(locations) {
         center: iciCestParis
       }
     );
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          const user_location = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+           
+          map.setCenter(user_location);
+     
+          const userLocationMarker = new google.maps.Marker({
+            position: {
+              lat: user_location.lat,
+              lng: user_location.lng
+            },
+            map: map,
+            title: "You are here.",
+            icon:
+            {
+               url: '/images/place.png',
+               scaledSize : new window.google.maps.Size(50, 50),
+               labelOrigin: new google.maps.Point(0, 0)
+           },
+           animation: google.maps.Animation.DROP,
+           optimized: false
+          });
+     
+        }, function () {
+            console.log('Error in the geolocation service.');
+          });
+        }
     
 
     const markers = locations.map(async loc => {
@@ -58,13 +100,67 @@ function startMap(locations) {
             animation: google.maps.Animation.DROP,
             optimized: false
         });
-
+       
 
         marker.addListener('mouseover', () => {
-            console.log('OVERMARKER')
+            displayInfoBox(loc)
+            //location = restaurant -_____-
+        })
+
+        marker.addListener('mouseout', () => {
+            infoBox.innerHTML = ''
+            //location = restaurant -_____-
         })
 
     });
+}
+
+const infoBox = document.getElementById('info-box')
+
+function displayInfoBox(restaurant){
+    //const favorites = await axios.get('/favorites/${restaurant._id}')
+
+    infoBox.style.top = `${mouseY - landingPage.getBoundingClientRect().top - 125}px`
+    infoBox.style.left = `${mouseX - landingPage.getBoundingClientRect().left + 15}px`
+
+    infoBox.innerHTML = `
+    <div class="restaurant-card">
+
+        <div class="restaurant-card-img" >
+            <img src="${restaurant.image}" alt="${restaurant.name}">
+        </div>
+
+        <div class="restaurant-card-banner">
+            <div class="banner-header">
+                <div class="titles">
+                    <h3>${restaurant.name}</h3>
+                    <div class="foodTypes">
+                    ${
+                        restaurant.foodTypes.map(type =>
+                            (type.name.charAt(0).toUpperCase() + type.name.slice(1))
+                            .split("_")
+                            .join(" ")
+                        )
+                    }
+                    </div>
+                </div>
+                <div class="short-infos">
+                    <div class="priceRating">
+                        ${restaurant.priceRating}
+                    </div>
+                </div>
+                <span class="see-more"></span>
+            </div>
+
+
+            <div class="details">
+                <p class="restaurant-card-description">
+                    ${restaurant.description}
+                </p>
+            </div>
+        </div>
+    </div>`
+
 }
 
 function disableScroll() {
@@ -82,4 +178,8 @@ function enableScroll() {
 
 function getRestaurants(){
     return axios.get('/restaurants')
+}
+
+function getOneRestaurant(id){
+    return axios.get(`/restaurant/:${id}`)
 }

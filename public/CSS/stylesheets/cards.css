@@ -50,6 +50,7 @@
     top: 78%;
     left: 0;
     width: 100%;
+    height: 100%;
     padding: 15px;
     background: linear-gradient(180deg, rgba(19,25,16,0.6) 41%, rgba(19,25,16,1) 100%);
     transition: all .5s cubic-bezier(0.77,0.2,0.05,1.0);
@@ -135,6 +136,12 @@
     line-height: 1.5;
 }
 
+.user-distance{
+    position: absolute;
+    left: 50px;
+    bottom: 50px;
+}
+
 .details-perso{
     display: flex;
     justify-content: flex-end;
@@ -211,3 +218,4 @@
 .personal-notes textarea:active{
     border: none;
 }
+
