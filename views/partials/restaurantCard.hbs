@@ -31,6 +31,10 @@
         </div>
 
         <div class="details-perso" data-card-id="{{this._id}}">
+            <a class="itinary" href="https://www.google.com/maps/dir/?api=1&destination={{this.coordinates.lat}},{{this.coordinates.lng}}&travelmode=walking" target="_blank" rel="noreferrer">
+                <i class="fa fa-map-marker-alt fa-lg"></i>
+            </a>
+
             <span class="favorite {{#isIncluded this._id @root.favorites}} isFavorite {{/isIncluded}}" >
                 <i class="fas fa-heart fa-lg"></i>
             </span>

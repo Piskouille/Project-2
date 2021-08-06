@@ -7,7 +7,7 @@ const yellow = "rgb(205, 205, 205)"
 const callback = (entries, observer) => {
 
     entries.forEach(entry => {
-
+ 
             const userClientPos = user.getBoundingClientRect()
             const userPos = userClientPos.y + userClientPos.height/2
             const targetPos = target.getBoundingClientRect().y
@@ -36,7 +36,7 @@ const callback = (entries, observer) => {
 }
 
 const myObserver = new IntersectionObserver(callback, {
-    rootMargin: `89px 0px ${90 - window.innerHeight}px 0px`
+    rootMargin: `124px 0px ${125 - window.innerHeight}px 0px`
 })
 
 if(window.innerWidth > 768){

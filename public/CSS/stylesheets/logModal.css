@@ -26,19 +26,19 @@
 
 /* Modal Content */
 .modal-content {
+  position: relative;
   background-color: var(--color-dark-green);
-  padding: 40px;
+  padding: 20px 60px;
   border: 1px solid #888;
   max-width: 400px;
   border-radius: 3px;
-  
 }
 
 /* The Close Button */
 #close-modal-si, #close-modal-su {
-  position: relative;
+  position: absolute;
   color: var(--color-light-green);
-  float: right;
+  right: 10px;
   width: 25px;
   height: 25px;
   cursor: pointer;

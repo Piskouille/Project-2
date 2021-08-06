@@ -18,11 +18,13 @@ text-align: justify;
 }
 
 .fl-table {
-    font-size: 12px;
+
     font-weight: normal;
     border: none;
     border-collapse: collapse;
-    white-space: nowrap;
+    table-layout: fixed;
+    width: 100vw;
+    
 }
 
 .fl-table td, .fl-table th {

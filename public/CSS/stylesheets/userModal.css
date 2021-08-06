@@ -70,7 +70,7 @@
   
 }
 
-#content-user li:hover {
+#content-user a:hover {
   color: white;
   transition: color 300ms ease;
 }
@@ -86,7 +86,6 @@
 #favorites {
   overflow-y: scroll;
   margin-top: 1.5em;
-
 }
 
 #favorites .restaurant-card:first-child {
@@ -115,7 +114,6 @@
 #favorites .restaurant-card .description {
   text-overflow: ellipsis;
   margin: 1em;
-  color: var(--color-yellow);
   font-size: .9em;
 }
 
@@ -135,4 +133,26 @@
 
 #favorites .details-perso {
   z-index: 25;
+}
+
+#content-user input {
+  height: 2.2em;
+  border-radius: 4px;
+  padding-left: 2em;
+  border: 1px solid black;
+  margin-top: .5em;
+}
+
+#content-user button {
+  margin-top: .5em;
+  padding: .2em .5em;
+  font-family: satoshi;
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: var(--color-yellow);
+  cursor: pointer;
+}
+
+#userAddInfos {
+  color: var(--color-dark-green);
 }

@@ -20,7 +20,7 @@ function randomPict(picts){
 }
 
 async function DBconnect(){
-    const foodTypes = {}
+    
     try{
         await mongoose.connect(process.env.MONGO_URI, {
             useNewUrlParser: true,
@@ -28,9 +28,9 @@ async function DBconnect(){
             useUnifiedTopology: true
           });
 
-          // await Restaurant.deleteMany({}, function(err) { 
-          //   console.log('collection removed') 
-          // })
+        //   await Restaurant.deleteMany({}, function(err) { 
+        //     console.log('collection removed') 
+        //   })
     
         const foodTypesData = await FoodType.find() 
      
@@ -57,8 +57,7 @@ async function yelpAPICall(foodTypes){
             params :{
                 term: "Restaurant",
                 location: "Paris",
-                limit: "5"
-            }
+                limit: "6"            }
         })
 
         await Promise.all(res.data.businesses.map(async resto => {
@@ -72,12 +71,17 @@ async function yelpAPICall(foodTypes){
             const resRestoData = resResto.data
             const categories = resRestoData.categories
             const seedFoodTypes = []
-
+            
             await Promise.all(categories.map(async cat => {
+ 
+              const checkFoodTypes = await FoodType.find()
+              const check = checkFoodTypes.map(c => c.name)
+
                 if(foodTypes.hasOwnProperty(cat.alias)){
                     seedFoodTypes.push(foodTypes[cat.alias])
                 }
-                else{
+                else if(!check.includes(cat.alias)){
+                    
                     const newFoodType = await FoodType.create({name: cat.alias}) 
                     seedFoodTypes.push(newFoodType.id)
                 }

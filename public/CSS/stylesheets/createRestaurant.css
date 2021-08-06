@@ -10,7 +10,7 @@
     font-family: satoshi;
 }
 #create-restaurant-form {
-    margin-top: 13em;
+    margin-top: 25em;
 }
 .containerCreateCreate label {
     margin-right: 1.5em;
@@ -41,13 +41,10 @@
     font-family: inherit;
 }
 
-.containerCreate::before {
-    content: 'Add a restaurant';
-    position:absolute;
-    top: 165px;
-    left: 50%;
-    transform: translate(-50%);
-    color: var(--color-light-green);
-    font-family: satoshi;
-    font-size: 3em;
+.containerCreate button {
+    justify-self: center;
+}
+
+.containerCreate textarea {
+    color: var(--color-dark-green);
 }

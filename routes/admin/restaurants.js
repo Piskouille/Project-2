@@ -49,6 +49,7 @@ router.get(
         scripts: ["bugerMenu.js", "userModal.js"],
       });
     } catch (error) {
+  
       next(error);
     }
   }
@@ -125,6 +126,7 @@ router.post(
       });
       res.redirect("/admin/restaurants-manage");
     } catch (error) {
+      console.log(error)
       next(error);
     }
   }
