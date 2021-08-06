@@ -52,10 +52,10 @@
       <label for="rating">Price rating</label>
       <select type="text" class="input" name="priceRating">
         <option value="-1" disabled selected>Choose a rate</option>
-        <option {{isSelected restaurant.priceRating 1}} value="1">1</option>
-        <option {{isSelected restaurant.priceRating 2}} value="2">2</option>
-        <option {{isSelected restaurant.priceRating 3}} value="3">3</option>
-                <option {{isSelected restaurant.priceRating 4}} value="4">4</option>
+        <option {{isSelected restaurant.priceRating 1 "selected"}} value="1">1</option>
+        <option {{isSelected restaurant.priceRating 2 "selected"}} value="2">2</option>
+        <option {{isSelected restaurant.priceRating 3 "selected"}} value="3">3</option>
+                <option {{isSelected restaurant.priceRating 4 "selected"}} value="4">4</option>
       </select>
       <label for="newFoodtype">Add new food type</label>
       <input id="newFoodtype" type="text" class="input" name="newFoodType" />

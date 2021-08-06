@@ -201,10 +201,12 @@ router.post(
         req.body.foodTypes.push(newFood);
       }
 
-      req.body.image =
-        req.file === null
-          ? req.file.path
-          : "https://images.pexels.com/photos/4577740/pexels-photo-4577740.jpeg?auto=compress&cs=tinysrgb&h=350";
+      if (req.file) {
+        req.body.image = req.file.path;
+      } else {
+        req.body.image =
+          "https://images.pexels.com/photos/4577740/pexels-photo-4577740.jpeg?auto=compress&cs=tinysrgb&h=350";
+      }
 
       const {
         number,

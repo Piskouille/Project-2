@@ -82,11 +82,10 @@ hbs.registerHelper("capitalize", (string) => {
 });
 
 // helper for display the price rating on the forms
-hbs.registerHelper("isSelected", (lvalue, rvalue, attribute, options) => {
+hbs.registerHelper("isSelected", (lvalue, rvalue, attribute) => {
   const isArray = Array.isArray(lvalue);
-  console.log("rval", rvalue, "lval", lvalue);
   if (isArray) {
-    return lvalue.include(rvalue.toString()) ? attribute : "";
+    return lvalue.includes(rvalue.toString()) ? attribute : "";
   } else {
     return lvalue == rvalue ? attribute : "";
   }
@@ -107,5 +106,4 @@ hbs.registerHelper("isAdded", (array, id, attribute) => {
   return objectIds.includes(id.toString()) ? attribute : " ";
 });
 
-hbs.registerHelper("jsonFormat", obj =>  JSON.stringify(obj));
-
+hbs.registerHelper("jsonFormat", (obj) => JSON.stringify(obj));
