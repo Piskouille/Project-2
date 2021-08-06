@@ -8,20 +8,22 @@
   <div class="restaurant-description-admin">
     <p>{{this.description}}</p></div>
   <div class="foodTypes-list">
-    <p>Food type :</p>
+    <h4>Food type : </h4>
     {{#each this.foodTypes}}
       <p>{{this.name}}</p>
+      ,
     {{/each}}
   </div>
-  <div>
-    <h4>Price rating: <p>{{this.priceRating}}</p></h4>
+
+  <div class="priceRating">
+    <h4>Price rating :</h4><p>{{this.priceRating}}</p>
   </div>
+
   <div>
     <a
       style="color: greenyellow;"
       href="/admin/restaurants/{{this._id}}/edit"
     >Edit</a>
-    <br />
     <a
       style="color: red;"
       href="/admin/restaurants/{{this._id}}/delete"

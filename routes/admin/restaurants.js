@@ -83,7 +83,7 @@ router.post(
         : [req.body.foodType];
 
       if (newFoodType) {
-        req.body.foodType.push(newFoodType._id);
+        req.body.foodType.push(newFoodType);
       }
 
       if (req.file) {
@@ -99,7 +99,7 @@ router.post(
         country,
         name,
         phone,
-        rating,
+        priceRating,
         foodTypes,
         description,
         image,
@@ -107,7 +107,7 @@ router.post(
       await Restaurant.create({
         name: name,
         foodTypes: foodTypes,
-        priceRating: rating,
+        priceRating: priceRating,
         address: {
           number: number,
           street: street,
@@ -210,7 +210,7 @@ router.post(
         country,
         name,
         phone,
-        rating,
+        priceRating,
         foodTypes,
         description,
         image,
@@ -220,7 +220,7 @@ router.post(
         {
           name: name,
           foodTypes: foodTypes,
-          rating: rating,
+          priceRating: priceRating,
           address: {
             number: number,
             street: street,
