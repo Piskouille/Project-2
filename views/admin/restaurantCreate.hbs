@@ -1,6 +1,7 @@
 <div class="containerCreate">
   <div class="form-admin-restaurant">
     <form
+     id="create-restaurant-form"
       method="POST"
       action="/admin/restaurants-create"
       enctype="multipart/form-data"
@@ -41,7 +42,7 @@
         <textarea name="description" class="input"></textarea>
         <label for="image">Image</label>
         <input class="input" name="image" type="file" />
-        <button>Submit !</button>
+        <button id="submit">Submit !</button>
       </div>
       <a href="/admin/restaurants-manage">Back admin page</a>
     </form>
