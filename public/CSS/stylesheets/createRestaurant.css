@@ -45,3 +45,7 @@
 .containerCreate button {
     justify-self: center;
 }
+
+.containerCreate textarea {
+    color: var(--color-dark-green);
+}
