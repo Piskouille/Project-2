@@ -25,7 +25,7 @@ function gpsDist(P1,P2){
 
     const dist = R * Math.acos(Math.sin(a)*Math.sin(b) + Math.cos(a) * Math.cos(b) * Math.cos(c - d))
     const distance = Math.round(dist)
-    console.log(distance)
+ 
     return distance >= 1000 ? `${Math.round(distance / 100)} Km` : `${distance} m`
 }
 

@@ -57,7 +57,7 @@ async function yelpAPICall(foodTypes){
             params :{
                 term: "Restaurant",
                 location: "Paris",
-                limit: "5"
+                limit: "9"
             }
         })
 
@@ -77,8 +77,6 @@ async function yelpAPICall(foodTypes){
  
               const checkFoodTypes = await FoodType.find()
               const check = checkFoodTypes.map(c => c.name)
-            
-           
 
                 if(foodTypes.hasOwnProperty(cat.alias)){
                     seedFoodTypes.push(foodTypes[cat.alias])
