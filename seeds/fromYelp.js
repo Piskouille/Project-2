@@ -78,12 +78,12 @@ async function yelpAPICall(foodTypes){
               const checkFoodTypes = await FoodType.find()
               const check = checkFoodTypes.map(c => c.name)
             
-              if(check.includes(cat.alias)) return
+           
 
                 if(foodTypes.hasOwnProperty(cat.alias)){
                     seedFoodTypes.push(foodTypes[cat.alias])
                 }
-                else{
+                else if(!check.includes(cat.alias)){
                     
                     const newFoodType = await FoodType.create({name: cat.alias}) 
                     seedFoodTypes.push(newFoodType.id)
